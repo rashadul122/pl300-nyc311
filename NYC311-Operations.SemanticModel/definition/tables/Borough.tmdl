@@ -1,0 +1,36 @@
+/// Six boroughs including UNKNOWN; the RLS filter enters here
+table Borough
+	lineageTag: 241e96cf-89b8-5905-be14-b9e4e0c98cbe
+
+	column Borough
+		dataType: string
+		lineageTag: dd491884-288b-5201-9ec5-7e4130af77f2
+		summarizeBy: none
+		sourceColumn: Borough
+		sortByColumn: 'Borough Sort'
+
+		annotation SummarizationSetBy = User
+
+	column 'Borough Sort'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a0ea0d30-e735-5327-a127-5cdf397854bf
+		summarizeBy: none
+		sourceColumn: 'Borough Sort'
+
+		annotation SummarizationSetBy = User
+
+	partition Borough = m
+		mode: import
+		queryGroup: Dimensions
+		source =
+				let
+					Source = Csv.Document(Web.Contents(pDataBaseUrl, [RelativePath = "raw/main/data/reference/borough.csv"]),
+						[Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+					Renamed = Table.RenameColumns(Promoted, {{"borough", "Borough"}, {"borough_sort", "Borough Sort"}}),
+					Typed = Table.TransformColumnTypes(Renamed, {{"Borough", type text}, {"Borough Sort", Int64.Type}})
+				in
+					Typed
+

@@ -1,0 +1,12 @@
+// C1 - volume and time intelligence, by fiscal year / month and borough
+EVALUATE
+SUMMARIZECOLUMNS (
+    ROLLUPADDISSUBTOTAL ( 'Date'[Fiscal Year], "Is FY Total", 'Date'[Year Month], "Is Month Total" ),
+    Borough[Borough],
+    'Time Calc'[Time View],
+    TREATAS ( { "Current", "FYTD", "PY", "YoY %" }, 'Time Calc'[Time View] ),
+    "Check Row", 1,
+    "Requests", [Requests],
+    "Requests (Daily)", [Requests (Daily)]
+)
+ORDER BY 'Date'[Fiscal Year], 'Date'[Year Month], Borough[Borough], 'Time Calc'[Time View]

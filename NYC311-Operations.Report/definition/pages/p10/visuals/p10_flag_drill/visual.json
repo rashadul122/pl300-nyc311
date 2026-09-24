@@ -1,0 +1,258 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "p10_flag_drill",
+  "position": {
+    "x": 16,
+    "y": 566,
+    "z": 14000,
+    "width": 744,
+    "height": 146,
+    "tabOrder": 13000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Requests"
+                    }
+                  },
+                  "Property": "Unique Key"
+                }
+              },
+              "queryRef": "Requests.Unique Key",
+              "nativeQueryRef": "Unique Key"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Requests"
+                    }
+                  },
+                  "Property": "Created Date"
+                }
+              },
+              "queryRef": "Requests.Created Date",
+              "nativeQueryRef": "Created Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Requests"
+                    }
+                  },
+                  "Property": "Status"
+                }
+              },
+              "queryRef": "Requests.Status",
+              "nativeQueryRef": "Status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Agency"
+                    }
+                  },
+                  "Property": "Agency"
+                }
+              },
+              "queryRef": "Agency.Agency",
+              "nativeQueryRef": "Agency"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Borough"
+                    }
+                  },
+                  "Property": "Borough"
+                }
+              },
+              "queryRef": "Borough.Borough",
+              "nativeQueryRef": "Borough"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Requests"
+                    }
+                  },
+                  "Property": "R02 Parse"
+                }
+              },
+              "queryRef": "Requests.R02 Parse",
+              "nativeQueryRef": "R02 Parse"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Requests"
+                    }
+                  },
+                  "Property": "R03 Close"
+                }
+              },
+              "queryRef": "Requests.R03 Close",
+              "nativeQueryRef": "R03 Close"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Requests"
+                    }
+                  },
+                  "Property": "R05 Resolution"
+                }
+              },
+              "queryRef": "Requests.R05 Resolution",
+              "nativeQueryRef": "R05 Resolution"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Requests"
+                    }
+                  },
+                  "Property": "R06 Day Precision"
+                }
+              },
+              "queryRef": "Requests.R06 Day Precision",
+              "nativeQueryRef": "R06 Day Precision"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Requests"
+                    }
+                  },
+                  "Property": "R07 Status Conflict"
+                }
+              },
+              "queryRef": "Requests.R07 Status Conflict",
+              "nativeQueryRef": "R07 Status Conflict"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Requests"
+                    }
+                  },
+                  "Property": "R12 Borough"
+                }
+              },
+              "queryRef": "Requests.R12 Borough",
+              "nativeQueryRef": "R12 Borough"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Requests"
+                    }
+                  },
+                  "Property": "R13 ZIP"
+                }
+              },
+              "queryRef": "Requests.R13 ZIP",
+              "nativeQueryRef": "R13 ZIP"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Requests"
+                    }
+                  },
+                  "Property": "R18 Open Invalid Close"
+                }
+              },
+              "queryRef": "Requests.R18 Open Invalid Close",
+              "nativeQueryRef": "R18 Open Invalid Close"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Requests"
+                  }
+                },
+                "Property": "Unique Key"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": false
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Flag drill: requests carrying the selected flags'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Table of window requests with their eight data-quality flag columns; the slicers above filter it by flag value.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

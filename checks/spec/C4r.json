@@ -1,0 +1,36 @@
+{
+  "check_id": "C4r",
+  "title": "The drill's live rebuild (SPEC Appendix C): C4 with the naive columns only",
+  "dax": "checks/dax/C4r.dax",
+  "keys": [
+    {
+      "name": "Date",
+      "kind": "date"
+    },
+    {
+      "name": "Borough",
+      "kind": "text"
+    }
+  ],
+  "measures": {
+    "Check Row": {
+      "kind": "count",
+      "compare": "exact",
+      "constant": 1
+    },
+    "Open Backlog EOP": {
+      "kind": "count",
+      "compare": "exact"
+    },
+    "EOP PHONE": {
+      "kind": "count",
+      "compare": "exact"
+    }
+  },
+  "overrides": [],
+  "notes": [
+    "Opt-in: the default reconcile run (C1-C5, C5b and L) skips C4r; run it with --checks C4r. It runs on a copy of the model that holds Open Backlog EOP and nothing else, against expected/<profile>/C4r.csv, which is C4 without the two Fast columns.",
+    "36 month ends x 6 boroughs, Check Row the constant 1 on every row; the 12 month ends outside the window are all BLANK and must be present (SPEC 9.4).",
+    "Comparison per SPEC 9.4: counts and whole numbers exact; hours, ratios and averages relative tolerance 1e-9; BLANK and 0 are different values; booleans, dates and text exact after the display format is normalised (True/TRUE, 8/31/2026 12:00:00 AM, 1,234, 12.5%)."
+  ]
+}

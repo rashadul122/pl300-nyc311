@@ -1,0 +1,13 @@
+// C4 - backlog at every month end, by borough; naive vs fast, with and without a Channel filter
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Date'[Date],
+    Borough[Borough],
+    FILTER ( ALL ( 'Date'[Date] ), 'Date'[Date] = EOMONTH ( 'Date'[Date], 0 ) ),
+    "Check Row", 1,
+    "Open Backlog EOP", [Open Backlog EOP],
+    "Open Backlog EOP (Fast)", [Open Backlog EOP (Fast)],
+    "EOP PHONE", CALCULATE ( [Open Backlog EOP], Channel[Channel] = "PHONE" ),
+    "EOP (Fast) PHONE", CALCULATE ( [Open Backlog EOP (Fast)], Channel[Channel] = "PHONE" )
+)
+ORDER BY 'Date'[Date], Borough[Borough]

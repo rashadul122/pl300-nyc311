@@ -1,0 +1,255 @@
+/// Calendar 2024-01-01 to 2026-12-31, marked as the date table (SPEC 5.1)
+table Date
+	lineageTag: 483044e8-5c56-5f04-8bdc-c7f8ca8ddca0
+	dataCategory: Time
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: yyyy-mm-dd
+		lineageTag: f5ea55c3-596b-57b2-bc21-c335bec9fa8a
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = User
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 314d5022-c2cb-5efb-911b-b7fb875ec035
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = User
+
+	column Quarter
+		dataType: string
+		lineageTag: a5bbce09-b1dd-5491-97ae-f21bf851e8f3
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = User
+
+	column 'Month No'
+		dataType: int64
+		formatString: 0
+		lineageTag: 760e0f84-4d2e-5333-8839-2459c1af4ff0
+		summarizeBy: none
+		sourceColumn: 'Month No'
+
+		annotation SummarizationSetBy = User
+
+	column 'Month Name'
+		dataType: string
+		lineageTag: 0c47528f-2c4c-5cd3-b1ed-84f602fc0a57
+		summarizeBy: none
+		sourceColumn: 'Month Name'
+		sortByColumn: 'Month No'
+
+		annotation SummarizationSetBy = User
+
+	column 'Year Month'
+		dataType: string
+		lineageTag: 95658ab4-660c-56b0-837b-245b23439949
+		summarizeBy: none
+		sourceColumn: 'Year Month'
+
+		annotation SummarizationSetBy = User
+
+	column 'Fiscal Year No'
+		dataType: int64
+		formatString: 0
+		lineageTag: 8ad9ee9d-b213-550f-80db-8c2c274194f9
+		summarizeBy: none
+		sourceColumn: 'Fiscal Year No'
+
+		annotation SummarizationSetBy = User
+
+	column 'Fiscal Year'
+		dataType: string
+		lineageTag: dbd10468-3051-5099-9c39-6664b31a2da1
+		summarizeBy: none
+		sourceColumn: 'Fiscal Year'
+		sortByColumn: 'Fiscal Year No'
+
+		annotation SummarizationSetBy = User
+
+	column 'Fiscal Month No'
+		dataType: int64
+		formatString: 0
+		lineageTag: b39dd0b6-fa41-58a0-b77f-7c3dd7cae3cb
+		summarizeBy: none
+		sourceColumn: 'Fiscal Month No'
+
+		annotation SummarizationSetBy = User
+
+	column 'Day of Week No'
+		dataType: int64
+		formatString: 0
+		lineageTag: e3f83608-086d-5ad6-a487-9ccb6bf1e91e
+		summarizeBy: none
+		sourceColumn: 'Day of Week No'
+
+		annotation SummarizationSetBy = User
+
+	column 'Day Name'
+		dataType: string
+		lineageTag: 6930c73c-c1f8-5479-877d-1870093e7e0c
+		summarizeBy: none
+		sourceColumn: 'Day Name'
+		sortByColumn: 'Day of Week No'
+
+		annotation SummarizationSetBy = User
+
+	column 'Is Weekend'
+		dataType: boolean
+		lineageTag: 58d1805c-a2cd-5cf9-8ae3-e8c8a7251002
+		summarizeBy: none
+		sourceColumn: 'Is Weekend'
+
+		annotation SummarizationSetBy = User
+
+	column 'In Data Window'
+		dataType: boolean
+		lineageTag: aa44f61b-4cbe-56e2-a675-7150401a3f79
+		summarizeBy: none
+		sourceColumn: 'In Data Window'
+
+		annotation SummarizationSetBy = User
+
+	column 'Is Mature Cohort'
+		dataType: boolean
+		lineageTag: 49ef60c9-1381-548c-9a8c-fd3ff98b9914
+		summarizeBy: none
+		sourceColumn: 'Is Mature Cohort'
+
+		annotation SummarizationSetBy = User
+
+	column 'Temp Max C'
+		dataType: double
+		formatString: #,##0.0
+		lineageTag: deaa6a92-6b2a-5c69-8883-bb6acee413c3
+		summarizeBy: average
+		sourceColumn: 'Temp Max C'
+
+		annotation SummarizationSetBy = User
+
+	column 'Temp Min C'
+		dataType: double
+		formatString: #,##0.0
+		lineageTag: aa34c37f-94de-5b61-ab23-b7785beee7d0
+		summarizeBy: average
+		sourceColumn: 'Temp Min C'
+
+		annotation SummarizationSetBy = User
+
+	column 'Precip mm'
+		dataType: double
+		formatString: #,##0.0
+		lineageTag: 0c7dc826-d6c0-5bfb-bc93-4a702588775b
+		summarizeBy: sum
+		sourceColumn: 'Precip mm'
+
+		annotation SummarizationSetBy = User
+
+	column 'Snow cm'
+		dataType: double
+		formatString: #,##0.0
+		lineageTag: 9a81dd4e-c4ec-5fd0-9319-ec3395306565
+		summarizeBy: sum
+		sourceColumn: 'Snow cm'
+
+		annotation SummarizationSetBy = User
+
+	column 'Precip Bucket'
+		dataType: string
+		lineageTag: 19dd88ff-c569-5255-86aa-2a8bd78ce6ee
+		summarizeBy: none
+		sourceColumn: 'Precip Bucket'
+		sortByColumn: 'Precip Bucket Sort'
+
+		annotation SummarizationSetBy = User
+
+	column 'Precip Bucket Sort'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4ecd12ce-21dc-5e0a-84bd-fa0442199f65
+		summarizeBy: none
+		sourceColumn: 'Precip Bucket Sort'
+
+		annotation SummarizationSetBy = User
+
+	hierarchy Calendar
+		lineageTag: 8c98d3d0-43c8-5e5a-86c5-a9a6996d2b72
+
+		level Year
+			lineageTag: 03043669-4eca-558a-8384-a068f8e8044c
+			column: Year
+
+		level Quarter
+			lineageTag: fb3ad922-7a1a-5b18-9ed9-a1a14b60128d
+			column: Quarter
+
+		level 'Month Name'
+			lineageTag: 3bf33a47-96a0-5aa4-8028-dd7921b786bf
+			column: 'Month Name'
+
+		level Date
+			lineageTag: 59a54e17-33d3-52c4-ae68-7f91531a6727
+			column: Date
+
+	hierarchy Fiscal
+		lineageTag: 85debe6a-4d9d-589b-916c-dea3b8fc0a6c
+
+		level 'Fiscal Year'
+			lineageTag: 335b9a38-96dc-5672-938d-1481f3b1dbd9
+			column: 'Fiscal Year'
+
+		level 'Fiscal Month No'
+			lineageTag: e38e6a71-4f06-56bb-a15d-d8f71b965588
+			column: 'Fiscal Month No'
+
+		level Date
+			lineageTag: 7730c951-bcde-52bc-87dd-abbdda397379
+			column: Date
+
+	partition Date = m
+		mode: import
+		queryGroup: Dimensions
+		source =
+				let
+					W = #"Data Window",
+					StartDate = #date(2024, 1, 1),
+					EndDate = #date(2026, 12, 31),
+					Dates = List.Dates(StartDate, Duration.Days(EndDate - StartDate) + 1, #duration(1, 0, 0, 0)),
+					T = Table.FromList(Dates, Splitter.SplitByNothing(), type table [Date = date]),
+					Year = Table.AddColumn(T, "Year", each Date.Year([Date]), Int64.Type),
+					Quarter = Table.AddColumn(Year, "Quarter", each "Q" & Text.From(Date.QuarterOfYear([Date])), type text),
+					MonthNo = Table.AddColumn(Quarter, "Month No", each Date.Month([Date]), Int64.Type),
+					MonthName = Table.AddColumn(MonthNo, "Month Name", each Date.ToText([Date], [Format = "MMM", Culture = "en-US"]), type text),
+					YearMonth = Table.AddColumn(MonthName, "Year Month", each Date.ToText([Date], [Format = "yyyy-MM", Culture = "en-US"]), type text),
+					FYNo = Table.AddColumn(YearMonth, "Fiscal Year No", each if Date.Month([Date]) >= 7 then Date.Year([Date]) + 1 else Date.Year([Date]), Int64.Type),
+					FY = Table.AddColumn(FYNo, "Fiscal Year", each "FY" & Text.From([Fiscal Year No]), type text),
+					FMonth = Table.AddColumn(FY, "Fiscal Month No", each Number.Mod(Date.Month([Date]) + 5, 12) + 1, Int64.Type),   // Jul = 1 ... Jun = 12
+					DowNo = Table.AddColumn(FMonth, "Day of Week No", each Date.DayOfWeek([Date], Day.Monday) + 1, Int64.Type),        // Mon = 1
+					DayName = Table.AddColumn(DowNo, "Day Name", each Date.ToText([Date], [Format = "ddd", Culture = "en-US"]), type text),
+					Weekend = Table.AddColumn(DayName, "Is Weekend", each [Day of Week No] >= 6, type logical),
+					InWindow = Table.AddColumn(Weekend, "In Data Window", each [Date] >= W[WindowStart] and [Date] <= W[WindowEnd], type logical),
+					Mature = Table.AddColumn(InWindow, "Is Mature Cohort", each [Date] <= Date.AddDays(DateTime.Date(W[AsOf]), -30), type logical),
+					WeatherJoin = Table.NestedJoin(Mature, {"Date"}, Weather, {"Date"}, "WeatherT", JoinKind.LeftOuter),
+					WeatherCols = Table.ExpandTableColumn(WeatherJoin, "WeatherT", {"Temp Max C", "Temp Min C", "Precip mm", "Snow cm"}),
+					Bucket = Table.AddColumn(WeatherCols, "Precip Bucket", each
+						if [Precip mm] = null then "Unknown" else if [Precip mm] < 0.2 then "Dry"
+						else if [Precip mm] < 5 then "Light" else if [Precip mm] < 20 then "Moderate" else "Heavy", type text),
+					BucketSort = Table.AddColumn(Bucket, "Precip Bucket Sort", each
+						if [Precip Bucket] = "Dry" then 1 else if [Precip Bucket] = "Light" then 2
+						else if [Precip Bucket] = "Moderate" then 3 else if [Precip Bucket] = "Heavy" then 4 else 5, Int64.Type),
+					Sorted = Table.Sort(BucketSort, {{"Date", Order.Ascending}}),
+					Typed = Table.TransformColumnTypes(Sorted, {{"Date", type date}, {"Temp Max C", type number}, {"Temp Min C", type number},
+						{"Precip mm", type number}, {"Snow cm", type number}})
+				in
+					Typed
+

@@ -1,0 +1,205 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "p05_decomptree",
+  "position": {
+    "x": 752,
+    "y": 112,
+    "z": 5000,
+    "width": 512,
+    "height": 480,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "decompositionTreeVisual",
+    "query": {
+      "queryState": {
+        "Analyze": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Requests"
+                }
+              },
+              "queryRef": "_Measures.Requests",
+              "nativeQueryRef": "Requests"
+            }
+          ]
+        },
+        "ExplainBy": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Agency"
+                    }
+                  },
+                  "Property": "Agency Group"
+                }
+              },
+              "queryRef": "Agency.Agency Group",
+              "nativeQueryRef": "Agency Group"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Borough"
+                    }
+                  },
+                  "Property": "Borough"
+                }
+              },
+              "queryRef": "Borough.Borough",
+              "nativeQueryRef": "Borough"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Channel"
+                    }
+                  },
+                  "Property": "Channel"
+                }
+              },
+              "queryRef": "Channel.Channel",
+              "nativeQueryRef": "Channel"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Complaint"
+                    }
+                  },
+                  "Property": "Category"
+                }
+              },
+              "queryRef": "Complaint.Category",
+              "nativeQueryRef": "Category"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date"
+                    }
+                  },
+                  "Property": "Day Name"
+                }
+              },
+              "queryRef": "Date.Day Name",
+              "nativeQueryRef": "Day Name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date"
+                    }
+                  },
+                  "Property": "Precip Bucket"
+                }
+              },
+              "queryRef": "Date.Precip Bucket",
+              "nativeQueryRef": "Precip Bucket"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date"
+                    }
+                  },
+                  "Property": "Is Weekend"
+                }
+              },
+              "queryRef": "Date.Is Weekend",
+              "nativeQueryRef": "Is Weekend"
+            }
+          ]
+        }
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "ExplainBy"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "Agency.Agency Group"
+            ],
+            "AIInformation": {
+              "method": "MaxSplit"
+            }
+          },
+          {
+            "queryRefs": [
+              "Borough.Borough"
+            ],
+            "AIInformation": {
+              "method": "MaxSplit"
+            }
+          }
+        ]
+      }
+    ],
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Requests decomposed with AI splits (high value)'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Decomposition tree of Requests. The first two levels are saved as AI high-value splits, by agency group and then by borough. Further levels can be expanded by the reader by channel, category, day name, precipitation bucket or weekend.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "annotations": [
+    {
+      "name": "serviceStep",
+      "value": "[unverified] The two expansion levels carry AIInformation method MaxSplit, read here as Desktop's 'High value' AI split (the schema gives the enum BestSplit/MaxSplit/MinSplit without descriptions). Confirm in the service that both levels show the AI lightbulb and 'High value'; if not, set them there."
+    }
+  ]
+}

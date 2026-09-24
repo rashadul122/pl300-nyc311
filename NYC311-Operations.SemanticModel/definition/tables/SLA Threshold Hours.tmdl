@@ -1,0 +1,23 @@
+/// What-if threshold table: 4 to 336 hours in steps of 4 (84 rows)
+table 'SLA Threshold Hours'
+	lineageTag: dba87d5a-b069-5d41-a8df-8387ab7cfa33
+
+	/// The selected threshold hour; 72 when none or several are selected (SPEC 6.4)
+	measure 'SLA Threshold Hours Value' = SELECTEDVALUE ( 'SLA Threshold Hours'[SLA Threshold Hours], 72 )
+		formatString: 0
+		displayFolder: Service Benchmark
+		lineageTag: 7adbbc7c-f7b3-57d0-be63-2a4c1e3118cd
+
+	column 'SLA Threshold Hours'
+		dataType: int64
+		formatString: 0
+		lineageTag: 15d98214-7be6-5129-a08b-326e6f5e6d7b
+		summarizeBy: none
+		sourceColumn: [SLA Threshold Hours]
+
+		annotation SummarizationSetBy = User
+
+	partition 'SLA Threshold Hours' = calculated
+		mode: import
+		source = SELECTCOLUMNS ( GENERATESERIES ( 4, 336, 4 ), "SLA Threshold Hours", [Value] )
+

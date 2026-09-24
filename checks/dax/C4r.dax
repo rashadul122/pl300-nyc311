@@ -1,0 +1,11 @@
+// C4r - the drill's live rebuild (Appendix C): C4 with the naive columns only
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Date'[Date],
+    Borough[Borough],
+    FILTER ( ALL ( 'Date'[Date] ), 'Date'[Date] = EOMONTH ( 'Date'[Date], 0 ) ),
+    "Check Row", 1,
+    "Open Backlog EOP", [Open Backlog EOP],
+    "EOP PHONE", CALCULATE ( [Open Backlog EOP], Channel[Channel] = "PHONE" )
+)
+ORDER BY 'Date'[Date], Borough[Borough]

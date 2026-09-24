@@ -1,0 +1,72 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup Parameters
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup Functions
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup Staging
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup Facts
+
+	annotation PBI_QueryGroupOrder = 3
+
+queryGroup Dimensions
+
+	annotation PBI_QueryGroupOrder = 4
+
+queryGroup Security
+
+	annotation PBI_QueryGroupOrder = 5
+
+queryGroup 'Data Quality'
+
+	annotation PBI_QueryGroupOrder = 6
+
+queryGroup Support
+
+	annotation PBI_QueryGroupOrder = 7
+
+queryGroup Diagnostics
+
+	annotation PBI_QueryGroupOrder = 8
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["pDataBaseUrl","pProfile","pWeatherLat","pWeatherLon","pWeatherEnd","Source Files","Manifest","Data Window","Manifest Files","Extract Files","Agency Remap Map","Complaint Alias Map","Complaint Category Map","SLA Benchmarks","Twin Rule Counts","Weather","fnCleanText","fnParseDateTime","fnNormalizeKey","fnComplaintKey","fnReadRole","fnCleanRequests","Requests","Opening Backlog","Requests Daily","Date","Agency","Complaint","Borough","Channel","Borough Access","DQ Rules","Reconciliation Results","_Measures","Load Errors"]
+
+ref table _Measures
+ref table Requests
+ref table 'Opening Backlog'
+ref table 'Requests Daily'
+ref table 'Backlog Flow'
+ref table Date
+ref table Agency
+ref table Complaint
+ref table Borough
+ref table Channel
+ref table 'Age Band'
+ref table 'SLA Threshold Hours'
+ref table 'Time Calc'
+ref table 'Borough Access'
+ref table 'DQ Rules'
+ref table 'Reconciliation Results'
+
+ref role 'City Operations'
+ref role 'Borough Manager - Brooklyn'
+ref role 'Borough Manager (Dynamic)'
+
+ref cultureInfo en-US
+

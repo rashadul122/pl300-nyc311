@@ -1,0 +1,10 @@
+// C2 - opened, closed and digital share by month and channel
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Date'[Year Month],
+    Channel[Channel],
+    "Requests", [Requests],
+    "Requests Closed", [Requests Closed],
+    "Digital Share", [Digital Share]
+)
+ORDER BY 'Date'[Year Month], Channel[Channel]

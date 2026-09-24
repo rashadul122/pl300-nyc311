@@ -1,0 +1,59 @@
+/// Age at the window end (R19); meaningful only at 31 Aug 2026 (SPEC 6.2)
+table 'Age Band'
+	lineageTag: 3d19fdc4-1231-5ad6-a5bc-13e36a5c34ff
+
+	column 'Age Band Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0a5aa8a0-5369-59c9-8a34-3b3f83b1a11c
+		summarizeBy: none
+		sourceColumn: [Age Band Key]
+
+		annotation SummarizationSetBy = User
+
+	column 'Age Band'
+		dataType: string
+		lineageTag: 7bd6b6b0-a08d-54c5-a535-35d404ae82f4
+		summarizeBy: none
+		sourceColumn: [Age Band]
+		sortByColumn: 'Age Band Key'
+
+		annotation SummarizationSetBy = User
+
+	column 'Min Days'
+		dataType: int64
+		formatString: 0
+		lineageTag: c8839c57-34ed-54cc-8f09-25c0c2f43b12
+		summarizeBy: none
+		sourceColumn: [Min Days]
+
+		annotation SummarizationSetBy = User
+
+	column 'Max Days'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5cad62f9-1f26-54d9-b949-232c6682682e
+		summarizeBy: none
+		sourceColumn: [Max Days]
+
+		annotation SummarizationSetBy = User
+
+	partition 'Age Band' = calculated
+		mode: import
+		source =
+				DATATABLE (
+					"Age Band Key", INTEGER,
+					"Age Band", STRING,
+					"Min Days", INTEGER,
+					"Max Days", INTEGER,
+					{
+						{ 0, "Not open at window end", BLANK (), BLANK () },    // round 4: R19 assigns 0 to every other row
+						{ 1, "0-7 days", 0, 7 },
+						{ 2, "8-30 days", 8, 30 },
+						{ 3, "31-90 days", 31, 90 },
+						{ 4, "91-365 days", 91, 365 },
+						{ 5, "Over 365 days (stale)", 366, 99999 }
+					}
+				)
+

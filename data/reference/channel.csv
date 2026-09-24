@@ -1,0 +1,6 @@
+channel,channel_group,channel_sort
+ONLINE,Digital,1
+MOBILE,Digital,2
+PHONE,Phone,3
+OTHER,Other/Unknown,4
+UNKNOWN,Other/Unknown,5

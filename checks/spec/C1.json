@@ -1,0 +1,74 @@
+{
+  "check_id": "C1",
+  "title": "Volume and time intelligence, by fiscal year / month and borough",
+  "dax": "checks/dax/C1.dax",
+  "keys": [
+    {
+      "name": "Fiscal Year",
+      "kind": "text"
+    },
+    {
+      "name": "Year Month",
+      "kind": "text"
+    },
+    {
+      "name": "Borough",
+      "kind": "text"
+    },
+    {
+      "name": "Time View",
+      "kind": "text"
+    }
+  ],
+  "measures": {
+    "Is FY Total": {
+      "kind": "boolean",
+      "compare": "exact"
+    },
+    "Is Month Total": {
+      "kind": "boolean",
+      "compare": "exact"
+    },
+    "Check Row": {
+      "kind": "count",
+      "compare": "exact",
+      "constant": 1
+    },
+    "Requests": {
+      "kind": "count",
+      "compare": "exact"
+    },
+    "Requests (Daily)": {
+      "kind": "count",
+      "compare": "exact"
+    }
+  },
+  "overrides": [
+    {
+      "when": {
+        "Time View": "YoY %"
+      },
+      "measures": {
+        "Requests": {
+          "kind": "ratio",
+          "compare": "rel_tol",
+          "rel_tol": 1e-09
+        },
+        "Requests (Daily)": {
+          "kind": "ratio",
+          "compare": "rel_tol",
+          "rel_tol": 1e-09
+        }
+      },
+      "why": "Under the YoY % calculation item Requests returns a ratio, not a count (SPEC 7). Requests (Daily) is off the Time Calc whitelist, so its expected value there is BLANK and any number fails whatever its kind. Current, FYTD and PY are counts and compare exactly."
+    }
+  ],
+  "notes": [
+    "Time View has the four SPEC 7 items: Current, FYTD, PY, YoY %. FYTD is capped to the data window: BLANK at FY2024, at the Jan-Aug 2024 months (no in-window dates) and at every month whose first date is after 2026-08-31 (Sep-Dec 2026); at FY2027 and at the grand total it is Jul-Aug 2026. Requests (Daily) is BLANK under FYTD, PY and YoY % (the whitelist).",
+    "Check Row is the constant 1 on every row (\"constant\": 1; an expected file that breaks it is refused). It makes SUMMARIZECOLUMNS return every Fiscal Year x Year Month (with the FY and grand-total rollups) x Borough x Time View combination, including the rows whose Requests and Requests (Daily) are both BLANK (the completeness guard). Those rows are compared cell by cell like any other; one absent from observed is 'missing', a fail (SPEC 9.4).",
+    "Rows: 36 Year Months (Date table 2024-01 .. 2026-12) + 4 FY subtotals (FY2024-FY2027) + the grand total = 41 members x 6 boroughs x 4 Time Views = 984 rows per profile.",
+    "ROLLUPADDISSUBTOTAL rows: an FY subtotal row has an empty Year Month, the grand total row an empty Fiscal Year and Year Month; the two booleans are compared as cells, so the key (Fiscal Year, Year Month, Borough, Time View) stays unique.",
+    "Load check (L, SPEC 9.4): the observed Current Requests of the month rows (Year Month not empty), summed over boroughs, are compared with each window file's manifest rows. FYTD, PY and YoY % rows and the rollups never count as loaded rows.",
+    "Comparison per SPEC 9.4: counts and whole numbers exact; hours, ratios and averages relative tolerance 1e-9; BLANK and 0 are different values; booleans, dates and text exact after the display format is normalised (True/TRUE, 8/31/2026 12:00:00 AM, 1,234, 12.5%)."
+  ]
+}

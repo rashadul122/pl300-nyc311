@@ -1,0 +1,37 @@
+# Sealed answer key: opened one section at a time, logged (SPEC §0.2). Never committed.
+answer-key/
+
+# Full profile: 7.5M rows / ~393 MB, published as release asset data-v1, regenerable
+# from big_data.db with tools/extract.py (the manifest records sha256 and as_of).
+data/full/*.csv.gz
+
+# Power BI Desktop local state
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+
+# Python
+__pycache__/
+*.pyc
+.twin-cache/
+
+# Private, sealed or engine-only material: never in this repo (PROCESS.md §P1)
+_design/PROCESS.md
+_design/DESIGN.md
+_design/critiques.json
+_design/design-plan.json
+_design/research-format.md
+_design/REVISION-NOTES.md
+_design/research-data.unredacted.md
+twin/
+.twin-cache/
+run_tests.sh
+tools/extract.py
+tools/tests/
+
+# The RLS-free scratch copy used only for Explain the increase (SPEC §8 spike 2)
+_scratch-insights-no-rls.pbip
+_scratch-insights-no-rls.Report/
+_scratch-insights-no-rls.SemanticModel/
+
+# macOS Finder metadata
+.DS_Store

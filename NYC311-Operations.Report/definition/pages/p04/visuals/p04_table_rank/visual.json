@@ -1,0 +1,120 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "p04_table_rank",
+  "position": {
+    "x": 16,
+    "y": 420,
+    "z": 8000,
+    "width": 400,
+    "height": 292,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Agency"
+                    }
+                  },
+                  "Property": "Agency"
+                }
+              },
+              "queryRef": "Agency.Agency",
+              "nativeQueryRef": "Agency"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Median Resolution Hours (Mature)"
+                }
+              },
+              "queryRef": "_Measures.Median Resolution Hours (Mature)",
+              "nativeQueryRef": "Median hours (mature)",
+              "displayName": "Median hours (mature)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Agency Rank (Median Resolution)"
+                }
+              },
+              "queryRef": "_Measures.Agency Rank (Median Resolution)",
+              "nativeQueryRef": "Rank (1 = fastest)",
+              "displayName": "Rank (1 = fastest)"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Measures"
+                  }
+                },
+                "Property": "Agency Rank (Median Resolution)"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": false
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Agency ranking by median resolution (mature cohorts)'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Table of agencies with their median resolution hours over mature cohorts and their rank, 1 being the fastest; agencies without a median have no rank.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

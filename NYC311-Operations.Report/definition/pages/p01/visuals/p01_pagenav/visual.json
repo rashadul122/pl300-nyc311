@@ -1,0 +1,30 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "p01_pagenav",
+  "position": {
+    "x": 540,
+    "y": 60,
+    "z": 6000,
+    "width": 724,
+    "height": 52,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "pageNavigator",
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Page navigator: buttons for Overview, Backlog, Resolution and Benchmark, Drivers (AI), and Data Quality and Method. The drillthrough page Complaint Detail is hidden and not listed.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,46 @@
+/// Intake channels with their group (Digital, Phone, Other/Unknown)
+table Channel
+	lineageTag: 8bf8e49e-98ff-5b18-8d68-717cb1d1b2d0
+
+	column Channel
+		dataType: string
+		lineageTag: f84b5208-d820-5d2d-91cc-ee476045d4ff
+		summarizeBy: none
+		sourceColumn: Channel
+		sortByColumn: 'Channel Sort'
+
+		annotation SummarizationSetBy = User
+
+	column 'Channel Group'
+		dataType: string
+		lineageTag: be70be12-f01d-5259-87ed-7da133f3d0e5
+		summarizeBy: none
+		sourceColumn: 'Channel Group'
+
+		annotation SummarizationSetBy = User
+
+	column 'Channel Sort'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 69a7696c-e0df-5a5c-a00a-c5d25f0c7547
+		summarizeBy: none
+		sourceColumn: 'Channel Sort'
+
+		annotation SummarizationSetBy = User
+
+	partition Channel = m
+		mode: import
+		queryGroup: Dimensions
+		source =
+				let
+					Source = Csv.Document(Web.Contents(pDataBaseUrl, [RelativePath = "raw/main/data/reference/channel.csv"]),
+						[Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+					Renamed = Table.RenameColumns(Promoted, {{"channel", "Channel"}, {"channel_group", "Channel Group"},
+						{"channel_sort", "Channel Sort"}}),
+					Typed = Table.TransformColumnTypes(Renamed, {{"Channel", type text}, {"Channel Group", type text},
+						{"Channel Sort", Int64.Type}})
+				in
+					Typed
+

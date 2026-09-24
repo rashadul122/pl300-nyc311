@@ -1,0 +1,73 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "p04_card_whatif",
+  "position": {
+    "x": 712,
+    "y": 40,
+    "z": 5000,
+    "width": 552,
+    "height": 68,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "SLA Met % (What-if)"
+                }
+              },
+              "queryRef": "_Measures.SLA Met % (What-if)",
+              "nativeQueryRef": "SLA Met % at the what-if target",
+              "displayName": "SLA Met % at the what-if target"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'SLA Met % at the what-if target'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Card: share of valid requests resolved within the selected what-if target hours (72 hours when none is selected).'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

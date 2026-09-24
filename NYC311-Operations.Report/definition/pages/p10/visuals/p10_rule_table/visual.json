@@ -1,0 +1,309 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "p10_rule_table",
+  "position": {
+    "x": 16,
+    "y": 56,
+    "z": 3000,
+    "width": 744,
+    "height": 232,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DQ Rules"
+                    }
+                  },
+                  "Property": "Role"
+                }
+              },
+              "queryRef": "DQ Rules.Role",
+              "nativeQueryRef": "Role (window / carry-in)",
+              "displayName": "Role (window / carry-in)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DQ Rules"
+                    }
+                  },
+                  "Property": "Rule Id"
+                }
+              },
+              "queryRef": "DQ Rules.Rule Id",
+              "nativeQueryRef": "Rule Id"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DQ Rules"
+                    }
+                  },
+                  "Property": "Flag Value"
+                }
+              },
+              "queryRef": "DQ Rules.Flag Value",
+              "nativeQueryRef": "Flag Value"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DQ Rules"
+                    }
+                  },
+                  "Property": "Description"
+                }
+              },
+              "queryRef": "DQ Rules.Description",
+              "nativeQueryRef": "Description"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DQ Rules"
+                    }
+                  },
+                  "Property": "Rows Flagged (Power Query)"
+                }
+              },
+              "queryRef": "DQ Rules.Rows Flagged (Power Query)",
+              "nativeQueryRef": "Rows Flagged (Power Query)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DQ Rules"
+                    }
+                  },
+                  "Property": "Rows Expected (Twin)"
+                }
+              },
+              "queryRef": "DQ Rules.Rows Expected (Twin)",
+              "nativeQueryRef": "Rows Expected (Twin)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DQ Rules"
+                    }
+                  },
+                  "Property": "Mismatch"
+                }
+              },
+              "queryRef": "DQ Rules.Mismatch",
+              "nativeQueryRef": "Mismatch",
+              "hidden": true
+            },
+            {
+              "field": {
+                "NativeVisualCalculation": {
+                  "Language": "dax",
+                  "Expression": "IF ( [Mismatch] = 1, \"✖ Mismatch\", \"✔ Match\" )",
+                  "Name": "Mismatch check",
+                  "DataType": "Text"
+                }
+              },
+              "queryRef": "Mismatch check",
+              "nativeQueryRef": "Mismatch check"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DQ Rules"
+                    }
+                  },
+                  "Property": "Rows (Raw Audit)"
+                }
+              },
+              "queryRef": "DQ Rules.Rows (Raw Audit)",
+              "nativeQueryRef": "Rows (raw audit, informational)",
+              "displayName": "Rows (raw audit, informational)"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DQ Rules"
+                  }
+                },
+                "Property": "Role"
+              }
+            },
+            "direction": "Ascending"
+          },
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DQ Rules"
+                  }
+                },
+                "Property": "Rule Id"
+              }
+            },
+            "direction": "Ascending"
+          },
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DQ Rules"
+                  }
+                },
+                "Property": "Flag Value"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": false
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Rule table: rows flagged by Power Query vs the Python twin'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Table of data-quality rule flags per role: rule id, flag value, description, rows flagged by Power Query, rows expected by the twin, a mismatch column with a check or cross symbol and text, and the raw audit count as a grey informational column that is never compared.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "objects": {
+      "columnFormatting": [
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#505C68'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "DQ Rules.Rows (Raw Audit)"
+          }
+        }
+      ]
+    }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "Filter_p10_KindFlag",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DQ Rules"
+              }
+            },
+            "Property": "Kind"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "d",
+              "Entity": "DQ Rules",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "d"
+                          }
+                        },
+                        "Property": "Kind"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'flag'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
+  }
+}

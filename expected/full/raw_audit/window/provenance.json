@@ -1,0 +1,208 @@
+{
+ "manifest": "../../../../data/full/manifest.json",
+ "dataset": "nyc311-erm2-nwe9-snapshot",
+ "profile": "full",
+ "role": "window",
+ "table": "extract_window",
+ "rows": 7542606,
+ "files": [
+  {
+   "name": "nyc311_2024-09.csv.gz",
+   "sha256": "fbdcd5c0079106936de49f99b8232e2e217cf1c191a5547e6eae037bb05fb3d5",
+   "bytes": 16593615,
+   "rows_manifest": 306770,
+   "rows_read": 306770,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2024-10.csv.gz",
+   "sha256": "9d1eb150fc808dc556046786fa1fd56c0dbfc84fa9e4934cc8bcce7f41d4acd6",
+   "bytes": 16686765,
+   "rows_manifest": 306803,
+   "rows_read": 306803,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2024-11.csv.gz",
+   "sha256": "094a447a4f3c775b9f318a2bf157a218f396d89e4a5ecb425a74261defad4a48",
+   "bytes": 15678200,
+   "rows_manifest": 293515,
+   "rows_read": 293515,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2024-12.csv.gz",
+   "sha256": "8905d8db58b3cb8e84938548457fcfc6f6747e0b42b80a3d7e6534c4fd2661ff",
+   "bytes": 16383220,
+   "rows_manifest": 313949,
+   "rows_read": 313949,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2025-01.csv.gz",
+   "sha256": "b789d99313e8387fa0a3ddc1cac09f81d6ba84b8a9ff80d75a81595afd2cf42a",
+   "bytes": 17470549,
+   "rows_manifest": 348180,
+   "rows_read": 348180,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2025-02.csv.gz",
+   "sha256": "307c369174f63ee98ecfccd5d657a0f820fb8cd15476c7dd375c814bbb94eefb",
+   "bytes": 13656947,
+   "rows_manifest": 255364,
+   "rows_read": 255364,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2025-03.csv.gz",
+   "sha256": "7586c2605ff7d41069d9ad3f28881b73b154222556b4647264033a8bcddf2af1",
+   "bytes": 15248788,
+   "rows_manifest": 281221,
+   "rows_read": 281221,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2025-04.csv.gz",
+   "sha256": "7eb06bca0767b57a0ad39fa73ca9bd54f966fabccb80314b3522a2d4010d987f",
+   "bytes": 14893752,
+   "rows_manifest": 272549,
+   "rows_read": 272549,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2025-05.csv.gz",
+   "sha256": "4f56a428049b764a9e94360526f53d77fd77ffa0165a80cb9d4681e3b48ea6f3",
+   "bytes": 16176377,
+   "rows_manifest": 295058,
+   "rows_read": 295058,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2025-06.csv.gz",
+   "sha256": "9636896c6970b51469ec5abb7f3eb54379296b506a98e80df8b42e2442e5c052",
+   "bytes": 16310410,
+   "rows_manifest": 306442,
+   "rows_read": 306442,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2025-07.csv.gz",
+   "sha256": "2005d97c02c23c04208b262f9546afe3a4dca4bdc11fe1d11a7b9c1857515ee7",
+   "bytes": 16734348,
+   "rows_manifest": 315883,
+   "rows_read": 315883,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2025-08.csv.gz",
+   "sha256": "a3e2dda9d5ec41e4fa388ebeb5043bec4a41e8bc7396f43c794ff670251cf95b",
+   "bytes": 16126357,
+   "rows_manifest": 304039,
+   "rows_read": 304039,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2025-09.csv.gz",
+   "sha256": "da864480828a30fb12a7c4d7ea8e90a84e7dfca801da9e583bedac7e5f292518",
+   "bytes": 15740385,
+   "rows_manifest": 302684,
+   "rows_read": 302684,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2025-10.csv.gz",
+   "sha256": "7277866c1f8062af782604d91fbe5b9fc688cf009d3ce3b05cb11156f6ecfb3c",
+   "bytes": 16839060,
+   "rows_manifest": 336612,
+   "rows_read": 336612,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2025-11.csv.gz",
+   "sha256": "77eca937c69af8f75fc1972420ac164304786b814b16ddd960fd2b30c3d2f857",
+   "bytes": 15073986,
+   "rows_manifest": 304905,
+   "rows_read": 304905,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2025-12.csv.gz",
+   "sha256": "ad13a69763f2b573b7267dc8ad2d3a74b6961eae26e33c2c7d56460bd340008a",
+   "bytes": 15545250,
+   "rows_manifest": 332103,
+   "rows_read": 332103,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2026-01.csv.gz",
+   "sha256": "0b1227e22cc1fdae049a52cff2bb7a593d7b2806b63191acc209a052b93a0ea9",
+   "bytes": 17109740,
+   "rows_manifest": 348511,
+   "rows_read": 348511,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2026-02.csv.gz",
+   "sha256": "69031df60f79c57bce8cdceab36665031694e843e1d88d0bacf496362b43be05",
+   "bytes": 16950793,
+   "rows_manifest": 334690,
+   "rows_read": 334690,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2026-03.csv.gz",
+   "sha256": "a7a03ff5684328e1c0fdf36c408119e654fdea7c5b293862c65f30b94f423dd1",
+   "bytes": 17779117,
+   "rows_manifest": 342388,
+   "rows_read": 342388,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2026-04.csv.gz",
+   "sha256": "f6407552d0a73bc374fc9cb634aac035e1dbe1b886b55e0953255a870a0b16d4",
+   "bytes": 15417743,
+   "rows_manifest": 302191,
+   "rows_read": 302191,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2026-05.csv.gz",
+   "sha256": "5b88586ca3c98622b7bf8b37c4f3da90a06817f61f0e17524a63dc27b9aa3e63",
+   "bytes": 16480511,
+   "rows_manifest": 331979,
+   "rows_read": 331979,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2026-06.csv.gz",
+   "sha256": "027253b9c0108eec5949f1762cf6fbeee9146f793aeeb3b749b0270fc8b31428",
+   "bytes": 17168739,
+   "rows_manifest": 334833,
+   "rows_read": 334833,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2026-07.csv.gz",
+   "sha256": "216d0407909aae0fcbdc50b53b8f80be021503b9951019a9ac442dee79f448c5",
+   "bytes": 17771268,
+   "rows_manifest": 343109,
+   "rows_read": 343109,
+   "blank_lines_skipped": 0
+  },
+  {
+   "name": "nyc311_2026-08.csv.gz",
+   "sha256": "20c4d9e9917ddc01fccada39f736cb4b55855251fd11f531ac611110be467a53",
+   "bytes": 16010451,
+   "rows_manifest": 328828,
+   "rows_read": 328828,
+   "blank_lines_skipped": 0
+  }
+ ],
+ "checks": "every file: sha256 and row count against the manifest, before loading",
+ "storage": "every column TEXT, values exactly as read; an empty field is NULL; missing-value tokens stay text (the client reader turns pandas' default tokens into NULL)",
+ "started": "2026-09-23T00:50:25",
+ "finished": "2026-09-23T01:36:12",
+ "sqlite": "3.51.0",
+ "profiler": "northledger.health.score_table"
+}

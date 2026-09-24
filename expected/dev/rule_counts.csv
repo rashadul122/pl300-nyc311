@@ -1,0 +1,31 @@
+role,rule_key,rule_id,flag_value,kind,description,rows_expected,raw_audit_rows
+carryin,R03|missing,R03,missing,flag,"close not valid: no close, or no created",2860,2860
+carryin,R03|negative,R03,negative,flag,close not valid: before created,54,
+carryin,R05|over_1y,R05,over_1y,flag,"valid close over 525,600 minutes: not valid for resolution",1066,
+carryin,R06|day_precision,R06,day_precision,flag,valid close at exactly 00:00:00 (row stays valid),820,
+carryin,R07|status_conflict,R07,status_conflict,flag,status Closed with no valid close: not backlog-eligible,1202,
+carryin,R08|after,R08,after,distinct,distinct Agency values,14,
+carryin,R08|raw,R08,raw,distinct,distinct raw agency values after R01 (twin),14,
+carryin,R09|after,R09,after,distinct,distinct Complaint Key values,114,
+carryin,R09|raw,R09,raw,distinct,distinct raw complaint_type values after R01 (twin),126,
+carryin,R12|unknown,R12,unknown,flag,borough not one of the five: UNKNOWN,19,
+carryin,R13|missing,R13,missing,flag,blank ZIP: UNKNOWN,442,442
+carryin,R17|after,R17,after,distinct,distinct Channel values,4,
+carryin,R17|raw,R17,raw,distinct,distinct raw open_data_channel_type values after R01 (twin),4,
+carryin,R18|open_invalid_close,R18,open_invalid_close,flag,"status not Closed, close present but not valid: treated as open",35,
+window,R03|missing,R03,missing,flag,"close not valid: no close, or no created",7874,7874
+window,R03|negative,R03,negative,flag,close not valid: before created,66,
+window,R05|over_1y,R05,over_1y,flag,"valid close over 525,600 minutes: not valid for resolution",327,
+window,R05|zero,R05,zero,flag,valid close under 1 minute: not valid for resolution,6071,
+window,R06|day_precision,R06,day_precision,flag,valid close at exactly 00:00:00 (row stays valid),8821,
+window,R07|status_conflict,R07,status_conflict,flag,status Closed with no valid close: not backlog-eligible,667,
+window,R08|after,R08,after,distinct,distinct Agency values,16,
+window,R08|raw,R08,raw,distinct,distinct raw agency values after R01 (twin),16,
+window,R09|after,R09,after,distinct,distinct Complaint Key values,183,
+window,R09|raw,R09,raw,distinct,distinct raw complaint_type values after R01 (twin),186,
+window,R12|unknown,R12,unknown,flag,borough not one of the five: UNKNOWN,249,
+window,R13|invalid,R13,invalid,flag,ZIP not 5 digits in 10000-14999: UNKNOWN,6,
+window,R13|missing,R13,missing,flag,blank ZIP: UNKNOWN,2649,2649
+window,R17|after,R17,after,distinct,distinct Channel values,5,
+window,R17|raw,R17,raw,distinct,distinct raw open_data_channel_type values after R01 (twin),5,
+window,R18|open_invalid_close,R18,open_invalid_close,flag,"status not Closed, close present but not valid: treated as open",48,

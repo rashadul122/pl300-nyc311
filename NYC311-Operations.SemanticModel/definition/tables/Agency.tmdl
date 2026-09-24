@@ -1,0 +1,49 @@
+/// Canonical agency codes from agency_dim.csv, UNKNOWN included
+table Agency
+	lineageTag: 97236e47-8530-5ba7-99dc-0264bd3f21e2
+
+	column Agency
+		dataType: string
+		lineageTag: b35e2685-68fb-5560-af24-519e9df530aa
+		summarizeBy: none
+		sourceColumn: Agency
+
+		annotation SummarizationSetBy = User
+
+	column 'Agency Name'
+		dataType: string
+		lineageTag: 6cd87804-09e9-5d0c-8057-634f125edb74
+		summarizeBy: none
+		sourceColumn: 'Agency Name'
+
+		annotation SummarizationSetBy = User
+
+	/// Model-side grouping standing in for Desktop's Groups dialog (SPEC 5.1)
+	column 'Agency Group' =
+			SWITCH (
+				TRUE (),
+				Agency[Agency] IN { "HPD", "DOB" }, "Housing & Buildings",
+				Agency[Agency] IN { "DSNY", "DEP", "DOHMH", "DPR" }, "Environment, Health & Parks",
+				Agency[Agency] IN { "NYPD", "OOS" }, "Public Safety",
+				Agency[Agency] IN { "DOT", "TLC" }, "Transportation",
+				"Other"                    // 311, DCWP, DHS, DOE, EDC, OTI, UNKNOWN: never blank
+			)
+		dataType: string
+		lineageTag: 26d64315-70ce-5afd-b292-549e865fc14f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+	partition Agency = m
+		mode: import
+		queryGroup: Dimensions
+		source =
+				let
+					Source = Csv.Document(Web.Contents(pDataBaseUrl, [RelativePath = "raw/main/data/reference/agency_dim.csv"]),
+						[Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+					Renamed = Table.RenameColumns(Promoted, {{"agency", "Agency"}, {"agency_name", "Agency Name"}}),
+					Typed = Table.TransformColumnTypes(Renamed, {{"Agency", type text}, {"Agency Name", type text}})
+				in
+					Typed
+

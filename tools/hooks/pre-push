@@ -1,0 +1,1 @@
+exec sh tools/check_sealed.sh

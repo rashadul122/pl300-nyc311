@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "p01_asof",
+  "position": {
+    "x": 588,
+    "y": 8,
+    "z": 2000,
+    "width": 420,
+    "height": 40,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Data through 31 Aug 2026 (snapshot as of 20 Sep 2026)",
+                    "textStyle": {
+                      "fontSize": "9pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Data through 31 Aug 2026 (snapshot as of 20 Sep 2026). The report is a frozen snapshot.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

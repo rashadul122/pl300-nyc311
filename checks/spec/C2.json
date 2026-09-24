@@ -1,0 +1,34 @@
+{
+  "check_id": "C2",
+  "title": "Opened, closed and digital share by month and channel",
+  "dax": "checks/dax/C2.dax",
+  "keys": [
+    {
+      "name": "Year Month",
+      "kind": "text"
+    },
+    {
+      "name": "Channel",
+      "kind": "text"
+    }
+  ],
+  "measures": {
+    "Requests": {
+      "kind": "count",
+      "compare": "exact"
+    },
+    "Requests Closed": {
+      "kind": "count",
+      "compare": "exact"
+    },
+    "Digital Share": {
+      "kind": "ratio",
+      "compare": "rel_tol",
+      "rel_tol": 1e-09
+    }
+  },
+  "overrides": [],
+  "notes": [
+    "Comparison per SPEC 9.4: counts and whole numbers exact; hours, ratios and averages relative tolerance 1e-9; BLANK and 0 are different values; booleans, dates and text exact after the display format is normalised (True/TRUE, 8/31/2026 12:00:00 AM, 1,234, 12.5%)."
+  ]
+}

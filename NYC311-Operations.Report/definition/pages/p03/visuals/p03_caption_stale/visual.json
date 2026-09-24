@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "p03_caption_stale",
+  "position": {
+    "x": 648,
+    "y": 628,
+    "z": 9000,
+    "width": 616,
+    "height": 84,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "City-wide, full profile, not filtered by borough or slicers: a further 84,050 requests (30.2% of everything open) had been open more than 365 days and are outside the operational backlog (rule R20).",
+                    "textStyle": {
+                      "fontSize": "9pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Caption: city-wide, full profile, not filtered by borough or slicers: a further 84,050 requests, 30.2 percent of everything open, had been open more than 365 days and are outside the operational backlog (rule R20).'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

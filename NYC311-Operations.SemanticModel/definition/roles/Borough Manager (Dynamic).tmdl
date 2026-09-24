@@ -1,0 +1,16 @@
+role 'Borough Manager (Dynamic)'
+	modelPermission: read
+
+	tablePermission 'Borough Access' = 'Borough Access'[User Principal Name] = USERPRINCIPALNAME()
+
+	tablePermission Borough =
+			Borough[Borough]
+				IN CALCULATETABLE (
+					VALUES ( 'Borough Access'[Borough] ),
+					'Borough Access'[User Principal Name] = USERPRINCIPALNAME ()
+				)
+
+	tablePermission 'DQ Rules' = FALSE()
+
+	tablePermission 'Reconciliation Results' = FALSE()
+

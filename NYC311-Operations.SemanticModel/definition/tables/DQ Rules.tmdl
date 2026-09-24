@@ -1,0 +1,139 @@
+/// Power Query rule counts of both roles merged with the twin's rule_counts.csv
+table 'DQ Rules'
+	lineageTag: 88ec73cb-24e7-5fd9-ac19-4d99ec1f74b5
+
+	column Role
+		dataType: string
+		lineageTag: d09a3bdf-3d01-50ae-8841-161d51cecae8
+		summarizeBy: none
+		sourceColumn: Role
+
+		annotation SummarizationSetBy = User
+
+	column 'Rule Key'
+		dataType: string
+		lineageTag: 6aa42eef-4418-5b45-b792-a9e4b8df1565
+		summarizeBy: none
+		sourceColumn: 'Rule Key'
+
+		annotation SummarizationSetBy = User
+
+	column 'Rule Id'
+		dataType: string
+		lineageTag: 15d17325-0b07-5ea5-8059-4ff372c4b972
+		summarizeBy: none
+		sourceColumn: 'Rule Id'
+
+		annotation SummarizationSetBy = User
+
+	column 'Flag Value'
+		dataType: string
+		lineageTag: e4a33e0c-77af-5918-8b73-87269e00516d
+		summarizeBy: none
+		sourceColumn: 'Flag Value'
+
+		annotation SummarizationSetBy = User
+
+	column Kind
+		dataType: string
+		lineageTag: 3a8e33de-b3f0-5d16-8d95-a58ddae8ac24
+		summarizeBy: none
+		sourceColumn: Kind
+
+		annotation SummarizationSetBy = User
+
+	column Description
+		dataType: string
+		lineageTag: a57408ad-e4ca-5bad-b05e-04e283752420
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = User
+
+	column 'Rows Flagged (Power Query)'
+		dataType: int64
+		formatString: #,##0
+		lineageTag: 04221d5c-2dc5-515e-9afd-1a94b70b4bc9
+		summarizeBy: sum
+		sourceColumn: 'Rows Flagged (Power Query)'
+
+		annotation SummarizationSetBy = User
+
+	column 'Rows Expected (Twin)'
+		dataType: int64
+		formatString: #,##0
+		lineageTag: 531fa9ba-1c3c-5c8a-81d1-8323b636bc0f
+		summarizeBy: sum
+		sourceColumn: 'Rows Expected (Twin)'
+
+		annotation SummarizationSetBy = User
+
+	column 'Rows (Raw Audit)'
+		dataType: int64
+		formatString: #,##0
+		lineageTag: c38bdadd-a8f8-5d6b-8770-e73f3565a4dd
+		summarizeBy: sum
+		sourceColumn: 'Rows (Raw Audit)'
+
+		annotation SummarizationSetBy = User
+
+	column Mismatch
+		dataType: int64
+		formatString: 0
+		lineageTag: 402193e0-4ba3-5aa6-a046-7f60df565136
+		summarizeBy: sum
+		sourceColumn: Mismatch
+
+		annotation SummarizationSetBy = User
+
+	partition 'DQ Rules' = m
+		mode: import
+		queryGroup: 'Data Quality'
+		source =
+				let
+					FlagCols = {"R02 Parse", "R03 Close", "R05 Resolution", "R06 Day Precision", "R07 Status Conflict",
+						"R12 Borough", "R13 ZIP", "R18 Open Invalid Close"},
+					KeyCols = {"Agency", "Complaint Key", "Channel"},
+					PerRole = (t as table, role as text) as table =>
+						let
+							// group FIRST: flag combinations x the three consolidated keys, a few thousand rows
+							Combos = Table.Group(Table.SelectColumns(t, FlagCols & KeyCols), FlagCols & KeyCols,
+								{{"Rows", each Table.RowCount(_), Int64.Type}}),
+							Distincts = #table(type table [#"PQ Key" = text, #"Rows Flagged (Power Query)" = Int64.Type], {
+								{role & "|R08|after", List.Count(List.Distinct(Combos[Agency]))},
+								{role & "|R09|after", List.Count(List.Distinct(Combos[Complaint Key]))},
+								{role & "|R17|after", List.Count(List.Distinct(Combos[Channel]))}}),
+							FlagsOnly = Table.RemoveColumns(Combos, KeyCols),
+							Long = Table.UnpivotOtherColumns(FlagsOnly, {"Rows"}, "Rule Column", "Flag Value"),
+							NonNull = Table.SelectRows(Long, each [Flag Value] <> null),
+							PerFlag = Table.Group(NonNull, {"Rule Column", "Flag Value"},
+								{{"Rows Flagged (Power Query)", each List.Sum([Rows]), Int64.Type}}),
+							Keyed = Table.AddColumn(PerFlag, "PQ Key",
+								each role & "|" & Text.Start([Rule Column], 3) & "|" & [Flag Value], type text),
+							Flags = Table.SelectColumns(Keyed, {"PQ Key", "Rows Flagged (Power Query)"})
+						in
+							Table.Combine({Flags, Distincts}),
+					PQ = Table.Combine({PerRole(Requests, "window"), PerRole(#"Opening Backlog", "carryin")}),
+					Twin = Table.AddColumn(#"Twin Rule Counts", "Twin Key", each [role] & "|" & [rule_key], type text),
+					Joined = Table.NestedJoin(Twin, {"Twin Key"}, PQ, {"PQ Key"}, "PQT", JoinKind.FullOuter),
+					Expanded = Table.ExpandTableColumn(Joined, "PQT", {"PQ Key", "Rows Flagged (Power Query)"}),
+					Key = Table.AddColumn(Expanded, "Key", each if [Twin Key] <> null then [Twin Key] else [PQ Key], type text),
+					Parts = Table.AddColumn(Key, "Parts", each Text.Split([Key], "|")),
+					Role = Table.AddColumn(Parts, "Role", each [Parts]{0}, type text),
+					RuleId = Table.AddColumn(Role, "Rule Id", each [Parts]{1}, type text),
+					FlagValue = Table.AddColumn(RuleId, "Flag Value", each [Parts]{2}, type text),
+					RuleKey = Table.AddColumn(FlagValue, "Rule Key", each [Parts]{1} & "|" & [Parts]{2}, type text),
+					Kind = Table.AddColumn(RuleKey, "Kind", each
+						if [kind] <> null then [kind]
+						else if List.Contains({"raw", "after"}, [Flag Value]) then "distinct" else "flag", type text),
+					// compared: every flag row, and the distinct 'after' rows; 'raw' rows are twin-only
+					Mismatch = Table.AddColumn(Kind, "Mismatch", each
+						if ([Kind] = "flag" or [Flag Value] = "after")
+							and [#"Rows Flagged (Power Query)"] <> [rows_expected] then 1 else 0, Int64.Type),
+					Renamed = Table.RenameColumns(Mismatch, {{"description", "Description"}, {"rows_expected", "Rows Expected (Twin)"},
+						{"raw_audit_rows", "Rows (Raw Audit)"}}),
+					Selected = Table.SelectColumns(Renamed, {"Role", "Rule Key", "Rule Id", "Flag Value", "Kind", "Description",
+						"Rows Flagged (Power Query)", "Rows Expected (Twin)", "Rows (Raw Audit)", "Mismatch"})
+				in
+					Selected
+

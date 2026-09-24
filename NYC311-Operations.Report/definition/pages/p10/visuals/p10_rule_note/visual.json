@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "p10_rule_note",
+  "position": {
+    "x": 16,
+    "y": 290,
+    "z": 4000,
+    "width": 744,
+    "height": 40,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Rows (raw audit) is informational and never compared: ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt"
+                    }
+                  },
+                  {
+                    "value": "the NorthLedger raw audit is written independently of rules R01–R20. A blank cell means the audit has no corresponding measure, or the engine could not show that the two definitions agree on this profile. See expected/<profile>/raw_audit/raw_audit_map.csv.",
+                    "textStyle": {
+                      "fontSize": "9pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Note: the raw audit column is informational; blank cells are explained in raw_audit_map.csv.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "p10_access_note",
+  "position": {
+    "x": 776,
+    "y": 8,
+    "z": 2000,
+    "width": 488,
+    "height": 48,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "DQ Access Note"
+                }
+              },
+              "queryRef": "_Measures.DQ Access Note",
+              "nativeQueryRef": "Access note",
+              "displayName": "Access note"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Access'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Card: for borough roles, says that data-quality and reconciliation detail is shown to City Operations only; blank for City Operations.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,211 @@
+complaint_key,category,category_sort
+ABANDONED BIKE,Sanitation & Cleanliness,6
+ABANDONED VEHICLE,Parking & Traffic,5
+ADOPT-A-BASKET,Sanitation & Cleanliness,6
+AHV INSPECTION UNIT,Buildings & Construction,3
+AIR QUALITY,Environmental Protection,7
+ANIMAL FACILITY - NO PERMIT,Public Health,8
+ANIMAL IN A PARK,Parks & Trees,9
+ANIMAL-ABUSE,Public Order,10
+APPLIANCE,Housing Conditions,2
+ASBESTOS,Environmental Protection,7
+BEACH/POOL/SAUNA COMPLAINT,Public Health,8
+BENCH,Street Infrastructure,4
+BEST/SITE SAFETY,Buildings & Construction,3
+BIKE RACK,Street Infrastructure,4
+BIKE RACK CONDITION,Street Infrastructure,4
+BIKE/ROLLER/SKATE,Public Order,10
+BIKE/ROLLER/SKATE CHRONIC,Public Order,10
+BLOCKED DRIVEWAY,Parking & Traffic,5
+BOILERS,Buildings & Construction,3
+BOROUGH OFFICE,Buildings & Construction,3
+BRIDGE CONDITION,Street Infrastructure,4
+BROKEN PARKING METER,Street Infrastructure,4
+BUILDING CONDITION,Buildings & Construction,3
+BUILDING DRINKING WATER TANK,Public Health,8
+BUILDING MARSHALS OFFICE,Buildings & Construction,3
+BUILDING/USE,Buildings & Construction,3
+BUS STOP SHELTER COMPLAINT,Street Infrastructure,4
+BUS STOP SHELTER PLACEMENT,Street Infrastructure,4
+CALORIE LABELING,Public Health,8
+CANNABIS RETAILER,Consumer & Licensing,12
+COMMERCIAL DISPOSAL COMPLAINT,Sanitation & Cleanliness,6
+CONSTRUCTION LEAD DUST,Public Health,8
+CONSTRUCTION SAFETY ENFORCEMENT,Buildings & Construction,3
+CONSUMER COMPLAINT,Consumer & Licensing,12
+COOLING TOWER,Public Health,8
+CRANES AND DERRICKS,Buildings & Construction,3
+CURB CONDITION,Street Infrastructure,4
+DAMAGED TREE,Parks & Trees,9
+DAY CARE,Public Health,8
+DEAD ANIMAL,Sanitation & Cleanliness,6
+DEAD/DYING TREE,Parks & Trees,9
+DEP HIGHWAY CONDITION,Street Infrastructure,4
+DEP SIDEWALK CONDITION,Street Infrastructure,4
+DEP STREET CONDITION,Street Infrastructure,4
+DEPT OF INVESTIGATIONS,Buildings & Construction,3
+DERELICT VEHICLES,Sanitation & Cleanliness,6
+DIRTY CONDITION,Sanitation & Cleanliness,6
+DISORDERLY YOUTH,Public Order,10
+DISPATCHED TAXI COMPLAINT,Consumer & Licensing,12
+DOB POSTED NOTICE OR ORDER,Buildings & Construction,3
+DOOR/WINDOW,Housing Conditions,2
+DRINKING,Public Order,10
+DRINKING WATER,Public Health,8
+DRUG ACTIVITY,Public Order,10
+DRY WEATHER DISCHARGE,Environmental Protection,7
+DSNY INTERNAL,Sanitation & Cleanliness,6
+DUMPSTER COMPLAINT,Sanitation & Cleanliness,6
+E-SCOOTER,Street Infrastructure,4
+ELECTRIC,Housing Conditions,2
+ELECTRICAL,Buildings & Construction,3
+ELECTRONICS WASTE APPOINTMENT,Sanitation & Cleanliness,6
+ELEVATOR,Buildings & Construction,3
+EMERGENCY RESPONSE TEAM (ERT),Buildings & Construction,3
+ENCAMPMENT,Homelessness,11
+EXECUTIVE INSPECTIONS,Buildings & Construction,3
+FACADE INSP SAFETY PGM,Buildings & Construction,3
+FERRY COMPLAINT,Street Infrastructure,4
+FERRY INQUIRY,Street Infrastructure,4
+FHV LICENSEE COMPLAINT,Consumer & Licensing,12
+FLOORING/STAIRS,Housing Conditions,2
+FOOD ESTABLISHMENT,Public Health,8
+FOOD POISONING,Public Health,8
+FOR HIRE VEHICLE COMPLAINT,Consumer & Licensing,12
+FOR HIRE VEHICLE REPORT,Consumer & Licensing,12
+FOUND PROPERTY,Consumer & Licensing,12
+GENERAL,Housing Conditions,2
+GENERAL CONSTRUCTION/PLUMBING,Buildings & Construction,3
+GRAFFITI,Sanitation & Cleanliness,6
+GREEN INFRASTRUCTURE,Environmental Protection,7
+GREEN TAXI COMPLAINT,Consumer & Licensing,12
+GREEN TAXI REPORT,Consumer & Licensing,12
+HARBORING BEES/WASPS,Public Health,8
+HAZARDOUS MATERIALS,Environmental Protection,7
+HEAT/HOT WATER,Housing Conditions,2
+HIGHWAY CONDITION,Street Infrastructure,4
+HIGHWAY SIGN - DAMAGED,Street Infrastructure,4
+HIGHWAY SIGN - DANGLING,Street Infrastructure,4
+HIGHWAY SIGN - MISSING,Street Infrastructure,4
+HOMELESS PERSON ASSISTANCE,Homelessness,11
+ILLEGAL ANIMAL KEPT AS PET,Public Health,8
+ILLEGAL ANIMAL SOLD,Public Health,8
+ILLEGAL DUMPING,Sanitation & Cleanliness,6
+ILLEGAL FIREWORKS,Public Order,10
+ILLEGAL PARKING,Parking & Traffic,5
+ILLEGAL POSTING,Sanitation & Cleanliness,6
+ILLEGAL TREE DAMAGE,Parks & Trees,9
+INCORRECT DATA,Sanitation & Cleanliness,6
+INDOOR AIR QUALITY,Public Health,8
+INDOOR SEWAGE,Public Health,8
+INDUSTRIAL WASTE,Environmental Protection,7
+INSTITUTION DISPOSAL COMPLAINT,Sanitation & Cleanliness,6
+INVESTIGATIONS AND DISCIPLINE (IAD),Buildings & Construction,3
+LEAD,Environmental Protection,7
+LEANING BAR,Street Infrastructure,4
+LIFEGUARD,Public Health,8
+LINKNYC,Street Infrastructure,4
+LITTER BASKET COMPLAINT,Sanitation & Cleanliness,6
+LITTER BASKET REQUEST,Sanitation & Cleanliness,6
+LOST PROPERTY,Consumer & Licensing,12
+LOT CONDITION,Sanitation & Cleanliness,6
+MAINTENANCE OR FACILITY,Parks & Trees,9
+MISSED COLLECTION,Sanitation & Cleanliness,6
+MOBILE FOOD VENDOR,Public Health,8
+MOLD,Public Health,8
+MOSQUITOES,Public Health,8
+MUNICIPAL PARKING FACILITY,Street Infrastructure,4
+NEW TREE REQUEST,Parks & Trees,9
+NOISE,Environmental Protection,7
+NOISE - COMMERCIAL,Noise,1
+NOISE - HELICOPTER,Noise,1
+NOISE - HOUSE OF WORSHIP,Noise,1
+NOISE - PARK,Noise,1
+NOISE - RESIDENTIAL,Noise,1
+NOISE - STREET/SIDEWALK,Noise,1
+NOISE - VEHICLE,Noise,1
+NON-EMERGENCY POLICE MATTER,Public Order,10
+NON-RESIDENTIAL HEAT,Public Health,8
+OBSTRUCTION,Sanitation & Cleanliness,6
+OIL OR GAS SPILL,Sanitation & Cleanliness,6
+OUTDOOR DINING,Street Infrastructure,4
+OUTSIDE BUILDING,Housing Conditions,2
+OVERGROWN TREE/BRANCHES,Parks & Trees,9
+PAINT/PLASTER,Housing Conditions,2
+PANHANDLING,Public Order,10
+PEELING PAINT,Public Health,8
+PET SALE,Public Health,8
+PET SHOP,Public Health,8
+PLANT,Environmental Protection,7
+PLUMBING,Housing Conditions,2
+POISON IVY,Public Health,8
+POSTING ADVERTISEMENT,Public Order,10
+PUBLIC PAYPHONE COMPLAINT,Street Infrastructure,4
+PUBLIC TOILET,Street Infrastructure,4
+RADIOACTIVE MATERIAL,Public Health,8
+REAL TIME ENFORCEMENT,Buildings & Construction,3
+RECYCLING BASKET COMPLAINT,Sanitation & Cleanliness,6
+RESIDENTIAL DISPOSAL COMPLAINT,Sanitation & Cleanliness,6
+RETAILER COMPLAINT,Sanitation & Cleanliness,6
+RODENT,Public Health,8
+ROOT/SEWER/SIDEWALK CONDITION,Parks & Trees,9
+SAFETY,Housing Conditions,2
+SANITATION WORKER OR VEHICLE COMPLAINT,Sanitation & Cleanliness,6
+SCAFFOLD SAFETY,Buildings & Construction,3
+SCHOOL MAINTENANCE,Buildings & Construction,3
+SEASONAL COLLECTION,Sanitation & Cleanliness,6
+SEWER,Environmental Protection,7
+SEWER MAINTENANCE,Environmental Protection,7
+SIDEWALK CONDITION,Street Infrastructure,4
+SMOKING,Public Health,8
+SMOKING OR VAPING,Public Health,8
+SNOW OR ICE,Sanitation & Cleanliness,6
+SNW,Street Infrastructure,4
+SPECIAL NATURAL AREA DISTRICT (SNAD),Buildings & Construction,3
+SPECIAL OPERATIONS,Buildings & Construction,3
+SPECIAL PROJECTS INSPECTION TEAM (SPIT),Buildings & Construction,3
+SQUEEGEE,Public Order,10
+STALLED SITES,Buildings & Construction,3
+STANDING WATER,Public Health,8
+STREET CONDITION,Street Infrastructure,4
+STREET LIGHT CONDITION,Street Infrastructure,4
+STREET SIGN - DAMAGED,Street Infrastructure,4
+STREET SIGN - DANGLING,Street Infrastructure,4
+STREET SIGN - MISSING,Street Infrastructure,4
+STREET SWEEPING COMPLAINT,Sanitation & Cleanliness,6
+SUSTAINABILITY ENFORCEMENT,Buildings & Construction,3
+TANNING,Public Health,8
+TATTOOING,Public Health,8
+TAXI COMPLAINT,Consumer & Licensing,12
+TAXI COMPLIMENT,Consumer & Licensing,12
+TAXI LICENSEE COMPLAINT,Consumer & Licensing,12
+TAXI REPORT,Consumer & Licensing,12
+TOBACCO OR NON-TOBACCO SALE,Public Health,8
+TRAFFIC,Parking & Traffic,5
+TRAFFIC SIGNAL CONDITION,Street Infrastructure,4
+TRANSFER STATION COMPLAINT,Sanitation & Cleanliness,6
+TRAPPING PIGEON,Public Health,8
+TUNNEL CONDITION,Street Infrastructure,4
+UNLEASHED DOG,Public Health,8
+UNLICENSED DOG,Public Health,8
+UNSANITARY ANIMAL FACILITY,Public Health,8
+UNSANITARY ANIMAL PVT PROPERTY,Public Health,8
+UNSANITARY CONDITION,Housing Conditions,2
+UNSANITARY PIGEON CONDITION,Public Health,8
+UNSPECIFIED,Sanitation & Cleanliness,6
+UNSTABLE BUILDING,Buildings & Construction,3
+UPROOTED STUMP,Parks & Trees,9
+URINATING IN PUBLIC,Public Order,10
+VENDOR ENFORCEMENT,Sanitation & Cleanliness,6
+VIOLATION OF PARK RULES,Parks & Trees,9
+WASTE WATER TREATMENT PLANT,Environmental Protection,7
+WATER CONSERVATION,Environmental Protection,7
+WATER DRAINAGE,Buildings & Construction,3
+WATER LEAK,Housing Conditions,2
+WATER MAINTENANCE,Environmental Protection,7
+WATER QUALITY,Environmental Protection,7
+WATER SYSTEM,Environmental Protection,7
+WAYFINDING,Street Infrastructure,4
+WINDOW GUARD,Public Health,8
+WOOD PILE REMAINING,Parks & Trees,9
+X-RAY MACHINE/EQUIPMENT,Public Health,8

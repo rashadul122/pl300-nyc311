@@ -1,0 +1,80 @@
+/// Calculation group (SPEC 7): Current, FYTD, PY, YoY % on the four (TC) measures
+table 'Time Calc'
+	lineageTag: 89c349e1-7cdc-5339-bb81-dd34caae7db6
+
+	calculationGroup
+		precedence: 1
+
+		calculationItem Current = SELECTEDMEASURE ()
+
+		calculationItem FYTD =
+				VAR LastD =
+					CALCULATE ( MAX ( 'Date'[Date] ), REMOVEFILTERS ( 'Date' ), 'Date'[In Data Window] = TRUE () )
+				RETURN
+					IF (
+						ISSELECTEDMEASURE ( [Open Backlog EOP] ),
+						SELECTEDMEASURE (),
+						IF (
+							ISSELECTEDMEASURE ( [Requests], [Requests Closed], [Median Resolution Hours (Mature)] )
+								&& MIN ( 'Date'[Date] ) <= LastD,
+							CALCULATE (
+								SELECTEDMEASURE (),
+								DATESYTD ( 'Date'[Date], "6/30" ),
+								'Date'[In Data Window] = TRUE ()
+							)
+						)
+					)
+
+		calculationItem PY =
+				VAR WinStart =
+					CALCULATE ( MIN ( 'Date'[Date] ), REMOVEFILTERS ( 'Date' ), 'Date'[In Data Window] = TRUE () )
+				VAR CurDates =
+					CALCULATETABLE ( VALUES ( 'Date'[Date] ), KEEPFILTERS ( 'Date'[In Data Window] = TRUE () ) )
+				VAR MinCur = MINX ( CurDates, 'Date'[Date] )
+				VAR Complete = NOT ISBLANK ( MinCur ) && EDATE ( MinCur, -12 ) >= WinStart
+				RETURN
+					IF (
+						Complete
+							&& ISSELECTEDMEASURE ( [Requests], [Requests Closed], [Open Backlog EOP], [Median Resolution Hours (Mature)] ),
+						CALCULATE ( SELECTEDMEASURE (), SAMEPERIODLASTYEAR ( CurDates ) )
+					)
+
+		calculationItem 'YoY %' =
+				VAR WinStart =
+					CALCULATE ( MIN ( 'Date'[Date] ), REMOVEFILTERS ( 'Date' ), 'Date'[In Data Window] = TRUE () )
+				VAR CurDates =
+					CALCULATETABLE ( VALUES ( 'Date'[Date] ), KEEPFILTERS ( 'Date'[In Data Window] = TRUE () ) )
+				VAR MinCur = MINX ( CurDates, 'Date'[Date] )
+				VAR Complete = NOT ISBLANK ( MinCur ) && EDATE ( MinCur, -12 ) >= WinStart
+				VAR Cur = SELECTEDMEASURE ()
+				VAR Py = CALCULATE ( SELECTEDMEASURE (), SAMEPERIODLASTYEAR ( CurDates ) )
+				RETURN
+					IF (
+						Complete
+							&& ISSELECTEDMEASURE ( [Requests], [Requests Closed], [Open Backlog EOP], [Median Resolution Hours (Mature)] ),
+						DIVIDE ( Cur - Py, Py )
+					)
+
+			formatStringDefinition = "+0.0%;-0.0%;0.0%"
+
+	column 'Time View'
+		dataType: string
+		lineageTag: 6cf6ec01-c344-5367-b676-2c6092e8a245
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = User
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a1167905-3bf5-544f-8929-9493bf9e4509
+		summarizeBy: none
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = User
+
+	partition 'Time Calc' = calculationGroup
+

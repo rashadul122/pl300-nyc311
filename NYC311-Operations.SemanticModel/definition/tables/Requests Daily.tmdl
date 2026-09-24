@@ -1,0 +1,64 @@
+/// Created date x agency x complaint type x borough; on no v1 visual (SPEC 5.1 usage rule)
+table 'Requests Daily'
+	lineageTag: b6a92263-f25c-5adf-9d2b-7d35c8871e20
+
+	column 'Created Date'
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd
+		lineageTag: 90b11157-348d-5df9-9e43-058196167029
+		summarizeBy: none
+		sourceColumn: 'Created Date'
+
+		annotation SummarizationSetBy = User
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Agency
+		dataType: string
+		isHidden
+		lineageTag: 51360ab7-c02d-58cc-9ea3-4b1429b44eda
+		summarizeBy: none
+		sourceColumn: Agency
+
+		annotation SummarizationSetBy = User
+
+	column 'Complaint Key'
+		dataType: string
+		isHidden
+		lineageTag: f4f0da62-b94f-5b11-bff9-edefa25e6929
+		summarizeBy: none
+		sourceColumn: 'Complaint Key'
+
+		annotation SummarizationSetBy = User
+
+	column Borough
+		dataType: string
+		isHidden
+		lineageTag: 7bb37e47-b011-5e3d-a271-3564d5420b4a
+		summarizeBy: none
+		sourceColumn: Borough
+
+		annotation SummarizationSetBy = User
+
+	column 'Request Count'
+		dataType: int64
+		isHidden
+		formatString: #,##0
+		lineageTag: 6ef457d7-c1ff-57f3-8a68-3b656522dff6
+		summarizeBy: sum
+		sourceColumn: 'Request Count'
+
+		annotation SummarizationSetBy = User
+
+	partition 'Requests Daily' = m
+		mode: import
+		queryGroup: Facts
+		source =
+				let
+					Source = Requests,
+					Grouped = Table.Group(Source, {"Created Date", "Agency", "Complaint Key", "Borough"},
+						{{"Request Count", each Table.RowCount(_), Int64.Type}})
+				in
+					Grouped
+

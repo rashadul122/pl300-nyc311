@@ -1,0 +1,274 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "p10_key_consolidation",
+  "position": {
+    "x": 16,
+    "y": 332,
+    "z": 5000,
+    "width": 744,
+    "height": 176,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DQ Rules"
+                    }
+                  },
+                  "Property": "Role"
+                }
+              },
+              "queryRef": "DQ Rules.Role",
+              "nativeQueryRef": "Role (window / carry-in)",
+              "displayName": "Role (window / carry-in)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DQ Rules"
+                    }
+                  },
+                  "Property": "Rule Id"
+                }
+              },
+              "queryRef": "DQ Rules.Rule Id",
+              "nativeQueryRef": "Rule Id"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DQ Rules"
+                    }
+                  },
+                  "Property": "Description"
+                }
+              },
+              "queryRef": "DQ Rules.Description",
+              "nativeQueryRef": "Description"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DQ Rules"
+                    }
+                  },
+                  "Property": "Flag Value"
+                }
+              },
+              "queryRef": "DQ Rules.Flag Value",
+              "nativeQueryRef": "Flag Value"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DQ Rules"
+                    }
+                  },
+                  "Property": "Rows Expected (Twin)"
+                }
+              },
+              "queryRef": "DQ Rules.Rows Expected (Twin)",
+              "nativeQueryRef": "Distinct values (twin)",
+              "displayName": "Distinct values (twin)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DQ Rules"
+                    }
+                  },
+                  "Property": "Rows Flagged (Power Query)"
+                }
+              },
+              "queryRef": "DQ Rules.Rows Flagged (Power Query)",
+              "nativeQueryRef": "After (Power Query)",
+              "displayName": "After (Power Query)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DQ Rules"
+                    }
+                  },
+                  "Property": "Mismatch"
+                }
+              },
+              "queryRef": "DQ Rules.Mismatch",
+              "nativeQueryRef": "Mismatch",
+              "hidden": true
+            },
+            {
+              "field": {
+                "NativeVisualCalculation": {
+                  "Language": "dax",
+                  "Expression": "IF ( [Flag Value] = \"raw\", \"– twin only, not compared\", IF ( [Mismatch] = 1, \"✖ Mismatch\", \"✔ Match\" ) )",
+                  "Name": "Mismatch check",
+                  "DataType": "Text"
+                }
+              },
+              "queryRef": "Mismatch check",
+              "nativeQueryRef": "Mismatch check"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DQ Rules"
+                  }
+                },
+                "Property": "Role"
+              }
+            },
+            "direction": "Ascending"
+          },
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DQ Rules"
+                  }
+                },
+                "Property": "Rule Id"
+              }
+            },
+            "direction": "Ascending"
+          },
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DQ Rules"
+                  }
+                },
+                "Property": "Flag Value"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": false
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Key consolidation (Flag Value: raw = twin before, after = after consolidation): R08 agencies, R09 complaint keys, R17 channels'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Table of distinct-value counts per role for agencies (R08), complaint keys (R09) and channels (R17): the raw count from the twin, the count after consolidation from the twin and from Power Query, and a mismatch column with a symbol and text. Raw rows are twin-only and not compared.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "Filter_p10_KindDistinct",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DQ Rules"
+              }
+            },
+            "Property": "Kind"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "d",
+              "Entity": "DQ Rules",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "d"
+                          }
+                        },
+                        "Property": "Kind"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'distinct'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
+  }
+}

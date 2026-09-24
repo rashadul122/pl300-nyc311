@@ -1,0 +1,72 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "p10_card_mismatches",
+  "position": {
+    "x": 776,
+    "y": 60,
+    "z": 15000,
+    "width": 240,
+    "height": 72,
+    "tabOrder": 14000
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Rule Mismatches"
+                }
+              },
+              "queryRef": "_Measures.Rule Mismatches",
+              "nativeQueryRef": "Rule Mismatches"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Rule mismatches (Power Query vs twin)'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Card: number of rule rows where Power Query and the twin disagree; blank for borough roles.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

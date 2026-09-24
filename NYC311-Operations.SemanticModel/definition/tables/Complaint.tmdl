@@ -1,0 +1,81 @@
+/// Distinct complaint keys (R09) of both roles, with category and benchmark hours
+table Complaint
+	lineageTag: bea93ab2-a295-55a0-b052-ef8cdb50e492
+
+	column 'Complaint Key'
+		dataType: string
+		isHidden
+		lineageTag: 5c2f2e89-e51d-59c0-80c9-03df33cad2d7
+		summarizeBy: none
+		sourceColumn: 'Complaint Key'
+
+		annotation SummarizationSetBy = User
+
+	column Category
+		dataType: string
+		lineageTag: ac9ef98f-e678-5daf-a9a3-28acc8e13711
+		summarizeBy: none
+		sourceColumn: Category
+		sortByColumn: 'Category Sort'
+
+		annotation SummarizationSetBy = User
+
+	column 'Category Sort'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 50f2c619-8f06-54bc-91a6-656b5c3688d2
+		summarizeBy: none
+		sourceColumn: 'Category Sort'
+
+		annotation SummarizationSetBy = User
+
+	column 'Benchmark Hours'
+		dataType: double
+		formatString: #,##0
+		lineageTag: 5a0b10ef-1e24-55e7-918b-6e233a5b9a11
+		summarizeBy: none
+		sourceColumn: 'Benchmark Hours'
+
+		annotation SummarizationSetBy = User
+
+	column 'Complaint Type'
+		dataType: string
+		lineageTag: 3cc250e6-4e72-5094-9df3-e9996ff1a268
+		summarizeBy: none
+		sourceColumn: 'Complaint Type'
+
+		annotation SummarizationSetBy = User
+
+	hierarchy 'Category Hierarchy'
+		lineageTag: 7f71fc2a-104d-57e1-84fc-8c46a77423e5
+
+		level Category
+			lineageTag: 7828f650-c18a-5ad6-a2f5-8b1f8ca8a91f
+			column: Category
+
+		level 'Complaint Type'
+			lineageTag: 8a185c9f-aec4-5d2e-8b8d-d63b2a2f96a0
+			column: 'Complaint Type'
+
+	partition Complaint = m
+		mode: import
+		queryGroup: Dimensions
+		source =
+				let
+					Types = Table.Combine(List.Transform(#"Extract Files"[Data], each Table.SelectColumns(_, {"complaint_type"}))),
+					DistinctRaw = Table.Distinct(Types),                                   // distinct first: about 300 rows, then normalize
+					Keys = Table.AddColumn(DistinctRaw, "Complaint Key", each fnComplaintKey([complaint_type]), type text),
+					DistinctKeys = Table.Distinct(Table.SelectColumns(Keys, {"Complaint Key"})),
+					MapJoin = Table.NestedJoin(DistinctKeys, {"Complaint Key"}, #"Complaint Category Map", {"complaint_key"}, "Map", JoinKind.LeftOuter),
+					Mapped = Table.ExpandTableColumn(MapJoin, "Map", {"category", "category_sort"}, {"Category", "Category Sort"}),
+					Unmapped = Table.ReplaceValue(Mapped, null, "Unmapped", Replacer.ReplaceValue, {"Category"}),
+					UnmappedSort = Table.ReplaceValue(Unmapped, null, 999, Replacer.ReplaceValue, {"Category Sort"}),
+					BenchJoin = Table.NestedJoin(UnmappedSort, {"Category"}, #"SLA Benchmarks", {"category"}, "Bench", JoinKind.LeftOuter),
+					WithBench = Table.ExpandTableColumn(BenchJoin, "Bench", {"benchmark_hours"}, {"Benchmark Hours"}),
+					Label = Table.DuplicateColumn(WithBench, "Complaint Key", "Complaint Type"),
+					Typed = Table.TransformColumnTypes(Label, {{"Complaint Key", type text}, {"Complaint Type", type text},
+						{"Category", type text}, {"Category Sort", Int64.Type}, {"Benchmark Hours", type number}})
+				in
+					Typed
+

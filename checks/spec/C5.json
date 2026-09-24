@@ -1,0 +1,125 @@
+{
+  "check_id": "C5",
+  "title": "Golden rows, window table: row-level Power Query (R01-R20) and Breach Flag on real unique keys",
+  "dax": {
+    "dev": "checks/dax/C5.dev.dax",
+    "full": "checks/dax/C5.full.dax"
+  },
+  "keys": [
+    {
+      "name": "Unique Key",
+      "kind": "integer"
+    }
+  ],
+  "measures": {
+    "Created Date": {
+      "kind": "date",
+      "compare": "exact"
+    },
+    "Created Hour": {
+      "kind": "integer",
+      "compare": "exact"
+    },
+    "Closed Date": {
+      "kind": "date",
+      "compare": "exact"
+    },
+    "Closed Valid": {
+      "kind": "boolean",
+      "compare": "exact"
+    },
+    "Resolution Minutes": {
+      "kind": "integer",
+      "compare": "exact"
+    },
+    "Valid For Resolution": {
+      "kind": "boolean",
+      "compare": "exact"
+    },
+    "Backlog Eligible": {
+      "kind": "boolean",
+      "compare": "exact"
+    },
+    "Backlog Exit Date": {
+      "kind": "date",
+      "compare": "exact"
+    },
+    "Backlog Exit": {
+      "kind": "text",
+      "compare": "exact"
+    },
+    "Status": {
+      "kind": "text",
+      "compare": "exact"
+    },
+    "Agency": {
+      "kind": "text",
+      "compare": "exact"
+    },
+    "Complaint Key": {
+      "kind": "text",
+      "compare": "exact"
+    },
+    "Descriptor": {
+      "kind": "text",
+      "compare": "exact"
+    },
+    "Borough": {
+      "kind": "text",
+      "compare": "exact"
+    },
+    "Channel": {
+      "kind": "text",
+      "compare": "exact"
+    },
+    "ZIP": {
+      "kind": "text",
+      "compare": "exact"
+    },
+    "Age Band Key": {
+      "kind": "integer",
+      "compare": "exact"
+    },
+    "Breach Flag": {
+      "kind": "integer",
+      "compare": "exact"
+    },
+    "R02": {
+      "kind": "text",
+      "compare": "exact"
+    },
+    "R03": {
+      "kind": "text",
+      "compare": "exact"
+    },
+    "R05": {
+      "kind": "text",
+      "compare": "exact"
+    },
+    "R06": {
+      "kind": "text",
+      "compare": "exact"
+    },
+    "R07": {
+      "kind": "text",
+      "compare": "exact"
+    },
+    "R12": {
+      "kind": "text",
+      "compare": "exact"
+    },
+    "R13": {
+      "kind": "text",
+      "compare": "exact"
+    },
+    "R18": {
+      "kind": "text",
+      "compare": "exact"
+    }
+  },
+  "overrides": [],
+  "notes": [
+    "Every column is compared exactly: a golden row is right or wrong. Breach Flag BLANK (not assessable) and 0 (met) are different values.",
+    "Comparison per SPEC 9.4: counts and whole numbers exact; hours, ratios and averages relative tolerance 1e-9; BLANK and 0 are different values; booleans, dates and text exact after the display format is normalised (True/TRUE, 8/31/2026 12:00:00 AM, 1,234, 12.5%)."
+  ]
+}

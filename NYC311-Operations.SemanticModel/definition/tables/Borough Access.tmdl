@@ -1,0 +1,34 @@
+/// UPN to borough for the dynamic role; test UPNs only (SPEC 3.5)
+table 'Borough Access'
+	isHidden
+	lineageTag: 78f60369-e624-565c-b625-bfcd09ad6397
+
+	column 'User Principal Name'
+		dataType: string
+		lineageTag: 9c269d7e-5def-5166-a6e4-05ffd37a785f
+		summarizeBy: none
+		sourceColumn: 'User Principal Name'
+
+		annotation SummarizationSetBy = User
+
+	column Borough
+		dataType: string
+		lineageTag: 5d31d010-fe79-5767-88e5-56129f619f67
+		summarizeBy: none
+		sourceColumn: Borough
+
+		annotation SummarizationSetBy = User
+
+	partition 'Borough Access' = m
+		mode: import
+		queryGroup: Security
+		source =
+				let
+					Source = Csv.Document(Web.Contents(pDataBaseUrl, [RelativePath = "raw/main/data/reference/borough_access.csv"]),
+						[Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+					Renamed = Table.RenameColumns(Promoted, {{"user_principal_name", "User Principal Name"}, {"borough", "Borough"}}),
+					Typed = Table.TransformColumnTypes(Renamed, {{"User Principal Name", type text}, {"Borough", type text}})
+				in
+					Typed
+

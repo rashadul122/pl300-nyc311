@@ -1,0 +1,13 @@
+category,benchmark_hours,baseline_requests,method
+Noise,1,613075,p75 of R05-valid resolution minutes of requests created 2023-09-01 to 2024-08-31 / 60; nearest whole hour (half up); minimum 1; internal benchmark; not NYC policy
+Housing Conditions,357,740562,p75 of R05-valid resolution minutes of requests created 2023-09-01 to 2024-08-31 / 60; nearest whole hour (half up); minimum 1; internal benchmark; not NYC policy
+Buildings & Construction,1500,88696,p75 of R05-valid resolution minutes of requests created 2023-09-01 to 2024-08-31 / 60; nearest whole hour (half up); minimum 1; internal benchmark; not NYC policy
+Street Infrastructure,181,188970,p75 of R05-valid resolution minutes of requests created 2023-09-01 to 2024-08-31 / 60; nearest whole hour (half up); minimum 1; internal benchmark; not NYC policy
+Parking & Traffic,3,749352,p75 of R05-valid resolution minutes of requests created 2023-09-01 to 2024-08-31 / 60; nearest whole hour (half up); minimum 1; internal benchmark; not NYC policy
+Sanitation & Cleanliness,91,304414,p75 of R05-valid resolution minutes of requests created 2023-09-01 to 2024-08-31 / 60; nearest whole hour (half up); minimum 1; internal benchmark; not NYC policy
+Environmental Protection,90,168163,p75 of R05-valid resolution minutes of requests created 2023-09-01 to 2024-08-31 / 60; nearest whole hour (half up); minimum 1; internal benchmark; not NYC policy
+Public Health,4434,52692,p75 of R05-valid resolution minutes of requests created 2023-09-01 to 2024-08-31 / 60; nearest whole hour (half up); minimum 1; internal benchmark; not NYC policy
+Parks & Trees,2538,108686,p75 of R05-valid resolution minutes of requests created 2023-09-01 to 2024-08-31 / 60; nearest whole hour (half up); minimum 1; internal benchmark; not NYC policy
+Public Order,1,88875,p75 of R05-valid resolution minutes of requests created 2023-09-01 to 2024-08-31 / 60; nearest whole hour (half up); minimum 1; internal benchmark; not NYC policy
+Homelessness,5,50090,p75 of R05-valid resolution minutes of requests created 2023-09-01 to 2024-08-31 / 60; nearest whole hour (half up); minimum 1; internal benchmark; not NYC policy
+Consumer & Licensing,2142,53782,p75 of R05-valid resolution minutes of requests created 2023-09-01 to 2024-08-31 / 60; nearest whole hour (half up); minimum 1; internal benchmark; not NYC policy

@@ -1,0 +1,436 @@
+expression pDataBaseUrl = "https://github.com/rashadul122/pl300-nyc311" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	lineageTag: 67aa5477-b0c7-5526-b12a-6fa09b4f2915
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Text
+
+expression pProfile = "dev" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true, List = {"dev", "full"}, DefaultValue = "dev"]
+	lineageTag: 9a32bcf9-0e7b-5767-a0db-f614220e8030
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Text
+
+expression pWeatherLat = "40.7812" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	lineageTag: 952358a8-d7ee-5bc2-85c3-5a540cd51be1
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Text
+
+expression pWeatherLon = "-73.9665" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	lineageTag: 60c16b19-293d-55a5-9310-6da02c961db5
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Text
+
+expression pWeatherEnd = "2026-09-14" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	lineageTag: 596a7550-d1c6-5c88-b408-f56b335b69f5
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Text
+
+/// Reads the manifest and fetches every file it lists (one SOURCE query; Formula.Firewall)
+expression 'Source Files' =
+		let
+			ManifestDoc = Json.Document(
+				Web.Contents(pDataBaseUrl, [RelativePath = "raw/main/data/" & pProfile & "/manifest.json"]), 65001),
+			Folder = if pProfile = "full" then "releases/download/data-v1/" else "raw/main/data/dev/",
+			Names = List.Transform(ManifestDoc[files], each _[name]),
+			Fetched = List.Transform(Names, (n) =>
+				let
+					Response = Web.Contents(pDataBaseUrl, [RelativePath = Folder & n, ManualStatusHandling = {404}]),
+					Status = Value.Metadata(Response)[Response.Status]
+				in
+					[name = n, Status = Status, Content = Response]),
+			T = Table.FromRecords(Fetched, type table [name = text, Status = number, Content = binary]),
+			Missing = Table.SelectRows(T, each [Status] = 404),
+			Checked =
+				if Table.RowCount(Missing) > 0
+				then error Error.Record("Missing file", "manifest.json lists files that are not at the source", Text.Combine(Missing[name], ", "))
+				else Table.SelectColumns(T, {"name", "Content"})
+		in
+			Checked
+	lineageTag: e59e0290-4c7e-5e2b-ba6e-dc8f429b957c
+	queryGroup: Staging
+
+	annotation PBI_ResultType = Table
+
+expression Manifest =
+		let
+			Doc = Json.Document(
+				Web.Contents(pDataBaseUrl, [RelativePath = "raw/main/data/" & pProfile & "/manifest.json"]), 65001)
+		in
+			Doc
+	lineageTag: ccaf5d69-55e6-57a8-abcb-1233b8ece985
+	queryGroup: Staging
+
+	annotation PBI_ResultType = Record
+
+expression 'Data Window' =
+		let
+			M = Manifest,
+			AsOfList = List.Transform(M[files], each DateTime.FromText(_[as_of], [Format = "yyyy-MM-dd'T'HH:mm:ss", Culture = "en-US"])),
+			Result = [
+				Profile = M[profile],
+				WindowStart = Date.FromText(M[window_start], [Format = "yyyy-MM-dd", Culture = "en-US"]),
+				WindowEnd = Date.FromText(M[window_end], [Format = "yyyy-MM-dd", Culture = "en-US"]),
+				AsOf = List.Min(AsOfList)
+			]
+		in
+			Result
+	lineageTag: d796158a-6ba9-506b-a6b7-5eaeb67d3ce2
+	queryGroup: Staging
+
+	annotation PBI_ResultType = Record
+
+expression 'Manifest Files' =
+		let
+			Files = Table.FromRecords(Manifest[files], null, MissingField.UseNull),
+			Typed = Table.TransformColumnTypes(Files, {
+				{"name", type text}, {"role", type text}, {"month", type text}, {"rows", Int64.Type},
+				{"sha256", type text}, {"bytes", Int64.Type}, {"dialect", type text}, {"source", type text},
+				{"as_of", type text}}),
+			AsOf = Table.AddColumn(Typed, "As Of",
+				each DateTime.FromText([as_of], [Format = "yyyy-MM-dd'T'HH:mm:ss", Culture = "en-US"]), type datetime)
+		in
+			AsOf
+	lineageTag: f35e74c6-d36c-5103-b73e-6fd02ddeba7f
+	queryGroup: Staging
+
+	annotation PBI_ResultType = Table
+
+expression 'Extract Files' =
+		let
+			// round 6: Source Files already stopped on a missing file; this query accesses no source
+			Joined = Table.NestedJoin(#"Manifest Files", {"name"}, #"Source Files", {"name"}, "Src", JoinKind.LeftOuter),
+			WithContent = Table.ExpandTableColumn(Joined, "Src", {"Content"}, {"Content"}),
+			WithData = Table.AddColumn(WithContent, "Data",
+				each Table.PromoteHeaders(
+					Csv.Document(
+						Binary.Decompress([Content], Compression.GZip),
+						[Delimiter = ",", Columns = 19, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					[PromoteAllScalars = true]),
+				type table),
+			Kept = Table.SelectColumns(WithData, {"name", "role", "dialect", "As Of", "Data"})
+		in
+			Kept
+	lineageTag: b6437ece-51b7-5dfd-b7f4-10946853b64c
+	queryGroup: Staging
+
+	annotation PBI_ResultType = Table
+
+expression 'Agency Remap Map' =
+		let
+			Source = Csv.Document(Web.Contents(pDataBaseUrl, [RelativePath = "raw/main/data/reference/agency_remap.csv"]),
+				[Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+			Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+			Map = Record.FromList(List.Transform(Promoted[to_code], Text.Upper), List.Transform(Promoted[from_code], Text.Upper))
+		in
+			Map
+	lineageTag: 232cc446-8bdf-5b5b-8ac2-a7ca831a61c3
+	queryGroup: Staging
+
+	annotation PBI_ResultType = Record
+
+expression 'Complaint Alias Map' =
+		let
+			Source = Csv.Document(Web.Contents(pDataBaseUrl, [RelativePath = "raw/main/data/reference/complaint_alias.csv"]),
+				[Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+			Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+			Map = Record.FromList(Promoted[to_key], Promoted[from_key])
+		in
+			Map
+	lineageTag: 76463f9a-dc26-5213-a403-93f8adecad9c
+	queryGroup: Staging
+
+	annotation PBI_ResultType = Record
+
+expression 'Complaint Category Map' =
+		let
+			Source = Csv.Document(Web.Contents(pDataBaseUrl, [RelativePath = "raw/main/data/reference/complaint_category_map.csv"]),
+				[Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+			Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+			Typed = Table.TransformColumnTypes(Promoted, {{"complaint_key", type text}, {"category", type text}, {"category_sort", Int64.Type}})
+		in
+			Typed
+	lineageTag: 33d14532-a944-5d8f-a1f8-811ea8fae965
+	queryGroup: Staging
+
+	annotation PBI_ResultType = Table
+
+expression 'SLA Benchmarks' =
+		let
+			Source = Csv.Document(Web.Contents(pDataBaseUrl, [RelativePath = "raw/main/data/reference/sla_benchmarks.csv"]),
+				[Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+			Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+			Kept = Table.SelectColumns(Promoted, {"category", "benchmark_hours"}),
+			Blanks = Table.ReplaceValue(Kept, "", null, Replacer.ReplaceValue, {"benchmark_hours"}),
+			Typed = Table.TransformColumnTypes(Blanks, {{"category", type text}, {"benchmark_hours", type number}}, "en-US")
+		in
+			Typed
+	lineageTag: 59f5583d-f394-5ca1-9da5-b2dc99e874ef
+	queryGroup: Staging
+
+	annotation PBI_ResultType = Table
+
+expression 'Twin Rule Counts' =
+		let
+			Source = Csv.Document(Web.Contents(pDataBaseUrl, [RelativePath = "raw/main/expected/" & pProfile & "/rule_counts.csv"]),
+				[Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+			Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+			Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, {"rows_expected", "raw_audit_rows"}),
+			Typed = Table.TransformColumnTypes(Blanks, {
+				{"role", type text},                                                // round 4: window | carryin
+				{"rule_key", type text}, {"rule_id", type text}, {"flag_value", type text}, {"kind", type text},
+				{"description", type text}, {"rows_expected", Int64.Type}, {"raw_audit_rows", Int64.Type}})
+		in
+			Typed
+	lineageTag: 7b30b3e5-9a95-5466-b9ca-7fa935895df4
+	queryGroup: Staging
+
+	annotation PBI_ResultType = Table
+
+/// Open-Meteo daily archive for Central Park; typed empty fallback
+expression Weather =
+		let
+			Raw = try Json.Document(Web.Contents("https://archive-api.open-meteo.com", [
+					RelativePath = "v1/archive",
+					Query = [
+						latitude = pWeatherLat, longitude = pWeatherLon,
+						start_date = "2024-01-01", end_date = pWeatherEnd,
+						daily = "temperature_2m_max,temperature_2m_min,precipitation_sum,snowfall_sum",
+						timezone = "America/New_York"]])) otherwise null,
+			Empty = #table(type table [Date = date, #"Temp Max C" = number, #"Temp Min C" = number, #"Precip mm" = number, #"Snow cm" = number], {}),
+			D = if Raw = null then null else Record.FieldOrDefault(Raw, "daily", null),
+			Result =
+				if D = null then Empty
+				else Table.FromColumns(
+					{
+						List.Transform(D[time], each Date.FromText(_, [Format = "yyyy-MM-dd", Culture = "en-US"])),
+						D[temperature_2m_max], D[temperature_2m_min], D[precipitation_sum], D[snowfall_sum]
+					},
+					type table [Date = date, #"Temp Max C" = number, #"Temp Min C" = number, #"Precip mm" = number, #"Snow cm" = number])
+		in
+			Result
+	lineageTag: dc8b2fea-99a3-5cd7-a481-51fe846f5060
+	queryGroup: Staging
+
+	annotation PBI_ResultType = Table
+
+expression fnCleanText =
+		(t as nullable text) as nullable text =>
+		let
+			s = if t = null then null else Text.Trim(Text.Clean(t))
+		in
+			if s = "" then null else s
+	lineageTag: 2e656ecd-8daf-5c00-a60d-1429757137f1
+	queryGroup: Functions
+
+	annotation PBI_ResultType = Function
+
+expression fnParseDateTime =
+		(t as nullable text) as nullable datetime =>
+		let
+			s = if t = null then null else Text.Trim(t)
+		in
+			if s = null or s = "" then null
+			else DateTime.FromText(s, [Format = "MM/dd/yyyy hh:mm:ss tt", Culture = "en-US"])
+	lineageTag: 24a485c0-1f7a-568f-b179-90ef7c065daf
+	queryGroup: Functions
+
+	annotation PBI_ResultType = Function
+
+expression fnNormalizeKey =
+		(t as nullable text) as nullable text =>
+		let
+			s0 = if t = null then null else Text.Upper(Text.Trim(Text.Clean(t))),
+			s1 = if s0 = null then null else Text.Remove(s0, {"'", "’"}),
+			s2 = if s1 = null then null else Text.Combine(List.Select(Text.Split(s1, " "), each _ <> ""), " "),
+			s3 = if s2 = null then null else Text.Replace(s2, " / ", "/")
+		in
+			if s3 = null or s3 = "" then null else s3
+	lineageTag: 0ca093ec-8338-560e-b113-46e9175de0aa
+	queryGroup: Functions
+
+	annotation PBI_ResultType = Function
+
+expression fnComplaintKey =
+		(t as nullable text) as text =>
+		let
+			k = fnNormalizeKey(t),
+			k2 = if k = null then "(NONE)" else k
+		in
+			Record.FieldOrDefault(#"Complaint Alias Map", k2, k2)
+	lineageTag: 1a022421-6a5b-5c3d-a3ad-c018e73a2b59
+	queryGroup: Functions
+
+	annotation PBI_ResultType = Function
+
+expression fnReadRole =
+		(role as text) as table =>
+		let
+			Files = Table.SelectRows(#"Extract Files", each [role] = role),
+			Tagged = Table.AddColumn(Files, "Tagged", (f) =>
+				Table.AddColumn(
+					Table.AddColumn(f[Data], "Source File", each f[name], type text),
+					"As Of", each f[#"As Of"], type datetime)),
+			Combined = Table.Combine(Tagged[Tagged])
+		in
+			Combined
+	lineageTag: 2ba11e8c-4164-5ade-a97c-283b58e92631
+	queryGroup: Functions
+
+	annotation PBI_ResultType = Function
+
+expression fnCleanRequests =
+		(raw as table, windowEnd as date) as table =>
+		let
+			Kept = Table.SelectColumns(raw, {"unique_key", "created_date", "closed_date", "agency", "complaint_type",
+				"descriptor", "incident_zip", "borough", "status", "open_data_channel_type", "Source File", "As Of"}),
+		
+			// R01 text hygiene
+			TextCols = {"unique_key", "created_date", "closed_date", "agency", "complaint_type", "descriptor",
+				"incident_zip", "borough", "status", "open_data_channel_type"},
+			R01 = Table.TransformColumns(Kept, List.Transform(TextCols, (c) => {c, fnCleanText, type nullable text})),
+		
+			// R02 parse; failures -> null + flag
+			Created = Table.AddColumn(R01, "Created", each try fnParseDateTime([created_date]) otherwise null, type nullable datetime),
+			ClosedRaw = Table.AddColumn(Created, "Closed Raw", each try fnParseDateTime([closed_date]) otherwise null, type nullable datetime),
+			R02 = Table.AddColumn(ClosedRaw, "R02 Parse", each
+				if [created_date] <> null and [Created] = null then "created_unparseable"
+				else if [closed_date] <> null and [#"Closed Raw"] = null then "closed_unparseable"
+				else null, type nullable text),
+		
+			// R03 close validity against the row's OWN file as_of; first matching reason wins
+			R03 = Table.AddColumn(R02, "R03 Close", each
+				if [#"Closed Raw"] = null or [Created] = null then "missing"
+				else if Date.Year([#"Closed Raw"]) < 2020 then "pre_2020"
+				else if [#"Closed Raw"] < [Created] then "negative"
+				else if [#"Closed Raw"] > [#"As Of"] then "after_as_of"
+				else null, type nullable text),
+			ClosedValid = Table.AddColumn(R03, "Closed Valid", each [#"R03 Close"] = null, type logical),
+			ClosedDate = Table.AddColumn(ClosedValid, "Closed Date",
+				each if [Closed Valid] then DateTime.Date([#"Closed Raw"]) else null, type nullable date),
+		
+			// R04 whole minutes, rounded down
+			Minutes = Table.AddColumn(ClosedDate, "Resolution Minutes",
+				each if [Closed Valid] then Number.RoundDown(Duration.TotalMinutes([#"Closed Raw"] - [Created])) else null, Int64.Type),
+		
+			// R05
+			R05 = Table.AddColumn(Minutes, "R05 Resolution", each
+				if not [Closed Valid] then null
+				else if [Resolution Minutes] < 1 then "zero"
+				else if [Resolution Minutes] > 525600 then "over_1y"
+				else null, type nullable text),
+			Valid = Table.AddColumn(R05, "Valid For Resolution", each [Closed Valid] and [#"R05 Resolution"] = null, type logical),
+		
+			// R06
+			R06 = Table.AddColumn(Valid, "R06 Day Precision",
+				each if [Closed Valid] and DateTime.Time([#"Closed Raw"]) = #time(0, 0, 0) then "day_precision" else null, type nullable text),
+		
+			// R07 and R18 (status vs close); eligibility also needs a created date
+			R07 = Table.AddColumn(R06, "R07 Status Conflict",
+				each if [status] = "Closed" and not [Closed Valid] then "status_conflict" else null, type nullable text),
+			R18 = Table.AddColumn(R07, "R18 Open Invalid Close",
+				each if [status] <> "Closed" and [closed_date] <> null and not [Closed Valid] then "open_invalid_close" else null, type nullable text),
+			Eligible = Table.AddColumn(R18, "Backlog Eligible", each [#"R07 Status Conflict"] = null and [Created] <> null, type logical),
+		
+			// R08 agency remap
+			Agency = Table.AddColumn(Eligible, "Agency", each
+				let a = Text.Upper([agency]) in if a = null then "UNKNOWN" else Record.FieldOrDefault(#"Agency Remap Map", a, a), type text),
+		
+			// R09 complaint key, R10 descriptor
+			Complaint = Table.AddColumn(Agency, "Complaint Key", each fnComplaintKey([complaint_type]), type text),
+			Descriptor = Table.AddColumn(Complaint, "Descriptor", each
+				let k = fnNormalizeKey([descriptor]) in if k = null or k = "N/A" or k = "UNSPECIFIED" then "(NONE)" else k, type text),
+		
+			// R12 borough
+			Boroughs = {"BRONX", "BROOKLYN", "MANHATTAN", "QUEENS", "STATEN ISLAND"},
+			Borough = Table.AddColumn(Descriptor, "Borough", each
+				let b = Text.Upper([borough]) in if List.Contains(Boroughs, b) then b else "UNKNOWN", type text),
+			R12 = Table.AddColumn(Borough, "R12 Borough", each if [Borough] = "UNKNOWN" then "unknown" else null, type nullable text),
+		
+			// R13 ZIP
+			Zip = Table.AddColumn(R12, "ZIP", each
+				let z = [incident_zip] in
+				if z <> null and Text.Length(z) = 5 and Text.Select(z, {"0".."9"}) = z
+					and Number.From(z) >= 10000 and Number.From(z) <= 14999
+				then z else "UNKNOWN", type text),
+			R13 = Table.AddColumn(Zip, "R13 ZIP", each
+				if [incident_zip] = null then "missing" else if [ZIP] = "UNKNOWN" then "invalid" else null, type nullable text),
+		
+			// R17 channel
+			Channel = Table.AddColumn(R13, "Channel", each
+				let c = Text.Upper([open_data_channel_type]) in
+				if c = null or c = "UNKNOWN" then "UNKNOWN"
+				else if List.Contains({"ONLINE", "PHONE", "MOBILE", "OTHER"}, c) then c
+				else "OTHER", type text),
+		
+			// Created date / hour (the datetime is split; minutes and seconds dropped)
+			CreatedDate = Table.AddColumn(Channel, "Created Date", each if [Created] = null then null else DateTime.Date([Created]), type nullable date),
+			CreatedHour = Table.AddColumn(CreatedDate, "Created Hour", each if [Created] = null then null else Time.Hour([Created]), Int64.Type),
+		
+			// R19 age band at window end: every eligible row open at window end, whatever its age (band 5 = stale)
+			AgeBand = Table.AddColumn(CreatedHour, "Age Band Key", each
+				if [Backlog Eligible] and [Created Date] <= windowEnd
+					and ([Closed Date] = null or [Closed Date] > windowEnd)
+				then
+					let d = Duration.Days(windowEnd - [Created Date]) in
+					if d <= 7 then 1 else if d <= 30 then 2 else if d <= 90 then 3 else if d <= 365 then 4 else 5
+				else 0, Int64.Type),                                   // round 4: 0 = "Not open at window end", never null
+		
+			// R20 backlog exit: close within 365 days, else aged out at created + 366; kept only up to the window end
+			ExitDate = Table.AddColumn(AgeBand, "Backlog Exit Date", each
+				if not [Backlog Eligible] then null
+				else
+					let
+						closedInLife = [Closed Date] <> null and [Closed Date] <= Date.AddDays([Created Date], 365),
+						exit = if closedInLife then [Closed Date] else Date.AddDays([Created Date], 366)
+					in
+						if exit <= windowEnd then exit else null, type nullable date),
+			ExitType = Table.AddColumn(ExitDate, "Backlog Exit", each
+				if [Backlog Exit Date] = null then null
+				else if [Closed Date] <> null and [Closed Date] <= Date.AddDays([Created Date], 365) then "Closed"
+				else "Aged out", type nullable text),
+		
+			// R16 key + de-duplication (v1: expected no-op; v2 sorts by As Of desc + Table.Buffer first)
+			Key = Table.AddColumn(ExitType, "Unique Key", each Int64.From([unique_key]), Int64.Type),
+			Dedup = Table.Distinct(Key, {"Unique Key"}),
+		
+			// Remove helpers; set types LAST
+			Renamed = Table.RenameColumns(Dedup, {{"status", "Status"}}),
+			Selected = Table.SelectColumns(Renamed, {
+				"Unique Key", "Source File", "Created Date", "Created Hour", "Closed Date", "Closed Valid",
+				"Resolution Minutes", "Valid For Resolution", "Backlog Eligible", "Backlog Exit Date", "Backlog Exit",
+				"Status", "Agency", "Complaint Key", "Descriptor", "Borough", "Channel", "ZIP", "Age Band Key",
+				"R02 Parse", "R03 Close", "R05 Resolution", "R06 Day Precision", "R07 Status Conflict",
+				"R12 Borough", "R13 ZIP", "R18 Open Invalid Close"}),
+			Typed = Table.TransformColumnTypes(Selected, {
+				{"Unique Key", Int64.Type}, {"Source File", type text}, {"Created Date", type date}, {"Created Hour", Int64.Type},
+				{"Closed Date", type date}, {"Closed Valid", type logical}, {"Resolution Minutes", Int64.Type},
+				{"Valid For Resolution", type logical}, {"Backlog Eligible", type logical},
+				{"Backlog Exit Date", type date}, {"Backlog Exit", type text}, {"Status", type text},
+				{"Agency", type text}, {"Complaint Key", type text}, {"Descriptor", type text}, {"Borough", type text},
+				{"Channel", type text}, {"ZIP", type text}, {"Age Band Key", Int64.Type},
+				{"R02 Parse", type text}, {"R03 Close", type text}, {"R05 Resolution", type text}, {"R06 Day Precision", type text},
+				{"R07 Status Conflict", type text}, {"R12 Borough", type text}, {"R13 ZIP", type text}, {"R18 Open Invalid Close", type text}})
+		in
+			Typed
+	lineageTag: fe4fcc7a-3718-534a-82a6-95762c3b8211
+	queryGroup: Functions
+
+	annotation PBI_ResultType = Function
+
+/// Error cells per column of the typed outputs; not loaded, run it in dev mode
+expression 'Load Errors' =
+		let
+			ErrorsIn = (t as table, label as text) as table =>
+				Table.FromRecords(List.Transform(Table.ColumnNames(t), (c) =>
+					[Table = label, Column = c, #"Error Cells" = Table.RowCount(Table.SelectRowsWithErrors(t, {c}))])),
+			Result = Table.Combine({ErrorsIn(Requests, "Requests"), ErrorsIn(#"Opening Backlog", "Opening Backlog")})
+		in
+			Result
+	lineageTag: 587f2b24-0d1e-5152-8179-40c46a958649
+	queryGroup: Diagnostics
+
+	annotation PBI_ResultType = Table
+

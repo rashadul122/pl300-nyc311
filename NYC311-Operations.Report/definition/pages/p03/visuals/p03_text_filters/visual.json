@@ -1,0 +1,87 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "p03_text_filters",
+  "position": {
+    "x": 540,
+    "y": 8,
+    "z": 4000,
+    "width": 724,
+    "height": 96,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Which filters each backlog measure respects. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt"
+                    }
+                  },
+                  {
+                    "value": "Open Backlog EOP: the requests open at most 365 days (R20) at the last in-window date of the period; it responds to Date, Agency, Borough, Complaint, Channel and Age Band, and is blank when a Requests column (Status, ZIP, Descriptor, a flag) is filtered directly.",
+                    "textStyle": {
+                      "fontSize": "8pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Open Backlog EOP (Fast): ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt"
+                    }
+                  },
+                  {
+                    "value": "the same value in every context, computed from Backlog Flow where only Date, Agency and Borough filter it. ",
+                    "textStyle": {
+                      "fontSize": "8pt"
+                    }
+                  },
+                  {
+                    "value": "Backlog Inflow / Outflow: ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt"
+                    }
+                  },
+                  {
+                    "value": "eligible openings and exits (closed, or aged out after 365 days) per in-window date; blank under a Complaint, Channel or Age Band filter or a direct filter on a fact column.",
+                    "textStyle": {
+                      "fontSize": "8pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Text: which filters each backlog measure respects. Open Backlog EOP responds to date, agency, borough, complaint, channel and age band and is blank under a direct filter on a request column; the Fast measure gives the same value; inflow and outflow are blank where Backlog Flow cannot answer.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

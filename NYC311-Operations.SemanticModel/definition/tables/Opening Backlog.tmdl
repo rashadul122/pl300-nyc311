@@ -1,0 +1,271 @@
+/// One row per carry-in request (created in the year before the window)
+table 'Opening Backlog'
+	lineageTag: bea65b77-c5c6-5faf-9528-81fef25e4ba4
+
+	column 'Unique Key'
+		dataType: int64
+		formatString: 0
+		lineageTag: d712734c-2baf-5b67-8487-eff63a9e2f58
+		summarizeBy: none
+		sourceColumn: 'Unique Key'
+
+		annotation SummarizationSetBy = User
+
+	column 'Source File'
+		dataType: string
+		isHidden
+		lineageTag: 072ceeea-2621-539e-869f-092e7137826a
+		summarizeBy: none
+		sourceColumn: 'Source File'
+
+		annotation SummarizationSetBy = User
+
+	column 'Created Date'
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd
+		lineageTag: 7509732c-c1a7-52a3-8d1d-685c6e281766
+		summarizeBy: none
+		sourceColumn: 'Created Date'
+
+		annotation SummarizationSetBy = User
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Created Hour'
+		dataType: int64
+		formatString: 0
+		lineageTag: b4f2afe6-4971-5d04-b048-05f8edd7722b
+		summarizeBy: none
+		sourceColumn: 'Created Hour'
+
+		annotation SummarizationSetBy = User
+
+	/// Date of a valid close only (R03); null otherwise
+	column 'Closed Date'
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd
+		lineageTag: 54b0e222-5b4b-5d09-b135-af256012aeee
+		summarizeBy: none
+		sourceColumn: 'Closed Date'
+
+		annotation SummarizationSetBy = User
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Closed Valid'
+		dataType: boolean
+		lineageTag: 6cf4b7d4-c1da-52dd-b0d9-139c495e128a
+		summarizeBy: none
+		sourceColumn: 'Closed Valid'
+
+		annotation SummarizationSetBy = User
+
+	column 'Resolution Minutes'
+		dataType: int64
+		formatString: #,##0
+		lineageTag: 60dce2a4-7754-5ec6-984d-88d7437a760a
+		summarizeBy: sum
+		sourceColumn: 'Resolution Minutes'
+
+		annotation SummarizationSetBy = User
+
+	column 'Valid For Resolution'
+		dataType: boolean
+		lineageTag: c016ba9d-88f3-5383-9ab6-800f0cc89981
+		summarizeBy: none
+		sourceColumn: 'Valid For Resolution'
+
+		annotation SummarizationSetBy = User
+
+	column 'Backlog Eligible'
+		dataType: boolean
+		lineageTag: 4dab6982-e431-51bd-ba67-880d45b3150c
+		summarizeBy: none
+		sourceColumn: 'Backlog Eligible'
+
+		annotation SummarizationSetBy = User
+
+	column 'Backlog Exit Date'
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd
+		lineageTag: 9d8ef6e5-11c4-5776-b9e2-c613a3d303c2
+		summarizeBy: none
+		sourceColumn: 'Backlog Exit Date'
+
+		annotation SummarizationSetBy = User
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Backlog Exit'
+		dataType: string
+		isHidden
+		lineageTag: 974b33aa-3c82-5ddf-85a7-27cb4d58c497
+		summarizeBy: none
+		sourceColumn: 'Backlog Exit'
+
+		annotation SummarizationSetBy = User
+
+	column Status
+		dataType: string
+		lineageTag: 00ce7822-967b-5ae2-8cc3-5f5516caafda
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = User
+
+	column Agency
+		dataType: string
+		isHidden
+		lineageTag: de47e405-9aa2-5fbe-9c98-c244458ea862
+		summarizeBy: none
+		sourceColumn: Agency
+
+		annotation SummarizationSetBy = User
+
+	column 'Complaint Key'
+		dataType: string
+		isHidden
+		lineageTag: 6ff7634e-4854-54be-b726-e92c5aec1997
+		summarizeBy: none
+		sourceColumn: 'Complaint Key'
+
+		annotation SummarizationSetBy = User
+
+	column Descriptor
+		dataType: string
+		lineageTag: e716f343-2554-55d0-ae95-23379d657f46
+		summarizeBy: none
+		sourceColumn: Descriptor
+
+		annotation SummarizationSetBy = User
+
+	column Borough
+		dataType: string
+		isHidden
+		lineageTag: db440369-d687-5d0d-9d08-7c121d727ed2
+		summarizeBy: none
+		sourceColumn: Borough
+
+		annotation SummarizationSetBy = User
+
+	column Channel
+		dataType: string
+		isHidden
+		lineageTag: f0050fa2-fd1c-5518-b7d8-08c7d0330666
+		summarizeBy: none
+		sourceColumn: Channel
+
+		annotation SummarizationSetBy = User
+
+	column ZIP
+		dataType: string
+		lineageTag: 420cbb0c-4628-5029-89e2-3cd40ec8faa3
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: ZIP
+
+		annotation SummarizationSetBy = User
+
+	column 'Age Band Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8b23daaf-9a1d-59b5-b260-f080b5de49d7
+		summarizeBy: none
+		sourceColumn: 'Age Band Key'
+
+		annotation SummarizationSetBy = User
+
+	column 'R02 Parse'
+		dataType: string
+		isHidden
+		displayFolder: Data Quality
+		lineageTag: f87a748b-bc73-5e7f-804f-c9927ca4e001
+		summarizeBy: none
+		sourceColumn: 'R02 Parse'
+
+		annotation SummarizationSetBy = User
+
+	column 'R03 Close'
+		dataType: string
+		isHidden
+		displayFolder: Data Quality
+		lineageTag: ea6ee60d-c455-51d1-84e6-39a313ed9e22
+		summarizeBy: none
+		sourceColumn: 'R03 Close'
+
+		annotation SummarizationSetBy = User
+
+	column 'R05 Resolution'
+		dataType: string
+		isHidden
+		displayFolder: Data Quality
+		lineageTag: 23f1ced3-f5f4-55d3-93c3-ed556e5a4640
+		summarizeBy: none
+		sourceColumn: 'R05 Resolution'
+
+		annotation SummarizationSetBy = User
+
+	column 'R06 Day Precision'
+		dataType: string
+		isHidden
+		displayFolder: Data Quality
+		lineageTag: f373945c-baba-5fb7-8d85-70b10385475b
+		summarizeBy: none
+		sourceColumn: 'R06 Day Precision'
+
+		annotation SummarizationSetBy = User
+
+	column 'R07 Status Conflict'
+		dataType: string
+		isHidden
+		displayFolder: Data Quality
+		lineageTag: def0a7b1-42f5-5190-a953-6c0577132a36
+		summarizeBy: none
+		sourceColumn: 'R07 Status Conflict'
+
+		annotation SummarizationSetBy = User
+
+	column 'R12 Borough'
+		dataType: string
+		isHidden
+		displayFolder: Data Quality
+		lineageTag: 832f2d51-f2a5-5b75-9d47-c768458f1bf2
+		summarizeBy: none
+		sourceColumn: 'R12 Borough'
+
+		annotation SummarizationSetBy = User
+
+	column 'R13 ZIP'
+		dataType: string
+		isHidden
+		displayFolder: Data Quality
+		lineageTag: 5c034eb0-2657-5238-86a5-3786671afb84
+		summarizeBy: none
+		sourceColumn: 'R13 ZIP'
+
+		annotation SummarizationSetBy = User
+
+	column 'R18 Open Invalid Close'
+		dataType: string
+		isHidden
+		displayFolder: Data Quality
+		lineageTag: c065a1a4-ee39-5417-b817-faaf8b7de919
+		summarizeBy: none
+		sourceColumn: 'R18 Open Invalid Close'
+
+		annotation SummarizationSetBy = User
+
+	partition 'Opening Backlog' = m
+		mode: import
+		queryGroup: Facts
+		source =
+				let
+					Raw = fnReadRole("carryin"),
+					Clean = fnCleanRequests(Raw, #"Data Window"[WindowEnd])
+				in
+					Clean
+

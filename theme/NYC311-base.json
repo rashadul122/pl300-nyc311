@@ -1,0 +1,51 @@
+{
+  "name": "NYC311 base (engine)",
+  "dataColors": [
+    "#1C5391",
+    "#B4470F",
+    "#2A7449",
+    "#7E3C8F",
+    "#8A6A00",
+    "#4E5D6A",
+    "#A12C3A",
+    "#00707F"
+  ],
+  "background": "#FFFFFF",
+  "backgroundLight": "#F4F6F8",
+  "backgroundNeutral": "#E4E8EC",
+  "foreground": "#1B1F24",
+  "foregroundNeutralSecondary": "#3F4A55",
+  "foregroundNeutralTertiary": "#505C68",
+  "good": "#1E6B3C",
+  "neutral": "#6A5300",
+  "bad": "#A8231B",
+  "hyperlink": "#1C5391",
+  "visitedHyperlink": "#5E3A87",
+  "tableAccent": "#1C5391",
+  "maximum": "#1C5391",
+  "center": "#E4E8EC",
+  "minimum": "#FFFFFF",
+  "null": "#8A949E",
+  "textClasses": {
+    "callout": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 28,
+      "color": "#1B1F24"
+    },
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 12,
+      "color": "#1B1F24"
+    },
+    "header": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 11,
+      "color": "#1B1F24"
+    },
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 10,
+      "color": "#3F4A55"
+    }
+  }
+}

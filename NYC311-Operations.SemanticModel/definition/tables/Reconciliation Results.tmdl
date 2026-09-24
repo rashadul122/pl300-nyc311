@@ -1,0 +1,86 @@
+/// The last pushed reconcile CLI run, including the L (load) rows
+table 'Reconciliation Results'
+	lineageTag: 13fb6fbd-b8c9-5984-878d-b77ea815554f
+
+	column 'Check Id'
+		dataType: string
+		lineageTag: 90ccbed0-eef3-594e-927f-c436824f7ad1
+		summarizeBy: none
+		sourceColumn: 'Check Id'
+
+		annotation SummarizationSetBy = User
+
+	column Key
+		dataType: string
+		lineageTag: 8d067fba-7f9f-52af-89cf-cf45fe08a7e7
+		summarizeBy: none
+		sourceColumn: Key
+
+		annotation SummarizationSetBy = User
+
+	column Measure
+		dataType: string
+		lineageTag: 567c28ce-b0c3-5983-9400-7199e3cc2da4
+		summarizeBy: none
+		sourceColumn: Measure
+
+		annotation SummarizationSetBy = User
+
+	column Expected
+		dataType: string
+		lineageTag: ac7f80be-f1a6-5241-baac-a126b7fc8ebc
+		summarizeBy: none
+		sourceColumn: Expected
+
+		annotation SummarizationSetBy = User
+
+	column Observed
+		dataType: string
+		lineageTag: 05f0e00a-82b8-5c2f-9d23-392c63c7ca29
+		summarizeBy: none
+		sourceColumn: Observed
+
+		annotation SummarizationSetBy = User
+
+	column Status
+		dataType: string
+		lineageTag: 4e6b2f08-2ef8-55a5-9f77-abd67edfe3d7
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = User
+
+	column 'Run At'
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: 0fb4d76d-dacb-5670-adf5-a8c6d610a044
+		summarizeBy: none
+		sourceColumn: 'Run At'
+
+		annotation SummarizationSetBy = User
+
+	partition 'Reconciliation Results' = m
+		mode: import
+		queryGroup: 'Data Quality'
+		source =
+				let
+					Response = Web.Contents(pDataBaseUrl, [
+						RelativePath = "raw/main/reconcile/" & pProfile & "/reconciliation_results.csv",
+						ManualStatusHandling = {404}]),
+					Status = Value.Metadata(Response)[Response.Status],
+					Empty = #table(type table [#"Check Id" = text, Key = text, Measure = text, Expected = text, Observed = text,
+						Status = text, #"Run At" = datetime], {}),
+					Loaded =
+						if Status = 404 then null
+						else try Table.Buffer(Table.PromoteHeaders(
+							Csv.Document(Response, [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+							[PromoteAllScalars = true])) otherwise null,
+					Shaped =
+						if Loaded = null then Empty
+						else Table.TransformColumnTypes(
+							Table.RenameColumns(Loaded, {{"check_id", "Check Id"}, {"key", "Key"}, {"measure", "Measure"},
+								{"expected", "Expected"}, {"observed", "Observed"}, {"status", "Status"}, {"run_at", "Run At"}}),
+							{{"Run At", type datetime}}, "en-US")
+				in
+					Shaped
+

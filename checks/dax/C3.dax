@@ -1,0 +1,20 @@
+// C3 - resolution, benchmark and rank by agency; carry-in rows for the load check
+EVALUATE
+SUMMARIZECOLUMNS (
+    Agency[Agency],
+    "Requests", [Requests],
+    "Median Hours", [Median Resolution Hours],
+    "P25 Hours", [P25 Resolution Hours],
+    "P75 Hours", [P75 Resolution Hours],
+    "P90 Hours", [P90 Resolution Hours],
+    "Median Hours (Mature)", [Median Resolution Hours (Mature)],
+    "Without Valid Close", [Requests Without Valid Close],
+    "Benchmark Eligible", [Benchmark Eligible Requests],
+    "SLA Met % (Benchmark)", [SLA Met % (Benchmark)],
+    "SLA Breach Rate", [SLA Breach Rate],
+    "SLA Met % (What-if default)", [SLA Met % (What-if)],
+    "Agency Rank", [Agency Rank (Median Resolution)],
+    "Unmatched Complaint Rows", CALCULATE ( [Requests], ISBLANK ( Complaint[Complaint Type] ) ),
+    "Carry-in Rows", COUNTROWS ( 'Opening Backlog' )
+)
+ORDER BY Agency[Agency]

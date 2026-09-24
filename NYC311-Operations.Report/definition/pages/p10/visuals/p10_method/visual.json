@@ -1,0 +1,187 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "p10_method",
+  "position": {
+    "x": 776,
+    "y": 390,
+    "z": 19000,
+    "width": 488,
+    "height": 322,
+    "tabOrder": 18000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Method",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "As of and window. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt"
+                    }
+                  },
+                  {
+                    "value": "Frozen snapshot, as_of 20 Sep 2026 01:51:01 (NYC local time). Requests created 1 Sep 2024 – 31 Aug 2026; data through 31 Aug 2026.",
+                    "textStyle": {
+                      "fontSize": "9pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Dev sample. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt"
+                    }
+                  },
+                  {
+                    "value": "The dev profile (the default) is a 1-in-25 sample: requests whose unique key is divisible by 25, over the same 24-month window and the carry-in file. A request is wholly in or out of it. The full profile holds every request.",
+                    "textStyle": {
+                      "fontSize": "9pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Benchmark ≠ SLA. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt"
+                    }
+                  },
+                  {
+                    "value": "The data carries no official service-level targets. The benchmark is internal: per category, the p75 of resolution hours in the Sep 2023 – Aug 2024 baseline year; not NYC policy. The benchmark hours are an engine-provided input from that baseline year, documented in sla_baseline_summary.csv. They are a city-wide threshold, not a volume.",
+                    "textStyle": {
+                      "fontSize": "9pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Censoring. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt"
+                    }
+                  },
+                  {
+                    "value": "The resolution statistics are optimistic, P90 most: they exclude requests with no valid close, and the R05 zero-minute and over-1-year rows.",
+                    "textStyle": {
+                      "fontSize": "9pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Day precision and zero-minute closes. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt"
+                    }
+                  },
+                  {
+                    "value": "A valid close at exactly 00:00:00 (R06) stays valid but has day precision only; zero-minute closes (R05) are excluded from the resolution statistics.",
+                    "textStyle": {
+                      "fontSize": "9pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Staleness (R20), city-wide, full profile, not filtered by borough or slicers. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt"
+                    }
+                  },
+                  {
+                    "value": "The backlog counts requests open at most 365 days. The stale share of everything open rose from 4.4% (Sep 2024) to 30.2% (Aug 2026). The carry-in holds requests created Sep 2023 – Aug 2024 with no valid close before 1 Sep 2024; 285,164 older requests with no valid close by then were excluded at extract. 6,319 window requests have an UNKNOWN borough; they are visible to City Operations only.",
+                    "textStyle": {
+                      "fontSize": "9pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Not shown in v1. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt"
+                    }
+                  },
+                  {
+                    "value": "Copilot, automatic page refresh, and Service features (apps, dashboards, alerts, subscriptions, scheduled refresh).",
+                    "textStyle": {
+                      "fontSize": "9pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Authorship. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt"
+                    }
+                  },
+                  {
+                    "value": "AI-built, owner-directed: the Power Query, model, measures, RLS and report were written by AI (Claude) from a specification the owner directed; the numbers are checked against an independent Python twin with the reconcile CLI.",
+                    "textStyle": {
+                      "fontSize": "9pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Method panel: as-of date and window, the dev sample rule, benchmark versus SLA, censoring, day precision and zero-minute closes, staleness, what v1 does not show, and the authorship statement.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

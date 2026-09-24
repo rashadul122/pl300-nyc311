@@ -1,0 +1,82 @@
+{
+  "check_id": "C3",
+  "title": "Resolution, benchmark and rank by agency; carry-in rows for the load check",
+  "dax": "checks/dax/C3.dax",
+  "keys": [
+    {
+      "name": "Agency",
+      "kind": "text"
+    }
+  ],
+  "measures": {
+    "Requests": {
+      "kind": "count",
+      "compare": "exact"
+    },
+    "Median Hours": {
+      "kind": "hours",
+      "compare": "rel_tol",
+      "rel_tol": 1e-09
+    },
+    "P25 Hours": {
+      "kind": "hours",
+      "compare": "rel_tol",
+      "rel_tol": 1e-09
+    },
+    "P75 Hours": {
+      "kind": "hours",
+      "compare": "rel_tol",
+      "rel_tol": 1e-09
+    },
+    "P90 Hours": {
+      "kind": "hours",
+      "compare": "rel_tol",
+      "rel_tol": 1e-09
+    },
+    "Median Hours (Mature)": {
+      "kind": "hours",
+      "compare": "rel_tol",
+      "rel_tol": 1e-09
+    },
+    "Without Valid Close": {
+      "kind": "count",
+      "compare": "exact"
+    },
+    "Benchmark Eligible": {
+      "kind": "count",
+      "compare": "exact"
+    },
+    "SLA Met % (Benchmark)": {
+      "kind": "ratio",
+      "compare": "rel_tol",
+      "rel_tol": 1e-09
+    },
+    "SLA Breach Rate": {
+      "kind": "ratio",
+      "compare": "rel_tol",
+      "rel_tol": 1e-09
+    },
+    "SLA Met % (What-if default)": {
+      "kind": "ratio",
+      "compare": "rel_tol",
+      "rel_tol": 1e-09
+    },
+    "Agency Rank": {
+      "kind": "integer",
+      "compare": "exact"
+    },
+    "Unmatched Complaint Rows": {
+      "kind": "count",
+      "compare": "exact"
+    },
+    "Carry-in Rows": {
+      "kind": "count",
+      "compare": "exact"
+    }
+  },
+  "overrides": [],
+  "notes": [
+    "Load check (L, SPEC 9.4): the observed Carry-in Rows, summed over agencies, are compared with the carry-in file's manifest rows.",
+    "Comparison per SPEC 9.4: counts and whole numbers exact; hours, ratios and averages relative tolerance 1e-9; BLANK and 0 are different values; booleans, dates and text exact after the display format is normalised (True/TRUE, 8/31/2026 12:00:00 AM, 1,234, 12.5%)."
+  ]
+}

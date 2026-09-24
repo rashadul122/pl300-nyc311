@@ -1,0 +1,95 @@
+/// Date x agency x borough x flow type (Opened, Closed, Aged out); signed count
+table 'Backlog Flow'
+	lineageTag: 176fae99-c172-561c-837f-d7a879d56dda
+
+	column Date
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd
+		lineageTag: c45c667a-f744-516d-b401-63f2de00ff96
+		summarizeBy: none
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = User
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Agency
+		dataType: string
+		isHidden
+		lineageTag: cb347754-f1de-5265-ad1a-9bbd7ea5c044
+		summarizeBy: none
+		sourceColumn: [Agency]
+
+		annotation SummarizationSetBy = User
+
+	column Borough
+		dataType: string
+		isHidden
+		lineageTag: ef4201da-5382-547d-b2c3-f5bac62988a5
+		summarizeBy: none
+		sourceColumn: [Borough]
+
+		annotation SummarizationSetBy = User
+
+	column Flow
+		dataType: string
+		lineageTag: f5b724f8-5618-54f7-9eb5-0b7b9e713239
+		summarizeBy: none
+		sourceColumn: [Flow]
+
+		annotation SummarizationSetBy = User
+
+	column 'Signed Count'
+		dataType: int64
+		isHidden
+		formatString: #,##0
+		lineageTag: 628f82c3-4766-5b10-aec0-13977027fb9b
+		summarizeBy: sum
+		sourceColumn: [Signed Count]
+
+		annotation SummarizationSetBy = User
+
+	partition 'Backlog Flow' = calculated
+		mode: import
+		source =
+				VAR Opened =
+					SUMMARIZECOLUMNS (
+						Requests[Created Date], Requests[Agency], Requests[Borough],
+						TREATAS ( { TRUE () }, Requests[Backlog Eligible] ),
+						"@Rows", COUNTROWS ( Requests )
+					)
+				VAR ExitsWindow =
+					SUMMARIZECOLUMNS (
+						Requests[Backlog Exit Date], Requests[Backlog Exit], Requests[Agency], Requests[Borough],
+						TREATAS ( { "Closed", "Aged out" }, Requests[Backlog Exit] ),
+						"@Rows", COUNTROWS ( Requests )
+					)
+				VAR ExitsCarry =
+					SUMMARIZECOLUMNS (
+						'Opening Backlog'[Backlog Exit Date], 'Opening Backlog'[Backlog Exit],
+						'Opening Backlog'[Agency], 'Opening Backlog'[Borough],
+						TREATAS ( { "Closed", "Aged out" }, 'Opening Backlog'[Backlog Exit] ),
+						"@Rows", COUNTROWS ( 'Opening Backlog' )
+					)
+				VAR Combined =
+					UNION (
+						SELECTCOLUMNS ( Opened,
+							"Date", Requests[Created Date], "Agency", Requests[Agency], "Borough", Requests[Borough],
+							"Flow", "Opened", "@Signed", [@Rows] ),
+						SELECTCOLUMNS ( ExitsWindow,
+							"Date", Requests[Backlog Exit Date], "Agency", Requests[Agency], "Borough", Requests[Borough],
+							"Flow", Requests[Backlog Exit], "@Signed", - [@Rows] ),
+						SELECTCOLUMNS ( ExitsCarry,
+							"Date", 'Opening Backlog'[Backlog Exit Date], "Agency", 'Opening Backlog'[Agency],
+							"Borough", 'Opening Backlog'[Borough],
+							"Flow", 'Opening Backlog'[Backlog Exit], "@Signed", - [@Rows] )
+					)
+				RETURN
+					// round 5: group AFTER combining, so each Date x Agency x Borough x Flow key is one row
+					GROUPBY (
+						Combined,
+						[Date], [Agency], [Borough], [Flow],
+						"Signed Count", SUMX ( CURRENTGROUP (), [@Signed] )
+					)
+

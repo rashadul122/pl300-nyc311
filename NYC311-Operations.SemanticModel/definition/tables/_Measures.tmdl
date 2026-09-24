@@ -1,0 +1,305 @@
+/// Measure home table; no rows (SPEC 5.1)
+table _Measures
+	lineageTag: 403ecb95-c346-5c42-8478-178a54136f65
+
+	/// (TC) Requests created in the filter context
+	measure Requests = COUNTROWS ( Requests )
+		formatString: #,##0
+		displayFolder: Volume
+		lineageTag: 5dc34aba-dfb0-59b5-9d1d-cda938dca764
+
+	/// The same count read from Requests Daily; on no v1 visual; not on the Time Calc whitelist
+	measure 'Requests (Daily)' = SUM ( 'Requests Daily'[Request Count] )
+		formatString: #,##0
+		isHidden
+		displayFolder: Volume
+		lineageTag: 82cbe907-8468-57cc-bfa6-54a3c15016f6
+
+	/// (TC) Window-created requests whose valid close date is in the date context and the data window (inactive Closed Date relationship)
+	measure 'Requests Closed' =
+			CALCULATE (
+				COUNTROWS ( Requests ),
+				USERELATIONSHIP ( Requests[Closed Date], 'Date'[Date] ),
+				KEEPFILTERS ( 'Date'[In Data Window] = TRUE () )
+			)
+		formatString: #,##0
+		displayFolder: Volume
+		lineageTag: 8c1b6513-8f35-5498-9f70-594b94c7821a
+
+	/// Requests in context with no valid close (R03 flagged)
+	measure 'Requests Without Valid Close' = CALCULATE ( COUNTROWS ( Requests ), KEEPFILTERS ( Requests[Closed Valid] = FALSE () ) )
+		formatString: #,##0
+		displayFolder: Volume
+		lineageTag: 27bedce8-806d-5ad8-95b7-3db839619799
+
+	/// Share of requests in context made ONLINE or by MOBILE, inside any Channel filter
+	measure 'Digital Share' =
+			VAR AllRequests = COUNTROWS ( Requests )
+			VAR DigitalRequests =
+				CALCULATE ( COUNTROWS ( Requests ), KEEPFILTERS ( Channel[Channel] IN { "ONLINE", "MOBILE" } ) )
+			RETURN
+				DIVIDE ( DigitalRequests + 0, AllRequests )
+		formatString: 0.0%
+		displayFolder: Volume
+		lineageTag: 7ddcb5f3-563c-520b-a726-b14bb10056bd
+
+	/// (TC) Operational backlog (open at most 365 days) at the last in-window date of the context, both facts
+	measure 'Open Backlog EOP' =
+			VAR LastD =
+				CALCULATE ( MAX ( 'Date'[Date] ), REMOVEFILTERS ( 'Date' ), 'Date'[In Data Window] = TRUE () )
+			VAR StartD =
+				CALCULATE ( MIN ( 'Date'[Date] ), REMOVEFILTERS ( 'Date' ), 'Date'[In Data Window] = TRUE () )
+			VAR FirstInContext = MIN ( 'Date'[Date] )
+			VAR AsOf = MIN ( MAX ( 'Date'[Date] ), LastD )
+			VAR Oldest = AsOf - 365
+			VAR Unsupported = ISFILTERED ( Requests ) || ISFILTERED ( 'Opening Backlog' )
+			VAR InWindow =
+				CALCULATE (
+					COUNTROWS ( Requests ),
+					REMOVEFILTERS ( 'Date' ),
+					Requests[Backlog Eligible] = TRUE (),
+					Requests[Created Date] >= Oldest && Requests[Created Date] <= AsOf,
+					ISBLANK ( Requests[Closed Date] ) || Requests[Closed Date] > AsOf
+				)
+			VAR CarryIn =
+				CALCULATE (
+					COUNTROWS ( 'Opening Backlog' ),
+					'Opening Backlog'[Backlog Eligible] = TRUE (),
+					'Opening Backlog'[Created Date] >= Oldest,
+					ISBLANK ( 'Opening Backlog'[Closed Date] ) || 'Opening Backlog'[Closed Date] > AsOf
+				)
+			RETURN
+				IF (
+					NOT Unsupported && FirstInContext <= LastD && AsOf >= StartD,
+					InWindow + CarryIn + 0
+				)
+		formatString: #,##0
+		displayFolder: Backlog
+		lineageTag: 2daa39d8-a68b-557f-a9b8-b824927b8ca8
+
+	/// Same value as Open Backlog EOP; from Backlog Flow where it can answer the context
+	measure 'Open Backlog EOP (Fast)' =
+			VAR Unreachable =
+				ISCROSSFILTERED ( Complaint ) || ISCROSSFILTERED ( Channel ) || ISCROSSFILTERED ( 'Age Band' )
+					|| ISFILTERED ( Requests ) || ISFILTERED ( 'Opening Backlog' )
+					|| ISFILTERED ( 'Backlog Flow' ) || ISFILTERED ( 'Requests Daily' )      // round 4
+			RETURN
+				IF (
+					Unreachable,
+					[Open Backlog EOP],
+					VAR LastD =
+						CALCULATE ( MAX ( 'Date'[Date] ), REMOVEFILTERS ( 'Date' ), 'Date'[In Data Window] = TRUE () )
+					VAR StartD =
+						CALCULATE ( MIN ( 'Date'[Date] ), REMOVEFILTERS ( 'Date' ), 'Date'[In Data Window] = TRUE () )
+					VAR AsOf = MIN ( MAX ( 'Date'[Date] ), LastD )
+					VAR Opening =
+						CALCULATE ( COUNTROWS ( 'Opening Backlog' ), 'Opening Backlog'[Backlog Eligible] = TRUE () )
+					VAR Net =
+						CALCULATE ( SUM ( 'Backlog Flow'[Signed Count] ), REMOVEFILTERS ( 'Date' ), 'Date'[Date] <= AsOf )
+					RETURN
+						IF ( MIN ( 'Date'[Date] ) <= LastD && AsOf >= StartD, Opening + Net + 0 )
+				)
+		formatString: #,##0
+		displayFolder: Backlog
+		lineageTag: ef479b8e-dc76-5ca5-a609-0795bbb0c777
+
+	/// Eligible requests opened per in-window date; BLANK where Backlog Flow cannot answer
+	measure 'Backlog Inflow' =
+			VAR Unreachable =
+				ISCROSSFILTERED ( Complaint ) || ISCROSSFILTERED ( Channel ) || ISCROSSFILTERED ( 'Age Band' )
+					|| ISFILTERED ( Requests ) || ISFILTERED ( 'Opening Backlog' )
+					|| ISFILTERED ( 'Requests Daily' )                                         // round 4
+			RETURN
+				IF (
+					NOT Unreachable,
+					CALCULATE ( SUM ( 'Backlog Flow'[Signed Count] ), KEEPFILTERS ( 'Backlog Flow'[Flow] = "Opened" ) )
+				)
+		formatString: #,##0
+		displayFolder: Backlog
+		lineageTag: b5e0127f-230a-5550-a3db-11cf46102700
+
+	/// Eligible exits (Closed and Aged out) per in-window date, shown positive
+	measure 'Backlog Outflow' =
+			VAR Unreachable =
+				ISCROSSFILTERED ( Complaint ) || ISCROSSFILTERED ( Channel ) || ISCROSSFILTERED ( 'Age Band' )
+					|| ISFILTERED ( Requests ) || ISFILTERED ( 'Opening Backlog' )
+					|| ISFILTERED ( 'Requests Daily' )                                         // round 4
+			VAR Signed =
+				CALCULATE (
+					SUM ( 'Backlog Flow'[Signed Count] ),
+					KEEPFILTERS ( 'Backlog Flow'[Flow] IN { "Closed", "Aged out" } )
+				)
+			RETURN
+				IF ( NOT Unreachable && NOT ISBLANK ( Signed ), - Signed )
+		formatString: #,##0
+		displayFolder: Backlog
+		lineageTag: b01a73c3-93f0-5270-86dc-f2d9701915b4
+
+	/// Median resolution hours over Valid For Resolution rows
+	measure 'Median Resolution Hours' =
+			DIVIDE (
+				CALCULATE ( MEDIAN ( Requests[Resolution Minutes] ), KEEPFILTERS ( Requests[Valid For Resolution] = TRUE () ) ),
+				60
+			)
+		formatString: #,##0.0
+		displayFolder: Resolution
+		lineageTag: 2537cac9-9a59-5f1b-aa7b-46fad5e84591
+
+	/// 25th percentile (inclusive) of resolution hours over valid rows
+	measure 'P25 Resolution Hours' =
+			VAR n = CALCULATE ( COUNTROWS ( Requests ), KEEPFILTERS ( Requests[Valid For Resolution] = TRUE () ) )
+			RETURN
+				IF ( n > 0,
+					DIVIDE ( CALCULATE ( PERCENTILE.INC ( Requests[Resolution Minutes], 0.25 ), KEEPFILTERS ( Requests[Valid For Resolution] = TRUE () ) ), 60 ) )
+		formatString: #,##0.0
+		displayFolder: Resolution
+		lineageTag: 2fc29cc0-41ea-5ce9-a857-371441df5d26
+
+	/// 75th percentile (inclusive) of resolution hours over valid rows
+	measure 'P75 Resolution Hours' =
+			VAR n = CALCULATE ( COUNTROWS ( Requests ), KEEPFILTERS ( Requests[Valid For Resolution] = TRUE () ) )
+			RETURN
+				IF ( n > 0,
+					DIVIDE ( CALCULATE ( PERCENTILE.INC ( Requests[Resolution Minutes], 0.75 ), KEEPFILTERS ( Requests[Valid For Resolution] = TRUE () ) ), 60 ) )
+		formatString: #,##0.0
+		displayFolder: Resolution
+		lineageTag: ecccea12-abe2-5d42-a2e8-0de946137466
+
+	/// 90th percentile (inclusive) of resolution hours over valid rows
+	measure 'P90 Resolution Hours' =
+			VAR n = CALCULATE ( COUNTROWS ( Requests ), KEEPFILTERS ( Requests[Valid For Resolution] = TRUE () ) )
+			RETURN
+				IF ( n > 0,
+					DIVIDE ( CALCULATE ( PERCENTILE.INC ( Requests[Resolution Minutes], 0.90 ), KEEPFILTERS ( Requests[Valid For Resolution] = TRUE () ) ), 60 ) )
+		formatString: #,##0.0
+		displayFolder: Resolution
+		lineageTag: 58bf7bf4-ca02-589c-be8f-3f439d80e3a7
+
+	/// (TC) Median over valid rows of mature cohorts (created at least 30 days before as_of)
+	measure 'Median Resolution Hours (Mature)' =
+			DIVIDE (
+				CALCULATE (
+					MEDIAN ( Requests[Resolution Minutes] ),
+					KEEPFILTERS ( Requests[Valid For Resolution] = TRUE () ),
+					KEEPFILTERS ( 'Date'[Is Mature Cohort] = TRUE () )
+				),
+				60
+			)
+		formatString: #,##0.0
+		displayFolder: Resolution
+		lineageTag: da42ce28-abb7-5516-9bef-4139f8b0cb1d
+
+	/// Rows with a non-blank Breach Flag
+	measure 'Benchmark Eligible Requests' = CALCULATE ( COUNTROWS ( Requests ), KEEPFILTERS ( NOT ISBLANK ( Requests[Breach Flag] ) ) )
+		formatString: #,##0
+		displayFolder: Service Benchmark
+		lineageTag: 789612ec-374a-5420-b133-f190ddfa540b
+
+	/// Breach Flag = 0 rows over eligible rows; internal benchmark, not NYC policy
+	measure 'SLA Met % (Benchmark)' =
+			VAR Eligible = CALCULATE ( COUNTROWS ( Requests ), KEEPFILTERS ( NOT ISBLANK ( Requests[Breach Flag] ) ) )
+			VAR Met =
+				CALCULATE (
+					COUNTROWS ( Requests ),
+					KEEPFILTERS ( NOT ISBLANK ( Requests[Breach Flag] ) && Requests[Breach Flag] = 0 )
+				)
+			RETURN
+				DIVIDE ( Met + 0, Eligible )          // BLANK when Eligible is BLANK; 0 when eligible rows exist but none met
+		formatString: 0.0%
+		displayFolder: Service Benchmark
+		lineageTag: 7713ce61-d455-5bc3-b12a-a348de6fe4a7
+
+	/// Breach Flag = 1 rows over eligible rows
+	measure 'SLA Breach Rate' =
+			VAR Eligible = CALCULATE ( COUNTROWS ( Requests ), KEEPFILTERS ( NOT ISBLANK ( Requests[Breach Flag] ) ) )
+			VAR Breaches = CALCULATE ( COUNTROWS ( Requests ), KEEPFILTERS ( Requests[Breach Flag] = 1 ) )
+			RETURN
+				DIVIDE ( Breaches + 0, Eligible )     // never 1 - [SLA Met %]: that turns BLANK into 100%
+		formatString: 0.0%
+		displayFolder: Service Benchmark
+		lineageTag: d452cea6-ae92-577b-924b-b64e1677652c
+
+	/// Valid rows resolved within the selected threshold hours
+	measure 'SLA Met % (What-if)' =
+			VAR LimitMin = [SLA Threshold Hours Value] * 60
+			VAR Eligible = CALCULATE ( COUNTROWS ( Requests ), KEEPFILTERS ( Requests[Valid For Resolution] = TRUE () ) )
+			VAR Met =
+				CALCULATE (
+					COUNTROWS ( Requests ),
+					KEEPFILTERS ( Requests[Valid For Resolution] = TRUE () ),
+					KEEPFILTERS ( Requests[Resolution Minutes] <= LimitMin )
+				)
+			RETURN
+				DIVIDE ( Met + 0, Eligible )
+		formatString: 0.0%
+		displayFolder: Service Benchmark
+		lineageTag: f8f66756-6a91-5805-bd36-bbfaaba97449
+
+	/// Dense rank, fastest = 1, of the mature median among visible agencies that have one
+	measure 'Agency Rank (Median Resolution)' =
+			VAR Me = [Median Resolution Hours (Mature)]
+			RETURN
+				IF (
+					ISINSCOPE ( Agency[Agency] ) && NOT ISBLANK ( Me ),
+					RANKX (
+						FILTER ( ALLSELECTED ( Agency[Agency] ), NOT ISBLANK ( [Median Resolution Hours (Mature)] ) ),
+						[Median Resolution Hours (Mature)],
+						Me,
+						ASC,
+						DENSE
+					)
+				)
+		formatString: 0
+		displayFolder: Ranking
+		lineageTag: afe47974-3e16-5ef6-8cc6-5f6e026a35ba
+
+	/// Label of the page 4 drillthrough button
+	measure 'Drillthrough Label' =
+			IF (
+				HASONEVALUE ( Complaint[Complaint Type] ),
+				"See detail for " & SELECTEDVALUE ( Complaint[Complaint Type] ),
+				"Select a complaint type"
+			)
+		displayFolder: Labels
+		lineageTag: 89d07b74-bde3-5609-9835-9eff1a83dc33
+
+	/// DQ Rules rows where Power Query and the twin disagree; BLANK when DQ Rules is hidden
+	measure 'Rule Mismatches' = IF ( NOT ISEMPTY ( 'DQ Rules' ), SUM ( 'DQ Rules'[Mismatch] ) + 0 )
+		formatString: #,##0
+		displayFolder: Data Quality
+		lineageTag: 2ce0fa36-f33a-5654-bbd2-4e059c761806
+
+	/// Share of Reconciliation Results rows with status pass
+	measure 'Reconciliation Pass Rate' =
+			DIVIDE (
+				CALCULATE ( COUNTROWS ( 'Reconciliation Results' ), 'Reconciliation Results'[Status] = "pass" ) + 0,
+				COUNTROWS ( 'Reconciliation Results' )
+			)
+		formatString: 0.0%
+		displayFolder: Data Quality
+		lineageTag: 59d72174-00e9-5491-b0f1-f390e3efd6f1
+
+	/// Shown to borough roles, for whom the data-quality tables are empty
+	measure 'DQ Access Note' = IF ( ISEMPTY ( 'DQ Rules' ), "Data-quality and reconciliation detail is shown to City Operations only." )
+		displayFolder: Labels
+		lineageTag: 60364a83-3f8c-57fa-b834-071896514662
+
+	column 'Measure Home'
+		dataType: string
+		isHidden
+		lineageTag: 0f06eee9-21c9-5876-ba3c-0ad8ea17f67f
+		summarizeBy: none
+		sourceColumn: 'Measure Home'
+
+		annotation SummarizationSetBy = User
+
+	partition _Measures = m
+		mode: import
+		queryGroup: Support
+		source =
+				let
+					// measure home table: one hidden column and no rows (SPEC 5.1)
+					Source = #table(type table [#"Measure Home" = text], {})
+				in
+					Source
+

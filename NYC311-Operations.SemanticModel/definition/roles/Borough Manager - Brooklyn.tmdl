@@ -1,0 +1,11 @@
+role 'Borough Manager - Brooklyn'
+	modelPermission: read
+
+	tablePermission Borough = Borough[Borough] = "BROOKLYN"
+
+	tablePermission 'Borough Access' = FALSE()
+
+	tablePermission 'DQ Rules' = FALSE()
+
+	tablePermission 'Reconciliation Results' = FALSE()
+

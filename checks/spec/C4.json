@@ -1,0 +1,44 @@
+{
+  "check_id": "C4",
+  "title": "Backlog at every month end, by borough; naive vs fast, with and without a Channel filter",
+  "dax": "checks/dax/C4.dax",
+  "keys": [
+    {
+      "name": "Date",
+      "kind": "date"
+    },
+    {
+      "name": "Borough",
+      "kind": "text"
+    }
+  ],
+  "measures": {
+    "Check Row": {
+      "kind": "count",
+      "compare": "exact",
+      "constant": 1
+    },
+    "Open Backlog EOP": {
+      "kind": "count",
+      "compare": "exact"
+    },
+    "Open Backlog EOP (Fast)": {
+      "kind": "count",
+      "compare": "exact"
+    },
+    "EOP PHONE": {
+      "kind": "count",
+      "compare": "exact"
+    },
+    "EOP (Fast) PHONE": {
+      "kind": "count",
+      "compare": "exact"
+    }
+  },
+  "overrides": [],
+  "notes": [
+    "36 month ends of the Date table (2024-01-31 .. 2026-12-31) x 6 boroughs. Check Row is the constant 1 on every row (\"constant\": 1), so the 12 month ends outside the window, whose measures are all BLANK, are returned and compared cell by cell; one absent from observed is 'missing', a fail (SPEC 9.4). Inside the window a stock is a number, 0 when nothing is open.",
+    "SPEC 9.2 fallback: if DAX query view rejects the constant, drop Check Row and regenerate the expected file without the all-BLANK rows (record it in docs/decisions.md).",
+    "Comparison per SPEC 9.4: counts and whole numbers exact; hours, ratios and averages relative tolerance 1e-9; BLANK and 0 are different values; booleans, dates and text exact after the display format is normalised (True/TRUE, 8/31/2026 12:00:00 AM, 1,234, 12.5%)."
+  ]
+}

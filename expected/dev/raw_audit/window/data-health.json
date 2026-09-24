@@ -1,0 +1,955 @@
+{
+ "table": "extract_window",
+ "n_rows": 301688,
+ "total_rows": 301688,
+ "sampled": false,
+ "n_cols": 19,
+ "score": 96.8,
+ "dimensions": {
+  "completeness": 98.4,
+  "validity": 86.8,
+  "uniqueness": 100.0,
+  "consistency": 99.0,
+  "timeliness": 100.0
+ },
+ "date_column": "created_date",
+ "scanned_at": "2026-09-23T00:48:34",
+ "columns": [
+  {
+   "name": "unique_key",
+   "dtype_guess": "numeric",
+   "declared_type": "TEXT",
+   "n_rows": 301688,
+   "n_null_like": 0,
+   "pct_null_like": 0.0,
+   "n_distinct": 301688,
+   "n_distinct_normalised": 301688,
+   "n_padded": 0,
+   "n_stored_text": 301688,
+   "n_numeric_as_text": 301688,
+   "class_counts": {
+    "date": 0,
+    "numeric": 301688,
+    "text": 0
+   },
+   "date_formats": {},
+   "day_month_order": "",
+   "validity": 0.5,
+   "consistency": null,
+   "is_id_like": true,
+   "top_values": [],
+   "issues": [
+    "301,688 of 301,688 numbers are stored as text; they will sort '10' before '9'."
+   ]
+  },
+  {
+   "name": "created_date",
+   "dtype_guess": "date",
+   "declared_type": "TEXT",
+   "n_rows": 301688,
+   "n_null_like": 0,
+   "pct_null_like": 0.0,
+   "n_distinct": 297486,
+   "n_distinct_normalised": 297486,
+   "n_padded": 0,
+   "n_stored_text": 301688,
+   "n_numeric_as_text": 0,
+   "class_counts": {
+    "date": 301688,
+    "numeric": 0,
+    "text": 0
+   },
+   "date_formats": {
+    "MM/DD/YYYY hh:mm:ss AM": 301688
+   },
+   "day_month_order": "mdy",
+   "validity": 1.0,
+   "consistency": null,
+   "is_id_like": false,
+   "top_values": [],
+   "issues": [
+    "day/month order read from the values: month-first, because 182,063 date(s) have a second part above 12."
+   ]
+  },
+  {
+   "name": "closed_date",
+   "dtype_guess": "date",
+   "declared_type": "TEXT",
+   "n_rows": 301688,
+   "n_null_like": 7874,
+   "pct_null_like": 2.6,
+   "n_distinct": 270760,
+   "n_distinct_normalised": 270760,
+   "n_padded": 0,
+   "n_stored_text": 293814,
+   "n_numeric_as_text": 0,
+   "class_counts": {
+    "date": 293814,
+    "numeric": 0,
+    "text": 0
+   },
+   "date_formats": {
+    "MM/DD/YYYY hh:mm:ss AM": 293814
+   },
+   "day_month_order": "mdy",
+   "validity": 1.0,
+   "consistency": null,
+   "is_id_like": false,
+   "top_values": [],
+   "issues": [
+    "day/month order read from the values: month-first, because 176,456 date(s) have a second part above 12.",
+    "2.6% null-like (7,874 of 301,688 values)."
+   ]
+  },
+  {
+   "name": "agency",
+   "dtype_guess": "text",
+   "declared_type": "TEXT",
+   "n_rows": 301688,
+   "n_null_like": 0,
+   "pct_null_like": 0.0,
+   "n_distinct": 16,
+   "n_distinct_normalised": 16,
+   "n_padded": 0,
+   "n_stored_text": 301688,
+   "n_numeric_as_text": 0,
+   "class_counts": {
+    "date": 0,
+    "numeric": 0,
+    "text": 301688
+   },
+   "date_formats": {},
+   "day_month_order": "",
+   "validity": 1.0,
+   "consistency": 1.0,
+   "is_id_like": false,
+   "top_values": [
+    [
+     "NYPD",
+     136758
+    ],
+    [
+     "HPD",
+     65329
+    ],
+    [
+     "DSNY",
+     27571
+    ],
+    [
+     "DOT",
+     19387
+    ],
+    [
+     "DEP",
+     16956
+    ]
+   ],
+   "issues": []
+  },
+  {
+   "name": "agency_name",
+   "dtype_guess": "text",
+   "declared_type": "TEXT",
+   "n_rows": 301688,
+   "n_null_like": 0,
+   "pct_null_like": 0.0,
+   "n_distinct": 16,
+   "n_distinct_normalised": 16,
+   "n_padded": 0,
+   "n_stored_text": 301688,
+   "n_numeric_as_text": 0,
+   "class_counts": {
+    "date": 0,
+    "numeric": 0,
+    "text": 301688
+   },
+   "date_formats": {},
+   "day_month_order": "",
+   "validity": 1.0,
+   "consistency": 1.0,
+   "is_id_like": false,
+   "top_values": [
+    [
+     "New York City Police Department",
+     136758
+    ],
+    [
+     "Department of Housing Preservation and Development",
+     65329
+    ],
+    [
+     "Department of Sanitation",
+     27571
+    ],
+    [
+     "Department of Transportation",
+     19387
+    ],
+    [
+     "Department of Environmental Protection",
+     16956
+    ]
+   ],
+   "issues": []
+  },
+  {
+   "name": "complaint_type",
+   "dtype_guess": "text",
+   "declared_type": "TEXT",
+   "n_rows": 301688,
+   "n_null_like": 0,
+   "pct_null_like": 0.0,
+   "n_distinct": 186,
+   "n_distinct_normalised": 184,
+   "n_padded": 0,
+   "n_stored_text": 301688,
+   "n_numeric_as_text": 0,
+   "class_counts": {
+    "date": 0,
+    "numeric": 0,
+    "text": 301688
+   },
+   "date_formats": {},
+   "day_month_order": "",
+   "validity": 1.0,
+   "consistency": 0.989247311827957,
+   "is_id_like": false,
+   "top_values": [
+    [
+     "Illegal Parking",
+     46480
+    ],
+    [
+     "Noise - Residential",
+     35420
+    ],
+    [
+     "HEAT/HOT WATER",
+     25989
+    ],
+    [
+     "Blocked Driveway",
+     14553
+    ],
+    [
+     "Noise - Street/Sidewalk",
+     14146
+    ]
+   ],
+   "issues": [
+    "186 distinct values collapse to 184 once trimmed and lowercased; casing/padding is splitting the same real value."
+   ]
+  },
+  {
+   "name": "descriptor",
+   "dtype_guess": "text",
+   "declared_type": "TEXT",
+   "n_rows": 301688,
+   "n_null_like": 6970,
+   "pct_null_like": 2.3,
+   "n_distinct": 871,
+   "n_distinct_normalised": 868,
+   "n_padded": 0,
+   "n_stored_text": 294718,
+   "n_numeric_as_text": 0,
+   "class_counts": {
+    "date": 0,
+    "numeric": 0,
+    "text": 294718
+   },
+   "date_formats": {},
+   "day_month_order": "",
+   "validity": 1.0,
+   "consistency": 0.9965556831228473,
+   "is_id_like": false,
+   "top_values": [
+    [
+     "Loud Music/Party",
+     37611
+    ],
+    [
+     "ENTIRE BUILDING",
+     17026
+    ],
+    [
+     "Blocked Hydrant",
+     12834
+    ],
+    [
+     "Banging/Pounding",
+     11353
+    ],
+    [
+     "Posted Parking Sign Violation",
+     11058
+    ]
+   ],
+   "issues": [
+    "871 distinct values collapse to 868 once trimmed and lowercased; casing/padding is splitting the same real value.",
+    "2.3% null-like (6,970 of 301,688 values)."
+   ]
+  },
+  {
+   "name": "location_type",
+   "dtype_guess": "text",
+   "declared_type": "TEXT",
+   "n_rows": 301688,
+   "n_null_like": 37179,
+   "pct_null_like": 12.3,
+   "n_distinct": 131,
+   "n_distinct_normalised": 130,
+   "n_padded": 0,
+   "n_stored_text": 264509,
+   "n_numeric_as_text": 0,
+   "class_counts": {
+    "date": 0,
+    "numeric": 0,
+    "text": 264509
+   },
+   "date_formats": {},
+   "day_month_order": "",
+   "validity": 1.0,
+   "consistency": 0.9923664122137404,
+   "is_id_like": false,
+   "top_values": [
+    [
+     "Street/Sidewalk",
+     92196
+    ],
+    [
+     "RESIDENTIAL BUILDING",
+     65329
+    ],
+    [
+     "Residential Building/House",
+     38566
+    ],
+    [
+     null,
+     37036
+    ],
+    [
+     "Street",
+     27090
+    ]
+   ],
+   "issues": [
+    "131 distinct values collapse to 130 once trimmed and lowercased; casing/padding is splitting the same real value.",
+    "12.3% null-like (37,179 of 301,688 values)."
+   ]
+  },
+  {
+   "name": "incident_zip",
+   "dtype_guess": "numeric",
+   "declared_type": "TEXT",
+   "n_rows": 301688,
+   "n_null_like": 2649,
+   "pct_null_like": 0.9,
+   "n_distinct": 245,
+   "n_distinct_normalised": 245,
+   "n_padded": 0,
+   "n_stored_text": 299039,
+   "n_numeric_as_text": 299039,
+   "class_counts": {
+    "date": 0,
+    "numeric": 299039,
+    "text": 0
+   },
+   "date_formats": {},
+   "day_month_order": "",
+   "validity": 0.5,
+   "consistency": null,
+   "is_id_like": false,
+   "top_values": [
+    [
+     "10466",
+     9891
+    ],
+    [
+     "11226",
+     4835
+    ],
+    [
+     "10467",
+     4293
+    ],
+    [
+     "10452",
+     4138
+    ],
+    [
+     "10456",
+     3980
+    ]
+   ],
+   "issues": [
+    "299,039 of 299,039 numbers are stored as text; they will sort '10' before '9'.",
+    "0.9% null-like (2,649 of 301,688 values)."
+   ]
+  },
+  {
+   "name": "borough",
+   "dtype_guess": "text",
+   "declared_type": "TEXT",
+   "n_rows": 301688,
+   "n_null_like": 0,
+   "pct_null_like": 0.0,
+   "n_distinct": 6,
+   "n_distinct_normalised": 6,
+   "n_padded": 0,
+   "n_stored_text": 301688,
+   "n_numeric_as_text": 0,
+   "class_counts": {
+    "date": 0,
+    "numeric": 0,
+    "text": 301688
+   },
+   "date_formats": {},
+   "day_month_order": "",
+   "validity": 1.0,
+   "consistency": 1.0,
+   "is_id_like": false,
+   "top_values": [
+    [
+     "BROOKLYN",
+     90730
+    ],
+    [
+     "QUEENS",
+     72749
+    ],
+    [
+     "BRONX",
+     66608
+    ],
+    [
+     "MANHATTAN",
+     59647
+    ],
+    [
+     "STATEN ISLAND",
+     11705
+    ]
+   ],
+   "issues": []
+  },
+  {
+   "name": "city",
+   "dtype_guess": "text",
+   "declared_type": "TEXT",
+   "n_rows": 301688,
+   "n_null_like": 14427,
+   "pct_null_like": 4.8,
+   "n_distinct": 67,
+   "n_distinct_normalised": 61,
+   "n_padded": 0,
+   "n_stored_text": 287261,
+   "n_numeric_as_text": 0,
+   "class_counts": {
+    "date": 0,
+    "numeric": 0,
+    "text": 287261
+   },
+   "date_formats": {},
+   "day_month_order": "",
+   "validity": 1.0,
+   "consistency": 0.9104477611940298,
+   "is_id_like": false,
+   "top_values": [
+    [
+     "BROOKLYN",
+     86938
+    ],
+    [
+     "BRONX",
+     64543
+    ],
+    [
+     "NEW YORK",
+     53844
+    ],
+    [
+     null,
+     14427
+    ],
+    [
+     "STATEN ISLAND",
+     11003
+    ]
+   ],
+   "issues": [
+    "67 distinct values collapse to 61 once trimmed and lowercased; casing/padding is splitting the same real value.",
+    "4.8% null-like (14,427 of 301,688 values)."
+   ]
+  },
+  {
+   "name": "status",
+   "dtype_guess": "text",
+   "declared_type": "TEXT",
+   "n_rows": 301688,
+   "n_null_like": 0,
+   "pct_null_like": 0.0,
+   "n_distinct": 7,
+   "n_distinct_normalised": 7,
+   "n_padded": 0,
+   "n_stored_text": 301688,
+   "n_numeric_as_text": 0,
+   "class_counts": {
+    "date": 0,
+    "numeric": 0,
+    "text": 301688
+   },
+   "date_formats": {},
+   "day_month_order": "",
+   "validity": 1.0,
+   "consistency": 1.0,
+   "is_id_like": false,
+   "top_values": [
+    [
+     "Closed",
+     293621
+    ],
+    [
+     "In Progress",
+     4926
+    ],
+    [
+     "Open",
+     2069
+    ],
+    [
+     "Assigned",
+     600
+    ],
+    [
+     "Pending",
+     367
+    ]
+   ],
+   "issues": []
+  },
+  {
+   "name": "resolution_action_updated_date",
+   "dtype_guess": "date",
+   "declared_type": "TEXT",
+   "n_rows": 301688,
+   "n_null_like": 2998,
+   "pct_null_like": 1.0,
+   "n_distinct": 240001,
+   "n_distinct_normalised": 240001,
+   "n_padded": 0,
+   "n_stored_text": 298690,
+   "n_numeric_as_text": 0,
+   "class_counts": {
+    "date": 298690,
+    "numeric": 0,
+    "text": 0
+   },
+   "date_formats": {
+    "MM/DD/YYYY hh:mm:ss AM": 298690
+   },
+   "day_month_order": "mdy",
+   "validity": 1.0,
+   "consistency": null,
+   "is_id_like": false,
+   "top_values": [],
+   "issues": [
+    "day/month order read from the values: month-first, because 179,672 date(s) have a second part above 12.",
+    "1.0% null-like (2,998 of 301,688 values)."
+   ]
+  },
+  {
+   "name": "community_board",
+   "dtype_guess": "text",
+   "declared_type": "TEXT",
+   "n_rows": 301688,
+   "n_null_like": 0,
+   "pct_null_like": 0.0,
+   "n_distinct": 77,
+   "n_distinct_normalised": 77,
+   "n_padded": 0,
+   "n_stored_text": 301688,
+   "n_numeric_as_text": 0,
+   "class_counts": {
+    "date": 0,
+    "numeric": 0,
+    "text": 301688
+   },
+   "date_formats": {},
+   "day_month_order": "",
+   "validity": 1.0,
+   "consistency": 1.0,
+   "is_id_like": false,
+   "top_values": [
+    [
+     "12 BRONX",
+     13611
+    ],
+    [
+     "12 MANHATTAN",
+     9184
+    ],
+    [
+     "01 BROOKLYN",
+     7444
+    ],
+    [
+     "05 BROOKLYN",
+     7360
+    ],
+    [
+     "01 QUEENS",
+     7354
+    ]
+   ],
+   "issues": []
+  },
+  {
+   "name": "council_district",
+   "dtype_guess": "numeric",
+   "declared_type": "TEXT",
+   "n_rows": 301688,
+   "n_null_like": 6661,
+   "pct_null_like": 2.2,
+   "n_distinct": 51,
+   "n_distinct_normalised": 51,
+   "n_padded": 0,
+   "n_stored_text": 295027,
+   "n_numeric_as_text": 295027,
+   "class_counts": {
+    "date": 0,
+    "numeric": 295027,
+    "text": 0
+   },
+   "date_formats": {},
+   "day_month_order": "",
+   "validity": 0.5,
+   "consistency": null,
+   "is_id_like": false,
+   "top_values": [
+    [
+     "11",
+     14723
+    ],
+    [
+     "10",
+     9000
+    ],
+    [
+     "09",
+     8856
+    ],
+    [
+     "14",
+     8617
+    ],
+    [
+     "16",
+     8593
+    ]
+   ],
+   "issues": [
+    "295,027 of 295,027 numbers are stored as text; they will sort '10' before '9'.",
+    "2.2% null-like (6,661 of 301,688 values)."
+   ]
+  },
+  {
+   "name": "police_precinct",
+   "dtype_guess": "text",
+   "declared_type": "TEXT",
+   "n_rows": 301688,
+   "n_null_like": 0,
+   "pct_null_like": 0.0,
+   "n_distinct": 78,
+   "n_distinct_normalised": 78,
+   "n_padded": 0,
+   "n_stored_text": 301688,
+   "n_numeric_as_text": 0,
+   "class_counts": {
+    "date": 0,
+    "numeric": 0,
+    "text": 301688
+   },
+   "date_formats": {},
+   "day_month_order": "",
+   "validity": 1.0,
+   "consistency": 1.0,
+   "is_id_like": false,
+   "top_values": [
+    [
+     "Precinct 47",
+     13625
+    ],
+    [
+     "Precinct 75",
+     7438
+    ],
+    [
+     "Precinct 114",
+     7426
+    ],
+    [
+     "Precinct 44",
+     7312
+    ],
+    [
+     "Precinct 52",
+     6683
+    ]
+   ],
+   "issues": []
+  },
+  {
+   "name": "open_data_channel_type",
+   "dtype_guess": "text",
+   "declared_type": "TEXT",
+   "n_rows": 301688,
+   "n_null_like": 0,
+   "pct_null_like": 0.0,
+   "n_distinct": 5,
+   "n_distinct_normalised": 5,
+   "n_padded": 0,
+   "n_stored_text": 301688,
+   "n_numeric_as_text": 0,
+   "class_counts": {
+    "date": 0,
+    "numeric": 0,
+    "text": 301688
+   },
+   "date_formats": {},
+   "day_month_order": "",
+   "validity": 1.0,
+   "consistency": 1.0,
+   "is_id_like": false,
+   "top_values": [
+    [
+     "ONLINE",
+     133377
+    ],
+    [
+     "PHONE",
+     77735
+    ],
+    [
+     "MOBILE",
+     66965
+    ],
+    [
+     "UNKNOWN",
+     23533
+    ],
+    [
+     "OTHER",
+     78
+    ]
+   ],
+   "issues": []
+  },
+  {
+   "name": "latitude",
+   "dtype_guess": "numeric",
+   "declared_type": "TEXT",
+   "n_rows": 301688,
+   "n_null_like": 5232,
+   "pct_null_like": 1.7,
+   "n_distinct": 149462,
+   "n_distinct_normalised": 149462,
+   "n_padded": 0,
+   "n_stored_text": 296456,
+   "n_numeric_as_text": 296456,
+   "class_counts": {
+    "date": 0,
+    "numeric": 296456,
+    "text": 0
+   },
+   "date_formats": {},
+   "day_month_order": "",
+   "validity": 0.5,
+   "consistency": null,
+   "is_id_like": false,
+   "top_values": [],
+   "issues": [
+    "296,456 of 296,456 numbers are stored as text; they will sort '10' before '9'.",
+    "1.7% null-like (5,232 of 301,688 values)."
+   ]
+  },
+  {
+   "name": "longitude",
+   "dtype_guess": "numeric",
+   "declared_type": "TEXT",
+   "n_rows": 301688,
+   "n_null_like": 5232,
+   "pct_null_like": 1.7,
+   "n_distinct": 149462,
+   "n_distinct_normalised": 149462,
+   "n_padded": 0,
+   "n_stored_text": 296456,
+   "n_numeric_as_text": 296456,
+   "class_counts": {
+    "date": 0,
+    "numeric": 296456,
+    "text": 0
+   },
+   "date_formats": {},
+   "day_month_order": "",
+   "validity": 0.5,
+   "consistency": null,
+   "is_id_like": false,
+   "top_values": [],
+   "issues": [
+    "296,456 of 296,456 numbers are stored as text; they will sort '10' before '9'.",
+    "1.7% null-like (5,232 of 301,688 values)."
+   ]
+  }
+ ],
+ "findings": [
+  "89222 of 5732072 cells are null-like, so completeness is 98.4/100.",
+  "unique_key: 301,688 of 301,688 numbers are stored as text; they will sort '10' before '9'.",
+  "created_date: day/month order read from the values: month-first, because 182,063 date(s) have a second part above 12.",
+  "closed_date: day/month order read from the values: month-first, because 176,456 date(s) have a second part above 12.",
+  "closed_date: 2.6% null-like (7,874 of 301,688 values).",
+  "complaint_type: 186 distinct values collapse to 184 once trimmed and lowercased; casing/padding is splitting the same real value.",
+  "descriptor: 871 distinct values collapse to 868 once trimmed and lowercased; casing/padding is splitting the same real value.",
+  "descriptor: 2.3% null-like (6,970 of 301,688 values).",
+  "location_type: 131 distinct values collapse to 130 once trimmed and lowercased; casing/padding is splitting the same real value.",
+  "location_type: 12.3% null-like (37,179 of 301,688 values).",
+  "incident_zip: 299,039 of 299,039 numbers are stored as text; they will sort '10' before '9'.",
+  "incident_zip: 0.9% null-like (2,649 of 301,688 values).",
+  "city: 67 distinct values collapse to 61 once trimmed and lowercased; casing/padding is splitting the same real value.",
+  "city: 4.8% null-like (14,427 of 301,688 values)."
+ ],
+ "sql_evidence": [
+  {
+   "key": "rows",
+   "unit": "count",
+   "value": 301688.0,
+   "sql": "SELECT COUNT(*) FROM \"extract_window\"",
+   "claim": "extract_window holds 301688 rows across 19 columns"
+  },
+  {
+   "key": "null_like_cells",
+   "unit": "count",
+   "value": 89222.0,
+   "sql": "SELECT COALESCE(SUM(CASE WHEN (TRIM(CAST(\"unique_key\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"unique_key\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"unique_key\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"created_date\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"created_date\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"created_date\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"closed_date\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"closed_date\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"closed_date\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"agency\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"agency\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"agency\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"agency_name\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"agency_name\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"agency_name\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"complaint_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"complaint_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"complaint_type\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"descriptor\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"descriptor\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"descriptor\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"location_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"location_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"location_type\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"incident_zip\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"incident_zip\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"incident_zip\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"borough\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"borough\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"borough\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"city\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"city\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"city\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"status\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"status\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"status\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"resolution_action_updated_date\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"resolution_action_updated_date\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"resolution_action_updated_date\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"community_board\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"community_board\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"community_board\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"council_district\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"council_district\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"council_district\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"police_precinct\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"police_precinct\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"police_precinct\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"open_data_channel_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"open_data_channel_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"open_data_channel_type\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"latitude\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"latitude\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"latitude\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"longitude\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"longitude\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"longitude\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) FROM \"extract_window\"",
+   "claim": "89,222 of 5,732,072 cells in extract_window are missing (empty, or a placeholder such as N/A or #N/A)"
+  },
+  {
+   "key": "completeness_pct",
+   "unit": "pct",
+   "value": 98.4,
+   "sql": "SELECT ROUND(100.0 * (1.0 - CAST(COALESCE(SUM(CASE WHEN (TRIM(CAST(\"unique_key\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"unique_key\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"unique_key\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"created_date\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"created_date\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"created_date\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"closed_date\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"closed_date\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"closed_date\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"agency\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"agency\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"agency\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"agency_name\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"agency_name\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"agency_name\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"complaint_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"complaint_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"complaint_type\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"descriptor\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"descriptor\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"descriptor\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"location_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"location_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"location_type\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"incident_zip\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"incident_zip\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"incident_zip\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"borough\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"borough\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"borough\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"city\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"city\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"city\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"status\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"status\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"status\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"resolution_action_updated_date\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"resolution_action_updated_date\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"resolution_action_updated_date\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"community_board\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"community_board\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"community_board\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"council_district\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"council_district\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"council_district\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"police_precinct\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"police_precinct\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"police_precinct\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"open_data_channel_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"open_data_channel_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"open_data_channel_type\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"latitude\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"latitude\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"latitude\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) + COALESCE(SUM(CASE WHEN (TRIM(CAST(\"longitude\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"longitude\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"longitude\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) AS REAL) / (COUNT(*) * 19)), 1) FROM \"extract_window\"",
+   "claim": "extract_window scores 98.4/100 on completeness"
+  },
+  {
+   "key": "duplicate_rows",
+   "unit": "count",
+   "value": 0.0,
+   "sql": "SELECT (SELECT COUNT(*) FROM \"extract_window\") - (SELECT COUNT(*) FROM (SELECT DISTINCT \"unique_key\", \"created_date\", \"closed_date\", \"agency\", \"agency_name\", \"complaint_type\", \"descriptor\", \"location_type\", \"incident_zip\", \"borough\", \"city\", \"status\", \"resolution_action_updated_date\", \"community_board\", \"council_district\", \"police_precinct\", \"open_data_channel_type\", \"latitude\", \"longitude\" FROM \"extract_window\"))",
+   "tolerance": "zero",
+   "claim": "0 of 301688 rows in extract_window are exact duplicates of another row"
+  },
+  {
+   "key": "future_dated_rows",
+   "unit": "count",
+   "value": 0.0,
+   "sql": "SELECT COALESCE(SUM(CASE WHEN d > '2026-09-23' THEN 1 ELSE 0 END), 0) FROM (SELECT date(CASE WHEN t GLOB '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]' THEN t WHEN t GLOB '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]T*' THEN substr(t,1,10) WHEN t GLOB '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]?*' THEN substr(t,1,10) WHEN t GLOB '[0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9]' THEN substr(t,7,4)||'-'||substr(t,1,2)||'-'||substr(t,4,2) WHEN t GLOB '[0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9] [AaPp][Mm]' THEN substr(t,7,4)||'-'||substr(t,1,2)||'-'||substr(t,4,2) WHEN t GLOB '[0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]' THEN substr(t,7,4)||'-'||substr(t,1,2)||'-'||substr(t,4,2) WHEN t GLOB '[0-9][0-9][0-9][0-9]/[0-9][0-9]/[0-9][0-9]' THEN REPLACE(t,'/','-') WHEN t GLOB '[0-9][0-9]-[A-Za-z][A-Za-z][A-Za-z]-[0-9][0-9][0-9][0-9]' THEN substr(t,8,4)||'-'||(CASE UPPER(substr(t,4,3)) WHEN 'JAN' THEN '01' WHEN 'FEB' THEN '02' WHEN 'MAR' THEN '03' WHEN 'APR' THEN '04' WHEN 'MAY' THEN '05' WHEN 'JUN' THEN '06' WHEN 'JUL' THEN '07' WHEN 'AUG' THEN '08' WHEN 'SEP' THEN '09' WHEN 'OCT' THEN '10' WHEN 'NOV' THEN '11' WHEN 'DEC' THEN '12' END)||'-'||substr(t,1,2) WHEN t GLOB '[0-9][0-9]-[A-Za-z][A-Za-z][A-Za-z]-[0-9][0-9]' THEN (CASE WHEN CAST(substr(t,8,2) AS INTEGER) < 69 THEN '20' ELSE '19' END)||substr(t,8,2)||'-'||(CASE UPPER(substr(t,4,3)) WHEN 'JAN' THEN '01' WHEN 'FEB' THEN '02' WHEN 'MAR' THEN '03' WHEN 'APR' THEN '04' WHEN 'MAY' THEN '05' WHEN 'JUN' THEN '06' WHEN 'JUL' THEN '07' WHEN 'AUG' THEN '08' WHEN 'SEP' THEN '09' WHEN 'OCT' THEN '10' WHEN 'NOV' THEN '11' WHEN 'DEC' THEN '12' END)||'-'||substr(t,1,2) WHEN t GLOB '[A-Za-z][A-Za-z][A-Za-z] [0-9][0-9] [0-9][0-9][0-9][0-9]' THEN substr(t,8,4)||'-'||(CASE UPPER(substr(t,1,3)) WHEN 'JAN' THEN '01' WHEN 'FEB' THEN '02' WHEN 'MAR' THEN '03' WHEN 'APR' THEN '04' WHEN 'MAY' THEN '05' WHEN 'JUN' THEN '06' WHEN 'JUL' THEN '07' WHEN 'AUG' THEN '08' WHEN 'SEP' THEN '09' WHEN 'OCT' THEN '10' WHEN 'NOV' THEN '11' WHEN 'DEC' THEN '12' END)||'-'||substr(t,5,2) ELSE NULL END) AS d FROM (SELECT TRIM(CAST(\"created_date\" AS TEXT), char(32)||char(9)||char(10)||char(13)) AS t FROM \"extract_window\"))",
+   "claim": "0 rows in extract_window are dated after 2026-09-23 in column created_date",
+   "caveats": [
+    "as of 2026-09-23"
+   ]
+  },
+  {
+   "key": "col.location_type.null_like_pct",
+   "unit": "pct",
+   "value": 12.3,
+   "sql": "SELECT ROUND(100.0 * COALESCE(SUM(CASE WHEN (TRIM(CAST(\"location_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"location_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"location_type\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) / COUNT(*), 1) FROM \"extract_window\"",
+   "claim": "12.3% of extract_window.location_type is null-like"
+  },
+  {
+   "key": "col.city.null_like_pct",
+   "unit": "pct",
+   "value": 4.8,
+   "sql": "SELECT ROUND(100.0 * COALESCE(SUM(CASE WHEN (TRIM(CAST(\"city\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"city\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"city\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) THEN 1 ELSE 0 END), 0) / COUNT(*), 1) FROM \"extract_window\"",
+   "claim": "4.8% of extract_window.city is null-like"
+  },
+  {
+   "key": "col.closed_date.gaps_follow.status",
+   "unit": "count",
+   "value": 7225.0,
+   "sql": "SELECT COUNT(*) FROM \"extract_window\" WHERE (TRIM(CAST(\"closed_date\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"closed_date\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"closed_date\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) AND ((TRIM(CAST(\"status\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"status\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"status\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) OR TRIM(CAST(\"status\" AS TEXT), char(32)||char(9)||char(10)||char(13)) <> 'Closed')",
+   "claim": "7,225 of the 7,874 empty values in extract_window.closed_date are on rows whose status is not 'Closed', while only 649 of the 293,621 rows where status is 'Closed' lack one. The gaps follow status, so they come from how those records work (the value may not exist yet, or may never be collected there) rather than from random loss. Confirm with whoever owns the data"
+  },
+  {
+   "key": "col.closed_date.null_like_where.status",
+   "unit": "count",
+   "value": 649.0,
+   "sql": "SELECT COUNT(*) FROM \"extract_window\" WHERE (TRIM(CAST(\"closed_date\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"closed_date\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"closed_date\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) AND NOT (TRIM(CAST(\"status\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"status\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"status\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) AND TRIM(CAST(\"status\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = 'Closed'",
+   "claim": "649 rows in extract_window have status 'Closed' but no closed_date. Everywhere else status is 'Closed', closed_date is present, so these are the gaps to fix"
+  },
+  {
+   "key": "col.complaint_type.variant_spellings",
+   "unit": "count",
+   "value": 384.0,
+   "sql": "WITH g AS (SELECT v, LOWER(v) AS k, COUNT(*) AS n FROM (SELECT TRIM(CAST(\"complaint_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) AS v FROM \"extract_window\" WHERE typeof(\"complaint_type\") = 'text' AND NOT (TRIM(CAST(\"complaint_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"complaint_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"complaint_type\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N'))) GROUP BY v), top AS (SELECT k, MAX(n) AS m FROM g GROUP BY k HAVING COUNT(*) > 1) SELECT COALESCE((SELECT SUM(g.n) FROM g JOIN top ON g.k = top.k), 0) - COALESCE((SELECT SUM(m) FROM top), 0)",
+   "claim": "384 values in extract_window.complaint_type are letter-case variants of a more common spelling, so one category is counted as several",
+   "tolerance": ""
+  },
+  {
+   "key": "col.descriptor.placeholder_values",
+   "unit": "count",
+   "value": 6059.0,
+   "sql": "SELECT COUNT(*) FROM \"extract_window\" WHERE \"descriptor\" IS NOT NULL AND (TRIM(CAST(\"descriptor\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"descriptor\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"descriptor\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N'))",
+   "claim": "6,059 values in extract_window.descriptor are placeholders for a missing value (such as 'N/A', '#N/A' or a blank) rather than true NULLs, so counts and joins treat them as real",
+   "tolerance": ""
+  },
+  {
+   "key": "col.descriptor.variant_spellings",
+   "unit": "count",
+   "value": 21.0,
+   "sql": "WITH g AS (SELECT v, LOWER(v) AS k, COUNT(*) AS n FROM (SELECT TRIM(CAST(\"descriptor\" AS TEXT), char(32)||char(9)||char(10)||char(13)) AS v FROM \"extract_window\" WHERE typeof(\"descriptor\") = 'text' AND NOT (TRIM(CAST(\"descriptor\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"descriptor\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"descriptor\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N'))) GROUP BY v), top AS (SELECT k, MAX(n) AS m FROM g GROUP BY k HAVING COUNT(*) > 1) SELECT COALESCE((SELECT SUM(g.n) FROM g JOIN top ON g.k = top.k), 0) - COALESCE((SELECT SUM(m) FROM top), 0)",
+   "claim": "21 values in extract_window.descriptor are letter-case variants of a more common spelling, so one category is counted as several",
+   "tolerance": ""
+  },
+  {
+   "key": "col.location_type.placeholder_values",
+   "unit": "count",
+   "value": 143.0,
+   "sql": "SELECT COUNT(*) FROM \"extract_window\" WHERE \"location_type\" IS NOT NULL AND (TRIM(CAST(\"location_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"location_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"location_type\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N'))",
+   "claim": "143 values in extract_window.location_type are placeholders for a missing value (such as 'N/A', '#N/A' or a blank) rather than true NULLs, so counts and joins treat them as real",
+   "tolerance": ""
+  },
+  {
+   "key": "col.location_type.variant_spellings",
+   "unit": "count",
+   "value": 574.0,
+   "sql": "WITH g AS (SELECT v, LOWER(v) AS k, COUNT(*) AS n FROM (SELECT TRIM(CAST(\"location_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) AS v FROM \"extract_window\" WHERE typeof(\"location_type\") = 'text' AND NOT (TRIM(CAST(\"location_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"location_type\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"location_type\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N'))) GROUP BY v), top AS (SELECT k, MAX(n) AS m FROM g GROUP BY k HAVING COUNT(*) > 1) SELECT COALESCE((SELECT SUM(g.n) FROM g JOIN top ON g.k = top.k), 0) - COALESCE((SELECT SUM(m) FROM top), 0)",
+   "claim": "574 values in extract_window.location_type are letter-case variants of a more common spelling, so one category is counted as several",
+   "tolerance": ""
+  },
+  {
+   "key": "col.borough.off_convention_casing",
+   "unit": "count",
+   "value": 249.0,
+   "sql": "SELECT COUNT(*) FROM \"extract_window\" WHERE typeof(\"borough\") = 'text' AND NOT (TRIM(CAST(\"borough\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"borough\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"borough\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) AND UPPER(TRIM(CAST(\"borough\" AS TEXT), char(32)||char(9)||char(10)||char(13))) <> LOWER(TRIM(CAST(\"borough\" AS TEXT), char(32)||char(9)||char(10)||char(13))) AND TRIM(CAST(\"borough\" AS TEXT), char(32)||char(9)||char(10)||char(13)) <> UPPER(TRIM(CAST(\"borough\" AS TEXT), char(32)||char(9)||char(10)||char(13)))",
+   "claim": "249 values in extract_window.borough break the column's UPPER-case convention, so one value can be stored several ways",
+   "tolerance": ""
+  },
+  {
+   "key": "col.city.off_convention_casing",
+   "unit": "count",
+   "value": 19.0,
+   "sql": "SELECT COUNT(*) FROM \"extract_window\" WHERE typeof(\"city\") = 'text' AND NOT (TRIM(CAST(\"city\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"city\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"city\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) AND UPPER(TRIM(CAST(\"city\" AS TEXT), char(32)||char(9)||char(10)||char(13))) <> LOWER(TRIM(CAST(\"city\" AS TEXT), char(32)||char(9)||char(10)||char(13))) AND TRIM(CAST(\"city\" AS TEXT), char(32)||char(9)||char(10)||char(13)) <> UPPER(TRIM(CAST(\"city\" AS TEXT), char(32)||char(9)||char(10)||char(13)))",
+   "claim": "19 values in extract_window.city break the column's UPPER-case convention, so one value can be stored several ways",
+   "tolerance": ""
+  },
+  {
+   "key": "col.community_board.off_convention_casing",
+   "unit": "count",
+   "value": 3928.0,
+   "sql": "SELECT COUNT(*) FROM \"extract_window\" WHERE typeof(\"community_board\") = 'text' AND NOT (TRIM(CAST(\"community_board\" AS TEXT), char(32)||char(9)||char(10)||char(13)) IS NULL OR TRIM(CAST(\"community_board\" AS TEXT), char(32)||char(9)||char(10)||char(13)) = '' OR UPPER(TRIM(CAST(\"community_board\" AS TEXT), char(32)||char(9)||char(10)||char(13))) IN ('#N/A', '#N/A N/A', '#NA', '#NULL!', '(NULL)', '-', '--', '-1.#IND', '-1.#QNAN', '-NAN', '1.#IND', '1.#QNAN', '<NA>', '?', 'N.A.', 'N/A', 'NA', 'NAN', 'NIL', 'NONE', 'NULL', '\\N')) AND UPPER(TRIM(CAST(\"community_board\" AS TEXT), char(32)||char(9)||char(10)||char(13))) <> LOWER(TRIM(CAST(\"community_board\" AS TEXT), char(32)||char(9)||char(10)||char(13))) AND TRIM(CAST(\"community_board\" AS TEXT), char(32)||char(9)||char(10)||char(13)) <> UPPER(TRIM(CAST(\"community_board\" AS TEXT), char(32)||char(9)||char(10)||char(13)))",
+   "claim": "3,928 values in extract_window.community_board break the column's UPPER-case convention, so one value can be stored several ways",
+   "tolerance": ""
+  }
+ ]
+}

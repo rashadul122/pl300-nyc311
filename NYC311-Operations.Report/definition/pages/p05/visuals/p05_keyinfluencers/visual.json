@@ -1,0 +1,174 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "p05_keyinfluencers",
+  "position": {
+    "x": 16,
+    "y": 112,
+    "z": 4000,
+    "width": 720,
+    "height": 480,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "keyDriversVisual",
+    "query": {
+      "queryState": {
+        "Target": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Requests"
+                    }
+                  },
+                  "Property": "Breach Flag"
+                }
+              },
+              "queryRef": "Requests.Breach Flag",
+              "nativeQueryRef": "Breach Flag"
+            }
+          ]
+        },
+        "Drivers": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Channel"
+                    }
+                  },
+                  "Property": "Channel"
+                }
+              },
+              "queryRef": "Channel.Channel",
+              "nativeQueryRef": "Channel"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Borough"
+                    }
+                  },
+                  "Property": "Borough"
+                }
+              },
+              "queryRef": "Borough.Borough",
+              "nativeQueryRef": "Borough"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Agency"
+                    }
+                  },
+                  "Property": "Agency Group"
+                }
+              },
+              "queryRef": "Agency.Agency Group",
+              "nativeQueryRef": "Agency Group"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date"
+                    }
+                  },
+                  "Property": "Day Name"
+                }
+              },
+              "queryRef": "Date.Day Name",
+              "nativeQueryRef": "Day Name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date"
+                    }
+                  },
+                  "Property": "Is Weekend"
+                }
+              },
+              "queryRef": "Date.Is Weekend",
+              "nativeQueryRef": "Is Weekend"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date"
+                    }
+                  },
+                  "Property": "Precip Bucket"
+                }
+              },
+              "queryRef": "Date.Precip Bucket",
+              "nativeQueryRef": "Precip Bucket"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Requests"
+                    }
+                  },
+                  "Property": "Created Hour"
+                }
+              },
+              "queryRef": "Requests.Created Hour",
+              "nativeQueryRef": "Created Hour"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Key influencers of a benchmark breach (Breach Flag, continuous analysis)'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Key influencers visual analysing Requests Breach Flag (1 = breached, 0 = met) as a continuous target, explained by channel, borough, agency group, day name, weekend, precipitation bucket and created hour. The visual analyses a sample of the rows.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

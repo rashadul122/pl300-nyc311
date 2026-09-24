@@ -1,0 +1,108 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "p05_notes",
+  "position": {
+    "x": 16,
+    "y": 600,
+    "z": 6000,
+    "width": 1248,
+    "height": 112,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "How to read this page. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt"
+                    }
+                  },
+                  {
+                    "value": "Key Influencers analyses Requests[Breach Flag], a calculated column: 1 = breached, 0 = met, blank = not assessable (no valid resolution time, or no benchmark for the category). Analysis type: Continuous, so each influencer is read as a change in the average breach flag, that is, the breach rate.",
+                    "textStyle": {
+                      "fontSize": "9pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Sampling. ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt"
+                    }
+                  },
+                  {
+                    "value": "Key Influencers runs its analysis on a sample of the rows (Microsoft documents a sample of 10,000 data points), not on every request. Its figures are indicative and are not reconciled with the twin.",
+                    "textStyle": {
+                      "fontSize": "9pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Agency Group ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt"
+                    }
+                  },
+                  {
+                    "value": "is a model-side grouping of the agencies (a calculated column of the Agency table, every agency in exactly one group). It stands in for Desktop's Groups dialog, which has no web entry point.",
+                    "textStyle": {
+                      "fontSize": "9pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Benchmark, not SLA: ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "9pt"
+                    }
+                  },
+                  {
+                    "value": "an internal benchmark derived from the Sep 2023 – Aug 2024 baseline year; not NYC policy.",
+                    "textStyle": {
+                      "fontSize": "9pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Notes on this page: what Breach Flag means, that Key Influencers samples its input, and what Agency Group is.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

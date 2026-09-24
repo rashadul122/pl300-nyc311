@@ -1,0 +1,77 @@
+relationship 53cdbb81-91ff-5af8-9611-51a97a15ed08
+	fromColumn: Requests.'Created Date'
+	toColumn: Date.Date
+
+relationship 31408acc-5dfe-581b-88f1-aa3164b593b0
+	isActive: false
+	fromColumn: Requests.'Closed Date'
+	toColumn: Date.Date
+
+relationship cad02b6c-4bf4-5d11-880e-3f30c33dad4d
+	fromColumn: Requests.Agency
+	toColumn: Agency.Agency
+
+relationship 98167534-fe0b-5566-92b1-3828b9cbaade
+	fromColumn: Requests.'Complaint Key'
+	toColumn: Complaint.'Complaint Key'
+
+relationship 6b38cb4a-980a-52cf-8af3-e3d15ffcb2b7
+	fromColumn: Requests.Borough
+	toColumn: Borough.Borough
+
+relationship 5e58bad7-a85c-5780-acfb-68e59abf4cf1
+	fromColumn: Requests.Channel
+	toColumn: Channel.Channel
+
+relationship a07e673a-4227-5f9f-b9d2-6adc1a7071d4
+	fromColumn: Requests.'Age Band Key'
+	toColumn: 'Age Band'.'Age Band Key'
+
+relationship 1f901b45-4297-53bc-b315-f455dbc471f5
+	fromColumn: 'Opening Backlog'.Agency
+	toColumn: Agency.Agency
+
+relationship e84dec8c-b6db-592a-b31d-80f3b856d271
+	fromColumn: 'Opening Backlog'.'Complaint Key'
+	toColumn: Complaint.'Complaint Key'
+
+relationship 01ee6a6e-7d90-5842-83a7-9ba287c4bfa2
+	fromColumn: 'Opening Backlog'.Borough
+	toColumn: Borough.Borough
+
+relationship d1863f01-a251-57ec-89fc-44fbda48adae
+	fromColumn: 'Opening Backlog'.Channel
+	toColumn: Channel.Channel
+
+relationship 894f3a2c-0076-5670-a234-6e1f7ff4d58c
+	fromColumn: 'Opening Backlog'.'Age Band Key'
+	toColumn: 'Age Band'.'Age Band Key'
+
+relationship cb65e8da-eb54-5c8b-9a5f-c810d1974d64
+	fromColumn: 'Requests Daily'.'Created Date'
+	toColumn: Date.Date
+
+relationship 29075bfd-a7e4-598d-8b30-7eea44325304
+	fromColumn: 'Requests Daily'.Agency
+	toColumn: Agency.Agency
+
+relationship 493a7812-45b2-51a4-bd89-56684db2483f
+	fromColumn: 'Requests Daily'.'Complaint Key'
+	toColumn: Complaint.'Complaint Key'
+
+relationship fc963c41-0697-52fb-ad0b-7c7a86091a63
+	fromColumn: 'Requests Daily'.Borough
+	toColumn: Borough.Borough
+
+relationship e0a264e4-af1e-5b95-aaa5-e564e2e972c7
+	fromColumn: 'Backlog Flow'.Date
+	toColumn: Date.Date
+
+relationship dd7ae15a-0c6f-5ab8-ae06-f1c5f83bacaf
+	fromColumn: 'Backlog Flow'.Agency
+	toColumn: Agency.Agency
+
+relationship 790a4b1b-3a91-56df-9098-f2944e9ceb9f
+	fromColumn: 'Backlog Flow'.Borough
+	toColumn: Borough.Borough
+

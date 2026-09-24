@@ -1,0 +1,48 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.0.0/schema.json",
+  "displayName": "Reset filters",
+  "name": "bm_p01_reset",
+  "options": {
+    "suppressDisplay": true,
+    "suppressActiveSection": true,
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "p01_slicer_date",
+      "p01_slicer_borough"
+    ]
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "p01",
+    "filters": {
+      "byExpr": []
+    },
+    "sections": {
+      "p01": {
+        "visualContainers": {
+          "p01_slicer_date": {
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {}
+            },
+            "filters": {
+              "byExpr": []
+            }
+          },
+          "p01_slicer_borough": {
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {}
+            },
+            "filters": {
+              "byExpr": []
+            }
+          }
+        },
+        "filters": {
+          "byExpr": []
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "p03",
+  "displayName": "Backlog",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#FFFFFF'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspace": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#F4F6F8'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "p03_slicer_date",
+      "target": "p03_col_ageband",
+      "type": "NoFilter"
+    },
+    {
+      "source": "p03_col_ageband",
+      "target": "p03_slicer_date",
+      "type": "NoFilter"
+    },
+    {
+      "source": "p03_col_ageband",
+      "target": "p03_slicer_borough",
+      "type": "NoFilter"
+    },
+    {
+      "source": "p03_col_ageband",
+      "target": "p03_line_eop",
+      "type": "NoFilter"
+    },
+    {
+      "source": "p03_col_ageband",
+      "target": "p03_line_agency",
+      "type": "NoFilter"
+    },
+    {
+      "source": "p03_col_ageband",
+      "target": "p03_matrix_flow",
+      "type": "NoFilter"
+    }
+  ]
+}
