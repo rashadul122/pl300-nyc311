@@ -80,6 +80,18 @@ ALLOWED: Dict[Tuple[str, ...], Dict[str, object]] = {
                   "asking for gzip only fixes it (measured in Power Query Online: 988 days vs the error). "
                   "Binary.Buffer makes try cover the whole response",
     },
+    ("M", "Extract Files"): {
+        "replace": [('WithData = Table.AddColumn(WithContent, "Data",',
+                     'Checked = (bin as binary, n as text, expected as nullable number) as binary => let B = '
+                     'Binary.Buffer(bin), Got = Binary.Length(B) in if expected <> null and Got <> expected then error '
+                     'Error.Record("Truncated download", n & " arrived with " & Text.From(Got) & " of " & '
+                     'Text.From(expected) & " bytes", n) else B, WithData = Table.AddColumn(WithContent, "Data",'),
+                    ('Binary.Decompress([Content], Compression.GZip),',
+                     'Binary.Decompress(Checked([Content], [name], [bytes]), Compression.GZip),')],
+        "reason": "refresh 4 (25 Sep 2026): the full refresh succeeded but loaded 17 of 24 window files only in part, "
+                  "silently; each file is now read whole (Binary.Buffer) and its length checked against the "
+                  "manifest's bytes, so a cut download fails the refresh by name",
+    },
     ("M", "_Measures"): {
         "no_key": True,
         "reason": "the measure home table of SPEC 5.1 (no rows); the key has no query for it",

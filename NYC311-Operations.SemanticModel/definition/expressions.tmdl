@@ -103,10 +103,22 @@ expression 'Extract Files' =
 			// round 6: Source Files already stopped on a missing file; this query accesses no source
 			Joined = Table.NestedJoin(#"Manifest Files", {"name"}, #"Source Files", {"name"}, "Src", JoinKind.LeftOuter),
 			WithContent = Table.ExpandTableColumn(Joined, "Src", {"Content"}, {"Content"}),
+			// refresh 4 (25 Sep 2026): the full refresh reported success but loaded 17 of the 24 window files
+			// only in part (7-20% of their rows), silently; the same files arrive whole in Power Query Online.
+			// Each file is now read in one piece (Binary.Buffer) and its length checked against the manifest's
+			// bytes: a cut download stops the refresh by name instead of loading part of a month.
+			Checked = (bin as binary, n as text, expected as nullable number) as binary =>
+				let
+					B = Binary.Buffer(bin),
+					Got = Binary.Length(B)
+				in
+					if expected <> null and Got <> expected
+					then error Error.Record("Truncated download", n & " arrived with " & Text.From(Got) & " of " & Text.From(expected) & " bytes", n)
+					else B,
 			WithData = Table.AddColumn(WithContent, "Data",
 				each Table.PromoteHeaders(
 					Csv.Document(
-						Binary.Decompress([Content], Compression.GZip),
+						Binary.Decompress(Checked([Content], [name], [bytes]), Compression.GZip),
 						[Delimiter = ",", Columns = 19, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
 					[PromoteAllScalars = true]),
 				type table),
