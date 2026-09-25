@@ -69,6 +69,17 @@ ALLOWED: Dict[Tuple[str, ...], Dict[str, object]] = {
         "replace": [("'Requests Daily'[Requests]", "'Requests Daily'[Request Count]")],
         "reason": "reads the renamed count column (see M / Requests Daily)",
     },
+    ("M", "Weather"): {
+        "replace": [('Json.Document(Web.Contents("https://archive-api.open-meteo.com"',
+                     'Json.Document(Binary.Buffer(Web.Contents("https://archive-api.open-meteo.com"'),
+                    ('RelativePath = "v1/archive",',
+                     'RelativePath = "v1/archive", Headers = [#"Accept-Encoding" = "gzip"],'),
+                    ('"America/New_York"]])) otherwise null', '"America/New_York"]]))) otherwise null')],
+        "reason": "refresh 2 (25 Sep 2026): offered gzip and deflate, Open-Meteo answers with zlib-wrapped "
+                  "deflate, which the service's HTTP stack cannot decode, below M where try cannot catch it; "
+                  "asking for gzip only fixes it (measured in Power Query Online: 988 days vs the error). "
+                  "Binary.Buffer makes try cover the whole response",
+    },
     ("M", "_Measures"): {
         "no_key": True,
         "reason": "the measure home table of SPEC 5.1 (no rows); the key has no query for it",

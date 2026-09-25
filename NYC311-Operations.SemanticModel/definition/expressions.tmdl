@@ -192,13 +192,18 @@ expression 'Twin Rule Counts' =
 /// Open-Meteo daily archive, the grid cell the API picks for Central Park (it returns 40.81 N, 74.02 W, New Jersey side); typed empty fallback
 expression Weather =
 		let
-			Raw = try Json.Document(Web.Contents("https://archive-api.open-meteo.com", [
+			// Accept-Encoding gzip: offered "gzip, deflate" (the service's default), Open-Meteo answers with
+			// zlib-wrapped deflate, which the service's HTTP stack cannot decode ("Found invalid data while
+			// decoding", refresh 2, 25 Sep 2026); that failure is raised below M, so try cannot catch it.
+			// Binary.Buffer reads the whole response inside try, so any M-level failure still falls back.
+			Raw = try Json.Document(Binary.Buffer(Web.Contents("https://archive-api.open-meteo.com", [
 					RelativePath = "v1/archive",
+					Headers = [#"Accept-Encoding" = "gzip"],
 					Query = [
 						latitude = pWeatherLat, longitude = pWeatherLon,
 						start_date = "2024-01-01", end_date = pWeatherEnd,
 						daily = "temperature_2m_max,temperature_2m_min,precipitation_sum,snowfall_sum",
-						timezone = "America/New_York"]])) otherwise null,
+						timezone = "America/New_York"]]))) otherwise null,
 			Empty = #table(type table [Date = date, #"Temp Max C" = number, #"Temp Min C" = number, #"Precip mm" = number, #"Snow cm" = number], {}),
 			D = if Raw = null then null else Record.FieldOrDefault(Raw, "daily", null),
 			Result =
