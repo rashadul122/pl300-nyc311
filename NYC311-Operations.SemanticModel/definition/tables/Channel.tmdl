@@ -15,7 +15,7 @@ table Channel
 		dataType: string
 		lineageTag: be70be12-f01d-5259-87ed-7da133f3d0e5
 		summarizeBy: none
-		sourceColumn: 'Channel Group'
+		sourceColumn: Channel Group
 
 		annotation SummarizationSetBy = User
 
@@ -25,7 +25,7 @@ table Channel
 		formatString: 0
 		lineageTag: 69a7696c-e0df-5a5c-a00a-c5d25f0c7547
 		summarizeBy: none
-		sourceColumn: 'Channel Sort'
+		sourceColumn: Channel Sort
 
 		annotation SummarizationSetBy = User
 

@@ -6,7 +6,7 @@ table 'Reconciliation Results'
 		dataType: string
 		lineageTag: 90ccbed0-eef3-594e-927f-c436824f7ad1
 		summarizeBy: none
-		sourceColumn: 'Check Id'
+		sourceColumn: Check Id
 
 		annotation SummarizationSetBy = User
 
@@ -55,7 +55,7 @@ table 'Reconciliation Results'
 		formatString: yyyy-mm-dd hh:nn:ss
 		lineageTag: 0fb4d76d-dacb-5670-adf5-a8c6d610a044
 		summarizeBy: none
-		sourceColumn: 'Run At'
+		sourceColumn: Run At
 
 		annotation SummarizationSetBy = User
 

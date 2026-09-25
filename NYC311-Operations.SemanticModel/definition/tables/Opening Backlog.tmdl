@@ -7,7 +7,7 @@ table 'Opening Backlog'
 		formatString: 0
 		lineageTag: d712734c-2baf-5b67-8487-eff63a9e2f58
 		summarizeBy: none
-		sourceColumn: 'Unique Key'
+		sourceColumn: Unique Key
 
 		annotation SummarizationSetBy = User
 
@@ -16,7 +16,7 @@ table 'Opening Backlog'
 		isHidden
 		lineageTag: 072ceeea-2621-539e-869f-092e7137826a
 		summarizeBy: none
-		sourceColumn: 'Source File'
+		sourceColumn: Source File
 
 		annotation SummarizationSetBy = User
 
@@ -26,7 +26,7 @@ table 'Opening Backlog'
 		formatString: yyyy-mm-dd
 		lineageTag: 7509732c-c1a7-52a3-8d1d-685c6e281766
 		summarizeBy: none
-		sourceColumn: 'Created Date'
+		sourceColumn: Created Date
 
 		annotation SummarizationSetBy = User
 
@@ -37,7 +37,7 @@ table 'Opening Backlog'
 		formatString: 0
 		lineageTag: b4f2afe6-4971-5d04-b048-05f8edd7722b
 		summarizeBy: none
-		sourceColumn: 'Created Hour'
+		sourceColumn: Created Hour
 
 		annotation SummarizationSetBy = User
 
@@ -48,7 +48,7 @@ table 'Opening Backlog'
 		formatString: yyyy-mm-dd
 		lineageTag: 54b0e222-5b4b-5d09-b135-af256012aeee
 		summarizeBy: none
-		sourceColumn: 'Closed Date'
+		sourceColumn: Closed Date
 
 		annotation SummarizationSetBy = User
 
@@ -58,7 +58,7 @@ table 'Opening Backlog'
 		dataType: boolean
 		lineageTag: 6cf4b7d4-c1da-52dd-b0d9-139c495e128a
 		summarizeBy: none
-		sourceColumn: 'Closed Valid'
+		sourceColumn: Closed Valid
 
 		annotation SummarizationSetBy = User
 
@@ -67,7 +67,7 @@ table 'Opening Backlog'
 		formatString: #,##0
 		lineageTag: 60dce2a4-7754-5ec6-984d-88d7437a760a
 		summarizeBy: sum
-		sourceColumn: 'Resolution Minutes'
+		sourceColumn: Resolution Minutes
 
 		annotation SummarizationSetBy = User
 
@@ -75,7 +75,7 @@ table 'Opening Backlog'
 		dataType: boolean
 		lineageTag: c016ba9d-88f3-5383-9ab6-800f0cc89981
 		summarizeBy: none
-		sourceColumn: 'Valid For Resolution'
+		sourceColumn: Valid For Resolution
 
 		annotation SummarizationSetBy = User
 
@@ -83,7 +83,7 @@ table 'Opening Backlog'
 		dataType: boolean
 		lineageTag: 4dab6982-e431-51bd-ba67-880d45b3150c
 		summarizeBy: none
-		sourceColumn: 'Backlog Eligible'
+		sourceColumn: Backlog Eligible
 
 		annotation SummarizationSetBy = User
 
@@ -93,7 +93,7 @@ table 'Opening Backlog'
 		formatString: yyyy-mm-dd
 		lineageTag: 9d8ef6e5-11c4-5776-b9e2-c613a3d303c2
 		summarizeBy: none
-		sourceColumn: 'Backlog Exit Date'
+		sourceColumn: Backlog Exit Date
 
 		annotation SummarizationSetBy = User
 
@@ -104,7 +104,7 @@ table 'Opening Backlog'
 		isHidden
 		lineageTag: 974b33aa-3c82-5ddf-85a7-27cb4d58c497
 		summarizeBy: none
-		sourceColumn: 'Backlog Exit'
+		sourceColumn: Backlog Exit
 
 		annotation SummarizationSetBy = User
 
@@ -130,7 +130,7 @@ table 'Opening Backlog'
 		isHidden
 		lineageTag: 6ff7634e-4854-54be-b726-e92c5aec1997
 		summarizeBy: none
-		sourceColumn: 'Complaint Key'
+		sourceColumn: Complaint Key
 
 		annotation SummarizationSetBy = User
 
@@ -175,7 +175,7 @@ table 'Opening Backlog'
 		formatString: 0
 		lineageTag: 8b23daaf-9a1d-59b5-b260-f080b5de49d7
 		summarizeBy: none
-		sourceColumn: 'Age Band Key'
+		sourceColumn: Age Band Key
 
 		annotation SummarizationSetBy = User
 
@@ -185,7 +185,7 @@ table 'Opening Backlog'
 		displayFolder: Data Quality
 		lineageTag: f87a748b-bc73-5e7f-804f-c9927ca4e001
 		summarizeBy: none
-		sourceColumn: 'R02 Parse'
+		sourceColumn: R02 Parse
 
 		annotation SummarizationSetBy = User
 
@@ -195,7 +195,7 @@ table 'Opening Backlog'
 		displayFolder: Data Quality
 		lineageTag: ea6ee60d-c455-51d1-84e6-39a313ed9e22
 		summarizeBy: none
-		sourceColumn: 'R03 Close'
+		sourceColumn: R03 Close
 
 		annotation SummarizationSetBy = User
 
@@ -205,7 +205,7 @@ table 'Opening Backlog'
 		displayFolder: Data Quality
 		lineageTag: 23f1ced3-f5f4-55d3-93c3-ed556e5a4640
 		summarizeBy: none
-		sourceColumn: 'R05 Resolution'
+		sourceColumn: R05 Resolution
 
 		annotation SummarizationSetBy = User
 
@@ -215,7 +215,7 @@ table 'Opening Backlog'
 		displayFolder: Data Quality
 		lineageTag: f373945c-baba-5fb7-8d85-70b10385475b
 		summarizeBy: none
-		sourceColumn: 'R06 Day Precision'
+		sourceColumn: R06 Day Precision
 
 		annotation SummarizationSetBy = User
 
@@ -225,7 +225,7 @@ table 'Opening Backlog'
 		displayFolder: Data Quality
 		lineageTag: def0a7b1-42f5-5190-a953-6c0577132a36
 		summarizeBy: none
-		sourceColumn: 'R07 Status Conflict'
+		sourceColumn: R07 Status Conflict
 
 		annotation SummarizationSetBy = User
 
@@ -235,7 +235,7 @@ table 'Opening Backlog'
 		displayFolder: Data Quality
 		lineageTag: 832f2d51-f2a5-5b75-9d47-c768458f1bf2
 		summarizeBy: none
-		sourceColumn: 'R12 Borough'
+		sourceColumn: R12 Borough
 
 		annotation SummarizationSetBy = User
 
@@ -245,7 +245,7 @@ table 'Opening Backlog'
 		displayFolder: Data Quality
 		lineageTag: 5c034eb0-2657-5238-86a5-3786671afb84
 		summarizeBy: none
-		sourceColumn: 'R13 ZIP'
+		sourceColumn: R13 ZIP
 
 		annotation SummarizationSetBy = User
 
@@ -255,7 +255,7 @@ table 'Opening Backlog'
 		displayFolder: Data Quality
 		lineageTag: c065a1a4-ee39-5417-b817-faaf8b7de919
 		summarizeBy: none
-		sourceColumn: 'R18 Open Invalid Close'
+		sourceColumn: R18 Open Invalid Close
 
 		annotation SummarizationSetBy = User
 

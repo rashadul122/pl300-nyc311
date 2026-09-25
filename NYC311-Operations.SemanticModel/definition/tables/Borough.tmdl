@@ -17,7 +17,7 @@ table Borough
 		formatString: 0
 		lineageTag: a0ea0d30-e735-5327-a127-5cdf397854bf
 		summarizeBy: none
-		sourceColumn: 'Borough Sort'
+		sourceColumn: Borough Sort
 
 		annotation SummarizationSetBy = User
 

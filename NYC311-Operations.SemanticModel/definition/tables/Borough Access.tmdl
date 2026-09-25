@@ -7,7 +7,7 @@ table 'Borough Access'
 		dataType: string
 		lineageTag: 9c269d7e-5def-5166-a6e4-05ffd37a785f
 		summarizeBy: none
-		sourceColumn: 'User Principal Name'
+		sourceColumn: User Principal Name
 
 		annotation SummarizationSetBy = User
 

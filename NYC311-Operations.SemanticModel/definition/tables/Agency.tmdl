@@ -14,7 +14,7 @@ table Agency
 		dataType: string
 		lineageTag: 6cd87804-09e9-5d0c-8057-634f125edb74
 		summarizeBy: none
-		sourceColumn: 'Agency Name'
+		sourceColumn: Agency Name
 
 		annotation SummarizationSetBy = User
 

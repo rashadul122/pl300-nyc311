@@ -7,7 +7,7 @@ table Complaint
 		isHidden
 		lineageTag: 5c2f2e89-e51d-59c0-80c9-03df33cad2d7
 		summarizeBy: none
-		sourceColumn: 'Complaint Key'
+		sourceColumn: Complaint Key
 
 		annotation SummarizationSetBy = User
 
@@ -26,7 +26,7 @@ table Complaint
 		formatString: 0
 		lineageTag: 50f2c619-8f06-54bc-91a6-656b5c3688d2
 		summarizeBy: none
-		sourceColumn: 'Category Sort'
+		sourceColumn: Category Sort
 
 		annotation SummarizationSetBy = User
 
@@ -35,7 +35,7 @@ table Complaint
 		formatString: #,##0
 		lineageTag: 5a0b10ef-1e24-55e7-918b-6e233a5b9a11
 		summarizeBy: none
-		sourceColumn: 'Benchmark Hours'
+		sourceColumn: Benchmark Hours
 
 		annotation SummarizationSetBy = User
 
@@ -43,7 +43,7 @@ table Complaint
 		dataType: string
 		lineageTag: 3cc250e6-4e72-5094-9df3-e9996ff1a268
 		summarizeBy: none
-		sourceColumn: 'Complaint Type'
+		sourceColumn: Complaint Type
 
 		annotation SummarizationSetBy = User
 

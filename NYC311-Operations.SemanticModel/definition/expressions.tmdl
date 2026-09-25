@@ -189,7 +189,7 @@ expression 'Twin Rule Counts' =
 
 	annotation PBI_ResultType = Table
 
-/// Open-Meteo daily archive for Central Park; typed empty fallback
+/// Open-Meteo daily archive, the grid cell the API picks for Central Park (it returns 40.81 N, 74.02 W, New Jersey side); typed empty fallback
 expression Weather =
 		let
 			Raw = try Json.Document(Web.Contents("https://archive-api.open-meteo.com", [

@@ -289,7 +289,7 @@ table _Measures
 		isHidden
 		lineageTag: 0f06eee9-21c9-5876-ba3c-0ad8ea17f67f
 		summarizeBy: none
-		sourceColumn: 'Measure Home'
+		sourceColumn: Measure Home
 
 		annotation SummarizationSetBy = User
 

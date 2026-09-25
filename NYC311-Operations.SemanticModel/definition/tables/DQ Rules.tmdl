@@ -14,7 +14,7 @@ table 'DQ Rules'
 		dataType: string
 		lineageTag: 6aa42eef-4418-5b45-b792-a9e4b8df1565
 		summarizeBy: none
-		sourceColumn: 'Rule Key'
+		sourceColumn: Rule Key
 
 		annotation SummarizationSetBy = User
 
@@ -22,7 +22,7 @@ table 'DQ Rules'
 		dataType: string
 		lineageTag: 15d17325-0b07-5ea5-8059-4ff372c4b972
 		summarizeBy: none
-		sourceColumn: 'Rule Id'
+		sourceColumn: Rule Id
 
 		annotation SummarizationSetBy = User
 
@@ -30,7 +30,7 @@ table 'DQ Rules'
 		dataType: string
 		lineageTag: e4a33e0c-77af-5918-8b73-87269e00516d
 		summarizeBy: none
-		sourceColumn: 'Flag Value'
+		sourceColumn: Flag Value
 
 		annotation SummarizationSetBy = User
 
@@ -55,7 +55,7 @@ table 'DQ Rules'
 		formatString: #,##0
 		lineageTag: 04221d5c-2dc5-515e-9afd-1a94b70b4bc9
 		summarizeBy: sum
-		sourceColumn: 'Rows Flagged (Power Query)'
+		sourceColumn: Rows Flagged (Power Query)
 
 		annotation SummarizationSetBy = User
 
@@ -64,7 +64,7 @@ table 'DQ Rules'
 		formatString: #,##0
 		lineageTag: 531fa9ba-1c3c-5c8a-81d1-8323b636bc0f
 		summarizeBy: sum
-		sourceColumn: 'Rows Expected (Twin)'
+		sourceColumn: Rows Expected (Twin)
 
 		annotation SummarizationSetBy = User
 
@@ -73,7 +73,7 @@ table 'DQ Rules'
 		formatString: #,##0
 		lineageTag: c38bdadd-a8f8-5d6b-8770-e73f3565a4dd
 		summarizeBy: sum
-		sourceColumn: 'Rows (Raw Audit)'
+		sourceColumn: Rows (Raw Audit)
 
 		annotation SummarizationSetBy = User
 

@@ -8,7 +8,7 @@ table 'Requests Daily'
 		formatString: yyyy-mm-dd
 		lineageTag: 90b11157-348d-5df9-9e43-058196167029
 		summarizeBy: none
-		sourceColumn: 'Created Date'
+		sourceColumn: Created Date
 
 		annotation SummarizationSetBy = User
 
@@ -28,7 +28,7 @@ table 'Requests Daily'
 		isHidden
 		lineageTag: f4f0da62-b94f-5b11-bff9-edefa25e6929
 		summarizeBy: none
-		sourceColumn: 'Complaint Key'
+		sourceColumn: Complaint Key
 
 		annotation SummarizationSetBy = User
 
@@ -47,7 +47,7 @@ table 'Requests Daily'
 		formatString: #,##0
 		lineageTag: 6ef457d7-c1ff-57f3-8a68-3b656522dff6
 		summarizeBy: sum
-		sourceColumn: 'Request Count'
+		sourceColumn: Request Count
 
 		annotation SummarizationSetBy = User
 

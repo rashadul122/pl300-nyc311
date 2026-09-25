@@ -37,7 +37,7 @@ table Date
 		formatString: 0
 		lineageTag: 760e0f84-4d2e-5333-8839-2459c1af4ff0
 		summarizeBy: none
-		sourceColumn: 'Month No'
+		sourceColumn: Month No
 
 		annotation SummarizationSetBy = User
 
@@ -45,7 +45,7 @@ table Date
 		dataType: string
 		lineageTag: 0c47528f-2c4c-5cd3-b1ed-84f602fc0a57
 		summarizeBy: none
-		sourceColumn: 'Month Name'
+		sourceColumn: Month Name
 		sortByColumn: 'Month No'
 
 		annotation SummarizationSetBy = User
@@ -54,7 +54,7 @@ table Date
 		dataType: string
 		lineageTag: 95658ab4-660c-56b0-837b-245b23439949
 		summarizeBy: none
-		sourceColumn: 'Year Month'
+		sourceColumn: Year Month
 
 		annotation SummarizationSetBy = User
 
@@ -63,7 +63,7 @@ table Date
 		formatString: 0
 		lineageTag: 8ad9ee9d-b213-550f-80db-8c2c274194f9
 		summarizeBy: none
-		sourceColumn: 'Fiscal Year No'
+		sourceColumn: Fiscal Year No
 
 		annotation SummarizationSetBy = User
 
@@ -71,7 +71,7 @@ table Date
 		dataType: string
 		lineageTag: dbd10468-3051-5099-9c39-6664b31a2da1
 		summarizeBy: none
-		sourceColumn: 'Fiscal Year'
+		sourceColumn: Fiscal Year
 		sortByColumn: 'Fiscal Year No'
 
 		annotation SummarizationSetBy = User
@@ -81,7 +81,7 @@ table Date
 		formatString: 0
 		lineageTag: b39dd0b6-fa41-58a0-b77f-7c3dd7cae3cb
 		summarizeBy: none
-		sourceColumn: 'Fiscal Month No'
+		sourceColumn: Fiscal Month No
 
 		annotation SummarizationSetBy = User
 
@@ -90,7 +90,7 @@ table Date
 		formatString: 0
 		lineageTag: e3f83608-086d-5ad6-a487-9ccb6bf1e91e
 		summarizeBy: none
-		sourceColumn: 'Day of Week No'
+		sourceColumn: Day of Week No
 
 		annotation SummarizationSetBy = User
 
@@ -98,7 +98,7 @@ table Date
 		dataType: string
 		lineageTag: 6930c73c-c1f8-5479-877d-1870093e7e0c
 		summarizeBy: none
-		sourceColumn: 'Day Name'
+		sourceColumn: Day Name
 		sortByColumn: 'Day of Week No'
 
 		annotation SummarizationSetBy = User
@@ -107,7 +107,7 @@ table Date
 		dataType: boolean
 		lineageTag: 58d1805c-a2cd-5cf9-8ae3-e8c8a7251002
 		summarizeBy: none
-		sourceColumn: 'Is Weekend'
+		sourceColumn: Is Weekend
 
 		annotation SummarizationSetBy = User
 
@@ -115,7 +115,7 @@ table Date
 		dataType: boolean
 		lineageTag: aa44f61b-4cbe-56e2-a675-7150401a3f79
 		summarizeBy: none
-		sourceColumn: 'In Data Window'
+		sourceColumn: In Data Window
 
 		annotation SummarizationSetBy = User
 
@@ -123,7 +123,7 @@ table Date
 		dataType: boolean
 		lineageTag: 49ef60c9-1381-548c-9a8c-fd3ff98b9914
 		summarizeBy: none
-		sourceColumn: 'Is Mature Cohort'
+		sourceColumn: Is Mature Cohort
 
 		annotation SummarizationSetBy = User
 
@@ -132,7 +132,7 @@ table Date
 		formatString: #,##0.0
 		lineageTag: deaa6a92-6b2a-5c69-8883-bb6acee413c3
 		summarizeBy: average
-		sourceColumn: 'Temp Max C'
+		sourceColumn: Temp Max C
 
 		annotation SummarizationSetBy = User
 
@@ -141,7 +141,7 @@ table Date
 		formatString: #,##0.0
 		lineageTag: aa34c37f-94de-5b61-ab23-b7785beee7d0
 		summarizeBy: average
-		sourceColumn: 'Temp Min C'
+		sourceColumn: Temp Min C
 
 		annotation SummarizationSetBy = User
 
@@ -150,7 +150,7 @@ table Date
 		formatString: #,##0.0
 		lineageTag: 0c7dc826-d6c0-5bfb-bc93-4a702588775b
 		summarizeBy: sum
-		sourceColumn: 'Precip mm'
+		sourceColumn: Precip mm
 
 		annotation SummarizationSetBy = User
 
@@ -159,7 +159,7 @@ table Date
 		formatString: #,##0.0
 		lineageTag: 9a81dd4e-c4ec-5fd0-9319-ec3395306565
 		summarizeBy: sum
-		sourceColumn: 'Snow cm'
+		sourceColumn: Snow cm
 
 		annotation SummarizationSetBy = User
 
@@ -167,7 +167,7 @@ table Date
 		dataType: string
 		lineageTag: 19dd88ff-c569-5255-86aa-2a8bd78ce6ee
 		summarizeBy: none
-		sourceColumn: 'Precip Bucket'
+		sourceColumn: Precip Bucket
 		sortByColumn: 'Precip Bucket Sort'
 
 		annotation SummarizationSetBy = User
@@ -178,7 +178,7 @@ table Date
 		formatString: 0
 		lineageTag: 4ecd12ce-21dc-5e0a-84bd-fa0442199f65
 		summarizeBy: none
-		sourceColumn: 'Precip Bucket Sort'
+		sourceColumn: Precip Bucket Sort
 
 		annotation SummarizationSetBy = User
 
