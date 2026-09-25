@@ -1,0 +1,7 @@
+[Unique Key]	[Created Date]	[Created Hour]	[Closed Date]	[Closed Valid]	[Resolution Minutes]	[Valid For Resolution]	[Backlog Eligible]	[Backlog Exit Date]	[Backlog Exit]	[Status]	[Agency]	[Complaint Key]	[Descriptor]	[Borough]	[Channel]	[ZIP]	[Age Band Key]	[R02]	[R03]	[R05]	[R06]	[R07]	[R12]	[R13]	[R18]
+58683675	2023-09-01T00:00:00	7		false		false	false			Closed	DHS	HOMELESS PERSON ASSISTANCE	(NONE)	MANHATTAN	ONLINE	10036	0		missing			status_conflict			
+58683925	2023-09-01T00:00:00	10		false		false	true	2024-09-01T00:00:00	Aged out	Started	DEP	WATER SYSTEM	HYDRANT KNOCKED OVER/MISSING (WC)	QUEENS	PHONE	11355	5		missing						
+58685800	2023-09-01T00:00:00	11	2025-01-10T00:00:00	true	715409	false	true	2024-09-01T00:00:00	Aged out	Closed	DOHMH	DAY CARE	DAY CARE FACILITY	MANHATTAN	ONLINE	10040	0			over_1y					
+58745800	2023-09-07T00:00:00	10		false		false	true	2024-09-07T00:00:00	Aged out	Pending	DOT	STREET LIGHT CONDITION	STREET LIGHT DAYBURNING	BRONX	UNKNOWN	10455	5		negative						open_invalid_close
+59446500	2023-10-05T00:00:00	13		false		false	false			Closed	DOB	BOILERS	DEFECTIVE	MANHATTAN	ONLINE	10035	0		negative			status_conflict			
+62144725	2024-08-16T00:00:00	15	2024-09-01T00:00:00	true	23219	true	true	2024-09-01T00:00:00	Closed	Closed	HPD	FLOORING/STAIRS	FLOOR	BROOKLYN	PHONE	11226	0								

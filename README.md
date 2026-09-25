@@ -4,7 +4,7 @@
 
 > "AI-built, owner-directed: the Power Query, model, measures, RLS and report were written by AI (Claude) from a specification the owner directed; the numbers are checked against an independent Python twin with the reconcile CLI."
 
-**Status (23 Sep 2026): written, not yet run in Power BI.** The files exist and their structure has been checked on a Mac. Nothing has been refreshed, calculated or rendered in Power BI yet, so this README quotes **no result from the model**. Anything that needs Power BI is marked **[unrun]**.
+**Status (25 Sep 2026): the dev profile refreshes and reconciles in the Power BI service.** Synced into a Premium Per User workspace by Fabric Git integration, refreshed there, and checked: every default check passes, **7,338 of 7,338 cells** against the independent Python twin (C4r 648 of 648). The first two refreshes failed and needed two fixes, both logged in `docs/decisions.md`. The full profile, RLS and the report pages have **not** been run yet; they stay marked **[unrun]**.
 
 ## What it is
 
@@ -31,13 +31,13 @@ Page 7 (Complaint Detail) is a hidden drillthrough page, reached from page 4.
 
 | Part | Where | State |
 |---|---|---|
-| Semantic model (TMDL): Power Query, star schema, measures, the Time Calc calculation group, RLS roles | `NYC311-Operations.SemanticModel/` | Written by AI. Structure checked on a Mac (below). **[unrun]** |
-| Report (enhanced PBIR), with the base theme as its custom theme | `NYC311-Operations.Report/` | Written by AI. Structure checked on a Mac. **[unrun]** |
+| Semantic model (TMDL): Power Query, star schema, measures, the Time Calc calculation group, RLS roles | `NYC311-Operations.SemanticModel/` | Written by AI. Refreshed in the Power BI service, dev profile; its numbers reconcile (below). Full profile **[unrun]** |
+| Report (enhanced PBIR), with the base theme as its custom theme | `NYC311-Operations.Report/` | Written by AI. Synced into the service; pages not yet reviewed **[unrun]** |
 | Project pointer | `NYC311-Operations.pbip` | Written by AI |
 | The data extract: a frozen snapshot, `as_of` 20 Sep 2026, window Sep 2024 to Aug 2026 | `data/dev/` (committed), `data/full/manifest.json` | Dev: a 1-in-25 sample, 301,688 window rows + 8,037 carry-in rows. Full: 7,542,606 + 201,517 rows, too large for Git, meant to be a release asset (`data-v1`) |
 | Reference tables (agency remap, complaint categories, channels, boroughs, benchmark hours, test users for dynamic RLS) | `data/reference/` | Data only |
 | Expected values from the Python twin, for both profiles | `expected/dev/`, `expected/full/` | Computed by the twin (a separate pandas implementation of the same rules) |
-| Check queries (DAX) | `checks/dax/` | Written. **[unrun]** |
+| Check queries (DAX) | `checks/dax/` | Run on the dev profile, 25 Sep 2026: all pass. Full **[unrun]** |
 | Reconcile CLI (Python standard library only) | `tools/reconcile/` | Runs; its own tests pass |
 | Base theme and its contrast check | `theme/` | Written |
 | Specification | `_design/SPEC.md` | The source of truth for behaviour |
@@ -48,12 +48,12 @@ Page 7 (Complaint Detail) is a hidden drillthrough page, reached from page 4.
 
 Neither check evaluates DAX or Power Query M, or draws a visual. A model that passes both can still fail to refresh, or return wrong numbers.
 
-## What is [unrun] until the project is opened in Power BI
+## What has run in Power BI, and what is still [unrun]
 
-- **Refresh:** no Power Query has run, and nothing has been read from GitHub or from the weather API.
-- **DAX:** no measure, calculated table, calculated column, calculation item or RLS filter has been evaluated.
-- **Visuals:** no page has been rendered, so there are **no screenshots**. They will be added when real ones exist, never mock-ups.
-- **Reconciliation:** `observed/` and `reconcile/` are empty. No check query has run, so **no number in the model is claimed to be correct yet**.
+- **Refresh:** the dev profile refreshed in the service on 25 Sep 2026 (GitHub files and the weather API). The full profile is **[unrun]**.
+- **DAX:** every calculated table, calculated column and the Time Calc items computed during that refresh; the measures the check queries use returned the twin's numbers. RLS filters are **[unrun]**.
+- **Visuals:** no page has been reviewed yet, so there are **no screenshots**. They will be added when real ones exist, never mock-ups.
+- **Reconciliation:** dev **PASS**, 7,338 of 7,338 cells; the grids are in `observed/dev/`, the comparison in `reconcile/dev/`, the record in `docs/evidence/refresh-3-dev.md`. Full **[unrun]**.
 - **RLS:** no role has been tested with Test as role.
 - **Two settings that must be finished in the Power BI service** (the file format has no documented way to store them):
   - page 1's daily line chart: anomaly detection's *Explain by* fields (Borough, Category, Channel, Precip Bucket, Day Name) are added in the service, under Analytics > Find anomalies;
@@ -64,7 +64,7 @@ The reconciliation below is the only proof of the numbers. One limit applies eve
 
 ## How the numbers are checked
 
-1. In Power BI, run each query in `checks/dax/` in the DAX query view, copy the result grid, and save it as `observed/<profile>/Cn.tsv`.
+1. In Power BI, run each query in `checks/dax/` in the DAX query view (or through the Execute Queries REST API, as for the dev results here), and save the result grid as `observed/<profile>/Cn.tsv`.
 2. From the repo root, with Python 3.9 or later and nothing to install:
    ```
    PYTHONPATH=tools/reconcile python3 -m northledger.pbi reconcile --repo . --profile dev
@@ -80,15 +80,15 @@ The reconciliation below is the only proof of the numbers. One limit applies eve
 | C4 | The backlog at every month end, by borough; the fast and the row-by-row versions must be equal |
 | C5, C5b | 33 real requests chosen to hit each cleaning rule, checked column by column |
 
-Once results exist, anyone with a clone can re-run the CLI on the committed files and get the same result in every column except the run time.
+The dev results are committed, so anyone with a clone can re-run the CLI on them and get the same result in every column except the run time.
 
 ## How to reproduce
 
-**In a Fabric workspace (browser, Mac or Windows).** Summarised from SPEC §2.1 and §3.2; loading these AI-written files into a workspace has not been tried yet **[unrun]**.
-1. Create a workspace on a Fabric capacity (a Fabric trial works). Turn on the setting that lets users edit data models in the Power BI service.
+**In a Fabric workspace (browser, Mac or Windows).** Summarised from SPEC §2.1 and §3.2; done on 25 Sep 2026 with a Power BI Premium Per User trial (the Fabric trial was not offered to the account).
+1. Create a workspace on a Fabric capacity (a Fabric trial works). In the admin portal's tenant settings, turn on "Users can edit semantic models in the Power BI service" and "Users can sync workspace items with GitHub repositories" (a Premium Per User workspace also works).
 2. Fork or copy this repo. In the workspace settings, connect Git integration to your copy: branch `main`, Git folder = the repo root. Git integration then brings in the semantic model and the report, both named `NYC311-Operations`.
 3. In the semantic model's settings, set the parameter **`pDataBaseUrl`** to your copy's address. Its default is `https://github.com/rashadul122/pl300-nyc311`, which works only once that repo is public. The model reads every data file relative to that address, over HTTPS, with no gateway.
-4. Under data source credentials, set both web sources (GitHub and the Open-Meteo archive) to **Anonymous** with privacy level **Public**, then refresh.
+4. Under data source credentials, set both web sources (GitHub and the Open-Meteo archive) to **Anonymous** with privacy level **Public**, then refresh. For Open-Meteo tick *Skip test connection*: its bare address answers 400 Bad Request.
 5. `pProfile` defaults to `dev`, which loads the sample committed with the repo. For the full profile, publish the full files as release `data-v1` on your copy, set `pProfile` to `full`, and refresh.
 6. Run the checks as above.
 
@@ -121,7 +121,7 @@ _design/HINTS.md                  concept notes from the earlier hand-built plan
 data/                             the extract (dev committed; full manifest only) and reference tables
 checks/                           DAX check queries and their comparison rules
 expected/                         the twin's expected values, per profile
-observed/, reconcile/             pasted Power BI results and the comparison output (empty until run)
+observed/, reconcile/             Power BI results and the comparison output (dev committed; full not run)
 theme/                            base report theme and contrast check
 tools/                            reconcile CLI, sealing check, git hooks
 docs/decisions.md                 decision log

@@ -5,6 +5,7 @@ SUMMARIZECOLUMNS (
     Borough[Borough],
     'Time Calc'[Time View],
     TREATAS ( { "Current", "FYTD", "PY", "YoY %" }, 'Time Calc'[Time View] ),
+    FILTER ( ALL ( 'Date'[Year Month] ), NOT ISBLANK ( 'Date'[Year Month] ) ),
     "Check Row", 1,
     "Requests", [Requests],
     "Requests (Daily)", [Requests (Daily)]

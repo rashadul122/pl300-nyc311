@@ -3,7 +3,7 @@ EVALUATE
 SUMMARIZECOLUMNS (
     'Date'[Date],
     Borough[Borough],
-    FILTER ( ALL ( 'Date'[Date] ), 'Date'[Date] = EOMONTH ( 'Date'[Date], 0 ) ),
+    FILTER ( ALL ( 'Date'[Date] ), NOT ISBLANK ( 'Date'[Date] ) && 'Date'[Date] = EOMONTH ( 'Date'[Date], 0 ) ),
     "Check Row", 1,
     "Open Backlog EOP", [Open Backlog EOP],
     "Open Backlog EOP (Fast)", [Open Backlog EOP (Fast)],

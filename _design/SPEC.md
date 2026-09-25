@@ -599,6 +599,7 @@ SUMMARIZECOLUMNS (
     Borough[Borough],
     'Time Calc'[Time View],
     TREATAS ( { "Current", "FYTD", "PY", "YoY %" }, 'Time Calc'[Time View] ),
+    FILTER ( ALL ( 'Date'[Year Month] ), NOT ISBLANK ( 'Date'[Year Month] ) ),
     "Check Row", 1,
     "Requests", [Requests],
     "Requests (Daily)", [Requests (Daily)]
@@ -645,7 +646,7 @@ EVALUATE
 SUMMARIZECOLUMNS (
     'Date'[Date],
     Borough[Borough],
-    FILTER ( ALL ( 'Date'[Date] ), 'Date'[Date] = EOMONTH ( 'Date'[Date], 0 ) ),
+    FILTER ( ALL ( 'Date'[Date] ), NOT ISBLANK ( 'Date'[Date] ) && 'Date'[Date] = EOMONTH ( 'Date'[Date], 0 ) ),
     "Check Row", 1,
     "Open Backlog EOP", [Open Backlog EOP],
     "Open Backlog EOP (Fast)", [Open Backlog EOP (Fast)],
@@ -660,7 +661,7 @@ EVALUATE
 SUMMARIZECOLUMNS (
     'Date'[Date],
     Borough[Borough],
-    FILTER ( ALL ( 'Date'[Date] ), 'Date'[Date] = EOMONTH ( 'Date'[Date], 0 ) ),
+    FILTER ( ALL ( 'Date'[Date] ), NOT ISBLANK ( 'Date'[Date] ) && 'Date'[Date] = EOMONTH ( 'Date'[Date], 0 ) ),
     "Check Row", 1,
     "Open Backlog EOP", [Open Backlog EOP],
     "EOP PHONE", CALCULATE ( [Open Backlog EOP], Channel[Channel] = "PHONE" )
