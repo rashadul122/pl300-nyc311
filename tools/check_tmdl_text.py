@@ -15,7 +15,10 @@ the same escaping and single-quote (') enclosing requirements of object declarat
 
 Section 1, quoting. A `name: value` property whose value is enclosed in single quotes must be a
 reference to another object (REFERENCES below). On any other property the quotes become part of
-the text, which is what failed refresh 1.
+the text, which is what failed refresh 1. A text value that really starts and ends with a quote
+must be written in double quotes, "'X'"; beware that Microsoft's serializer (a commit from the
+workspace) writes it back bare as 'X', which this section then flags. Keywords and property names
+are compared case-insensitively, as TMDL reads them.
 
 Section 2, source columns. For each table:
   - M partition: every column without a DAX expression has a sourceColumn. Its name must be one the
@@ -25,7 +28,8 @@ Section 2, source columns. For each table:
     column taken straight from a file header that no step names fails here on purpose: type it
     in a step (Table.TransformColumnTypes), as every query in this model does.
   - calculated table: sourceColumn is written [Name], the form Microsoft's own TMDL export of this
-    model writes. Name must appear in the table's DAX as "Name" or [Name].
+    model writes, or Table[Name] / 'Table'[Name] for a column that keeps its lineage. Name must
+    appear in the table's DAX as "Name" or [Name].
   - calculation group: sourceColumn is Name or Ordinal (Microsoft Learn, calculation groups:
     https://learn.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups).
 
@@ -48,11 +52,11 @@ from typing import Dict, List, Optional, Set, Tuple
 # TOM properties that hold a reference to another object, so single quotes are name syntax, not
 # text. The first five are used in this model; the rest are the other reference properties TMDL
 # writes (variations, aggregations, related-column details, entity and query partitions).
-REFERENCES = {
+REFERENCES = {p.lower() for p in (
     "sortByColumn", "column", "fromColumn", "toColumn", "queryGroup",
     "relationship", "defaultHierarchy", "defaultColumn", "baseColumn", "baseTable",
     "groupByColumn", "expressionSource", "dataSource",
-}
+)}                                  # compared lower-case: TMDL reads keywords case-insensitively
 CALC_GROUP_SOURCES = {"Name", "Ordinal"}
 
 _PROP = re.compile(r"^(\t*)([A-Za-z][A-Za-z0-9]*)[ \t]*:[ \t]*(.*?)[ \t]*$")
@@ -126,7 +130,7 @@ class Tmdl:
             if m:
                 prop, value = m.group(2), m.group(3)
                 self.props.append((where, prop, value))
-                if prop == "sourceColumn" and column is not None and d == 2:
+                if prop.lower() == "sourcecolumn" and column is not None and d == 2:
                     column["source"] = value
                     column["source_where"] = where
                 i += 1
@@ -135,7 +139,7 @@ class Tmdl:
             if not w:
                 i += 1
                 continue
-            word = w.group(2)
+            word = w.group(2).lower()
             name, tail = _name(w.group(3))
             code, nxt = _expression(lines, i, d, tail)
             if d == 0:
@@ -150,9 +154,9 @@ class Tmdl:
                     column = {"name": name, "calc": tail.startswith("="), "source": None, "where": where}
                     table["columns"].append(column)                 # type: ignore[union-attr]
                 elif word == "partition":
-                    table["kind"] = tail.lstrip("= ").strip()
-                elif word == "calculationGroup":
-                    table["kind"] = "calculationGroup"
+                    table["kind"] = tail.lstrip("= ").strip().lower()
+                elif word == "calculationgroup":
+                    table["kind"] = "calculationgroup"
             elif table is not None and d == 2 and word == "source":
                 table["code"] = code
             i = nxt
@@ -227,12 +231,13 @@ def check_quotes(model: Tmdl) -> int:
     for where, prop, value in model.props:
         if len(value) < 2 or not (value.startswith("'") and value.endswith("'")):
             continue
-        if prop in REFERENCES:
+        if prop.lower() in REFERENCES:
             refs += 1
             continue
         bad += 1
-        print("  FAIL      %s  %s: %s  (a text property keeps the quotes; write %s: %s)"
-              % (where, prop, value, prop, value[1:-1].replace("''", "'")))
+        print("  FAIL      %s  %s: %s  (a text property keeps the quotes; write %s: %s, or %s: \"%s\" "
+              "if the quotes really belong to the value)"
+              % (where, prop, value, prop, value[1:-1].replace("''", "'"), prop, value))
     print("  %s %d properties read, %d quoted references, %d quoted text values"
           % ("OK       " if not bad else "FAIL     ", len(model.props), refs, bad))
     return bad
@@ -267,7 +272,7 @@ def check_sources(model: Tmdl) -> int:
                 names |= parsed[q][0]
         elif kind == "calculated":
             names = _dax_names(str(tb["code"]))
-        elif kind == "calculationGroup":
+        elif kind == "calculationgroup":
             names = CALC_GROUP_SOURCES
         else:
             names = set()
@@ -281,13 +286,13 @@ def check_sources(model: Tmdl) -> int:
             if len(v) >= 2 and v.startswith('"') and v.endswith('"'):
                 v = v[1:-1].replace('""', '"')
             if kind == "calculated":
-                mm = re.match(r"^\[(.+)\]$", v)
+                mm = re.match(r"^(?:'(?:[^']|'')+'|[A-Za-z_][A-Za-z0-9_ ]*)?\[(.+)\]$", v)
                 if not mm:
-                    problems.append("column %s (%s): sourceColumn %s is not written [Name]" % (c["name"], c["source_where"], raw))
+                    problems.append("column %s (%s): sourceColumn %s is not written [Name] or Table[Name]" % (c["name"], c["source_where"], raw))
                 elif mm.group(1) not in names:
                     problems.append("column %s (%s): sourceColumn %s, the DAX never names %s"
                                     % (c["name"], c["source_where"], raw, mm.group(1)))
-            elif kind in ("m", "calculationGroup") and v not in names:
+            elif kind in ("m", "calculationgroup") and v not in names:
                 what = "the partition's Power Query never names" if kind == "m" else "a calculation group column binds Name or Ordinal, not"
                 problems.append("column %s (%s): sourceColumn %s, %s %s" % (c["name"], c["source_where"], raw, what, v))
         if problems:
